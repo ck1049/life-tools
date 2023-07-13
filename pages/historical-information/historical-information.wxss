@@ -1,0 +1,134 @@
+/* pages/historical-information/historical-information.wxss */
+page {
+    background-color: rgb(230, 230, 230);
+}
+
+.container {
+    padding: 0;
+    height: 0;
+}
+
+.container, .sing-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10rpx 0;
+}
+
+.sing-info {
+    align-items: flex-start;
+    border-bottom: 1px solid gray;
+    padding: 10rpx 10rpx 0 10rpx;
+    width: 90%;
+} 
+
+.item-overview {
+    width: 100%;
+    padding-bottom: 20rpx;
+    border-bottom: 1px solid gray;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-top, .detail-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10rpx;
+    margin-bottom: 10rpx;
+    padding-left: 10rpx;
+    padding-right: 10rpx;
+}
+
+.item-top view {
+    margin-right: 20rpx;
+}
+
+.item-detail {
+    width: 100%;
+}
+
+.detail-top {
+    justify-content: space-between;
+    padding-top: 15rpx;
+    padding-bottom: 15rpx;
+}
+
+.overview-left {
+    padding-right: 10rpx;
+}
+
+.overview-right {
+    padding-right: 10rpx;
+    display: flex;
+    align-items: center;
+    color: gray;
+}
+
+.overview-right image {
+    filter: invert(60%);
+    width: 50rpx;
+    height: 50rpx;
+}
+
+.item-winning-numbers {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.item-winning-numbers {
+    margin-bottom: 20rpx;
+}
+
+.item-info view {
+    padding-right: 15rpx;
+}
+
+.item-winning-numbers button {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+    margin-left: 15rpx;
+    margin-right: 15rpx;
+    font-size: small;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    padding: 0;
+}
+
+.redBall {
+    background-color: rgb(250, 98, 98);
+}
+
+.blueBall {
+    background-color: dodgerblue;
+}
+
+.table-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-row .th,.td {
+    height: 80rpx;
+    width: 33.3%;
+    text-align: center;
+    border: 1px solid gray;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.th {
+    background-color: lightgray;
+}

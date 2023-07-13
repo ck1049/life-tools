@@ -2,7 +2,8 @@
     "pages": [
         "pages/home/home",
         "pages/logs/logs",
-        "pages/lottery-information/lottery-information"
+        "pages/lottery-information/lottery-information",
+        "pages/historical-information/historical-information"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -10,5 +11,6 @@
         "navigationBarTitleText": "生活Tools",
         "navigationBarTextStyle": "black"
     },
+    "lazyCodeLoading": "requiredComponents",
     "sitemapLocation": "sitemap.json"
 }

@@ -1,0 +1,44 @@
+<!--pages/historical-information/historical-information.wxml-->
+<view class="container">
+    <view class="sing-info" wx:for="{{infoList}}" wx:key="index" wx:for-item="item">
+        <view class="item-overview" bindtap="expand" data-index="{{index}}">
+            <view class="overview-left">
+                <view class="item-top">
+                    <view>{{item.awardDate}}</view>
+                    <view>({{item.week}})</view>
+                    <view>{{item.issueNumber}}期</view>
+                    <view wx:if="{{item.bonusPool}}" style="color: red">奖池 {{item.bonusPool}}亿</view>
+                </view>
+                <view class="item-winning-numbers">
+                    <button class="redBall" wx:for="{{item.redBalls}}" wx:for-item="redBall" wx:key="index">{{redBall}}</button>
+                    <block wx:if="{{item.blueBalls}}">
+                        <view style="color: gray;">|</view>
+                        <button class="blueBall" wx:for="{{item.blueBalls}}" wx:for-item="blueBall" wx:key="index">{{blueBall}}</button>
+                    </block>
+                </view>
+            </view>
+            <view class="overview-right">
+                <image src="{{item.expand ? '../../images/expand-more.png' : '../../images//expand-less.png'}}" />
+            </view>
+        </view>
+
+        <view class="item-detail" style="color: gray" hidden="{{!item.expand}}">
+            <view class="detail-top">
+                <view>本期销量(元)：<i style="color: red">{{item.saleVolume}}亿</i></view>
+                <view>奖池累计(元)：<i style="color: red">{{item.accumulatedPrizePool}}亿</i></view>
+            </view>
+            <view class="wingLevel">
+                <view class="table-row">
+                    <view class="th">奖级</view>
+                    <view class="th">中奖注数</view>
+                    <view class="th">单注奖金(元)</view>
+                </view>
+                <view class="table-row" wx:for="{{item.detailList}}" wx:for-item="row" wx:key="index">
+                    <view class="td">{{row.level}}</view>
+                    <view class="td">{{row.winningBetsNum}}</view>
+                    <view class="td">{{row.singleBetBonus}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -43,7 +43,7 @@ Page({
   },
   forward(e) {
       var enName = e.currentTarget.dataset.enName;
-      wx.navigateTo({url: '/pages/logs/logs'})
+      wx.navigateTo({url: '/pages/historical-information/historical-information'})
   },
   onLoad() {
   }
