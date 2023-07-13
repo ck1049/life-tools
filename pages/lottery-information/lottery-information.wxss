@@ -1,0 +1,122 @@
+/* pages/lottery-information/lottery-information.wxss */
+page {
+    background-color: #dddddd;
+}
+
+.container {
+    padding: 0;
+    height: 0;
+}
+
+.container, .lottery-overview {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10rpx 0;
+}
+
+.lottery-overview {
+    align-items: flex-start;
+    background-color: white;
+    border-radius: 20rpx;
+    width: 90%;
+} 
+
+.item-main, .item-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10rpx;
+    margin-bottom: 10rpx;
+}
+
+.item-main {
+    justify-content: space-between;
+    width: 100%;
+}
+
+.main-left {
+    padding-right: 10rpx;
+}
+
+.main-right {
+    padding-right: 10rpx;
+    display: flex;
+    align-items: center;
+    color: gray;
+}
+
+.main-right image {
+    filter: invert(60%);
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.item-top, .item-content {
+    padding-left: 10rpx;
+}
+
+.item-icon image {
+    width: 80rpx;
+    height: 80rpx;
+}
+
+.item-info, .item-winning-numbers {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.item-winning-numbers {
+    margin-bottom: 20rpx;
+}
+
+.item-info view {
+    padding-right: 15rpx;
+}
+
+.item-winning-numbers button {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+    margin-left: 15rpx;
+    margin-right: 15rpx;
+    font-size: small;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    padding: 0;
+}
+
+.redBall {
+    background-color: rgb(250, 98, 98);
+}
+
+.blueBall {
+    background-color: dodgerblue;
+}
+
+.item-bottom {
+    margin-bottom: 20rpx;
+    border-top: 1px solid #ddd;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.trend, .awardsTool {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.item-bottom image {
+    width: 50rpx;
+    height: 50rpx;
+}

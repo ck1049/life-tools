@@ -1,0 +1,48 @@
+<!--pages/lottery-information/lottery-information.wxml-->
+<view class="container">
+    <view class="lottery-overview" wx:for="{{overviewList}}" wx:key="index" wx:for-item="item" bindtap="forward" data-en-name="{{item.enName}}">
+        <view class="item-main">
+            <view class="main-left">
+                <view class="item-top">
+                    <view class="item-icon">
+                        <image src="{{item.icon}}" />
+                    </view>
+                    <view class="item-content">
+                        <view class="item-name" style="font-size: 38rpx;">{{item.name}}</view>
+                        <view class="item-info" style="font-size: 22rpx;">
+                            <view style="color: gray">{{item.issueNumber}}期</view>
+                            <view style="color: gray">{{item.awardDate}}</view>
+                            <view style="color: gray">({{item.week}})</view>
+                            <view wx:if="{{item.bonusPool}}" style="color: red">奖池 {{item.bonusPool}}亿</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="item-winning-numbers">
+                    <button class="redBall" wx:for="{{item.redBalls}}" wx:for-item="redBall" wx:key="index">{{redBall}}</button>
+                    <block wx:if="{{item.blueBalls}}">
+                        <view style="color: gray;">|</view>
+                        <button class="blueBall" wx:for="{{item.blueBalls}}" wx:for-item="blueBall" wx:key="index">{{blueBall}}</button>
+                    </block>
+                </view>
+            </view>
+            <view class="main-right">
+                <image src="../../images/arrow-forward.png" />
+            </view>
+        </view>
+        <view class="item-bottom" wx:if="{{item.trendIcon || item.awardsToolIcon}}">
+            <view class="trend" wx:if="{{item.trendIcon}}">
+                <view>
+                    <image src="{{item.trendIcon}}" />
+                </view>
+                <view style="color: dodgerblue;">走势图</view>
+            </view>
+            <view wx:if="{{item.trendIcon && item.awardsToolIcon}}" style="color: lightgrey;">|</view>
+            <view class="awardsTool" wx:if="{{item.awardsToolIcon}}">
+                <view>
+                    <image src="{{item.awardsToolIcon}}" />
+                </view>
+                <view style="color: rgb(250, 98, 98);">算奖工具</view>
+            </view>
+        </view>
+    </view>
+</view>

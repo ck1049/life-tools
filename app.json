@@ -1,0 +1,14 @@
+{
+    "pages": [
+        "pages/home/home",
+        "pages/logs/logs",
+        "pages/lottery-information/lottery-information"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "生活Tools",
+        "navigationBarTextStyle": "black"
+    },
+    "sitemapLocation": "sitemap.json"
+}

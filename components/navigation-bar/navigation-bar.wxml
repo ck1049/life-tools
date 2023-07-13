@@ -1,0 +1,6 @@
+<!-- 自定义顶部栏 -->
+<view class="nav-bar" style="height:{{navBarHeight}}px;">
+    <view class="title">
+        {{defaultData.title}}
+    </view>
+</view>
