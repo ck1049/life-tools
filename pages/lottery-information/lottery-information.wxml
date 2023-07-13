@@ -1,7 +1,7 @@
 <!--pages/lottery-information/lottery-information.wxml-->
 <view class="container">
-    <view class="lottery-overview" wx:for="{{overviewList}}" wx:key="index" wx:for-item="item" bindtap="forward" data-en-name="{{item.enName}}">
-        <view class="item-main">
+    <view class="lottery-overview" wx:for="{{overviewList}}" wx:key="index" wx:for-item="item">
+        <view class="item-main" bindtap="forward" data-en-name="{{item.enName}}">
             <view class="main-left">
                 <view class="item-top">
                     <view class="item-icon">
