@@ -9,7 +9,7 @@
             "list": [
                 {
                     "name": "",
-                    "pathName": "pages/lottery-information/lottery-information",
+                    "pathName": "pages/home/home",
                     "query": "",
                     "launchMode": "default",
                     "scene": null

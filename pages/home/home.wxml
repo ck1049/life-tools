@@ -1,2 +1,3 @@
 <!--pages/home/home.wxml-->
-<view class="container"></view>
+<view class="container" style="background-image: url(../../images/home.jpg);background-size: 100% 100%;" bindtap="goToLottery">
+</view>
