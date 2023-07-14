@@ -5,7 +5,8 @@ module.exports = {
         index: rootUrl + '/lotto/index/{pageNum}/{pageSize}'
     },
     lottery: {
-        lotteryInformation:  rootUrl + '/lottery/lotteryInformation'
+        lotteryInformation:  rootUrl + '/lottery/lotteryInformation',
+        historicalInformation: rootUrl + '/lottery/historicalInformation/{enName}/{minIssueNumber}/{pageSize}'
     },
     twoColorBall: {
 

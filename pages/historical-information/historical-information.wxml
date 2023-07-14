@@ -4,10 +4,10 @@
         <view class="item-overview" bindtap="expand" data-index="{{index}}">
             <view class="overview-left">
                 <view class="item-top">
+                    <view>{{item.issueNumber}}期</view>
                     <view>{{item.awardDate}}</view>
                     <view>({{item.week}})</view>
-                    <view>{{item.issueNumber}}期</view>
-                    <view wx:if="{{item.bonusPool}}" style="color: red">奖池 {{item.bonusPool}}亿</view>
+                    <view wx:if="{{item.bonusPool && index == 0}}" style="color: red">奖池 {{item.bonusPool}}亿</view>
                 </view>
                 <view class="item-winning-numbers">
                     <button class="redBall" wx:for="{{item.redBalls}}" wx:for-item="redBall" wx:key="index">{{redBall}}</button>

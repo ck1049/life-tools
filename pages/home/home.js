@@ -9,7 +9,7 @@ Page({
     },
     goToLottery() {
         wx.navigateTo({
-          url: '/pages/lottery-information/lottery-information',
+          url: '/pages/lottery-information/lottery-information'
         })
     },
     /**
