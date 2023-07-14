@@ -3,8 +3,46 @@
         "pages/home/home",
         "pages/logs/logs",
         "pages/lottery-information/lottery-information",
-        "pages/historical-information/historical-information"
+        "pages/historical-information/historical-information",
+        "pages/message/message",
+        "pages/manage-money/manage-money",
+        "pages/life/life",
+        "pages/mine/mine"
     ],
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/home/home",
+                "text": "首页",
+                "iconPath": "images/home-gray.png",
+                "selectedIconPath": "images/home.png"
+            },
+            {
+                "pagePath": "pages/manage-money/manage-money",
+                "text": "理财",
+                "iconPath": "images/pay.png",
+                "selectedIconPath": "images/pay.png"
+            },
+            {
+                "pagePath": "pages/life/life",
+                "text": "生活",
+                "iconPath": "images/pay.png",
+                "selectedIconPath": "images/pay.png"
+            },
+            {
+                "pagePath": "pages/message/message",
+                "text": "消息",
+                "iconPath": "images/pay.png",
+                "selectedIconPath": "images/pay.png"
+            },
+            {
+                "pagePath": "pages/mine/mine",
+                "text": "我的",
+                "iconPath": "images/pay.png",
+                "selectedIconPath": "images/pay.png"
+            }
+        ]
+    },
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#fff",

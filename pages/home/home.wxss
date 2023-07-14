@@ -1,12 +1,134 @@
 /* pages/home/home.wxss */
 Page {
     height: 100%;
+    width: 100%;
 }
 .container {
-    width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0;
+}
+
+.top {
+    background-color: royalblue;
+    width: 100%;
+    height: 290rpx;
+    padding-top: 160rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 140rpx 5% 0;
+}
+
+.weather :first-child {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.search {
+    background-color: white;
+    border-radius: 10rpx;
+    width: 70%;
+    height: 60rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 20rpx;
+    color: gray;
+}
+
+.search-input {
+    height: 100%;
+    padding-left: 10rpx;
+}
+
+.plus-circle {
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 45rpx;
+    height: 45rpx;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    font-size: 35rpx;
+    padding-bottom: 6rpx;
+    box-sizing: border-box;
+}
+
+/* .plus-circle::before {
+    content: "-";
+}
+
+.plus-circle::after {
+    content: "|-";
+} */
+
+.tabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    background-color: royalblue;
+    margin-top: -1px;
+
+}
+
+.tabs view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin: 15rpx 0;
+}
+
+.tabs image {
+    width: 80rpx;
+    height: 80rpx;
+    filter: invert(100);
+}
+
+.main {
+    width: 100%;
+    height: 1500rpx;
+    padding: 25rpx 10rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ddd;
+}
+
+.mini-apps {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.mini-apps navigator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    margin-bottom: 40rpx;
+}
+
+.mini-apps image {
+    width: 50rpx;
+    height: 50rpx;
 }

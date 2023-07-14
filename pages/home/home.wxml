@@ -1,3 +1,41 @@
 <!--pages/home/home.wxml-->
-<view class="container" style="background-image: url(../../images/home.jpg);background-size: 100% 100%;" bindtap="goToLottery">
+<view class="container">
+    <view class="top">
+        <view class="weather">
+            <view style="color: white;">杭州<i class="fa fa-angle-down" /></view>
+            <view style="font-size: small; color: gray;">多云 37℃</view>
+        </view>
+        <view class="search fa fa-search">
+            <input class="search-input" type="text" placeholder="搜一搜..." />
+        </view>
+        <view class="plus-circle">+</view>
+    </view>
+
+    <view class="tabs">
+        <view>
+            <image src="../../images/scanner.png"></image>
+            <block>扫一扫</block>
+        </view>
+        <view>
+            <image src="../../images/pay.png"></image>
+            <block>付钱/收钱</block>
+        </view>
+        <view>
+            <image src="../../images/ride.png"></image>
+            <block>出行</block>
+        </view>
+        <view>
+            <image src="../../images/card-package.png"></image>
+            <block>卡包</block>
+        </view>
+    </view>
+
+    <view class="main">
+        <view class="mini-apps">
+            <navigator wx:for="{{miniApps}}" wx:for-item="item" wx:key="index" url="{{item.url}}">
+                <image src="{{item.icon}}" />
+                <block>{{item.name}}</block>
+            </navigator>
+        </view>
+    </view>
 </view>

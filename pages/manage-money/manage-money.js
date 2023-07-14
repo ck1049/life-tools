@@ -1,39 +1,18 @@
-// pages/home/home.js
+// pages/manage-money/manage-money.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        miniApps: [{
-            id: 1,
-            name: '彩票',
-            icon: "../../images/lottery-avatar.png",
-            url: "../../pages/lottery-information/lottery-information"
-        }]
+
     },
-    goToLottery() {
-        wx.navigateTo({
-          url: '/pages/lottery-information/lottery-information'
-        })
-    },
+
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        var _miniAppList = this.data.miniApps;
-        for (var i = 0; i < 13; i++) {
-            _miniAppList.push(_miniAppList[0]);
-        }
-        _miniAppList.push({
-            id: 1,
-            name: '更多',
-            icon: "../../images/lottery-avatar.png",
-            url: "../../pages/lottery-information/lottery-information"
-        });
-        this.setData({
-            'miniApps': _miniAppList
-        })
+
     },
 
     /**
@@ -47,7 +26,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow() {
-        
+
     },
 
     /**
