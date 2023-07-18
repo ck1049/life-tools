@@ -1,0 +1,5 @@
+<!--index.wxml-->
+<view class="container">
+  <ec-canvas id="amount-trend-line" canvas-id="amount-trend-line" ec="{{ amountTrend }}" style="border-bottom: 1px solid lightgray;"></ec-canvas>
+  <ec-canvas id="bonus-pool-trend-line" canvas-id="bonus-pool-trend-line" ec="{{ bonusPool }}"></ec-canvas>
+</view>
