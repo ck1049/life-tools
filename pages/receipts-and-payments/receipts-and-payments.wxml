@@ -1,0 +1,4 @@
+<!--pages/receipts-and-payments/receipts-and-payments.wxml-->
+<view class="container">
+    <image class="weui-uploader__img" src="{{qrCodeUrl}}" data-src="{{qrCodeUrl}}" bindtap="previewImage"></image>
+</view>

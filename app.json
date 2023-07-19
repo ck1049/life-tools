@@ -8,10 +8,12 @@
         "pages/manage-money/manage-money",
         "pages/life/life",
         "pages/mine/mine",
-        "pages/trend/trend"
+        "pages/trend/trend",
+        "pages/receipts-and-payments/receipts-and-payments"
     ],
     "tabBar": {
-        "list": [{
+        "list": [
+            {
                 "pagePath": "pages/home/home",
                 "text": "首页",
                 "iconPath": "images/home-gray.png",

@@ -10,5 +10,9 @@ module.exports = {
     },
     twoColorBall: {
 
+    },
+    qrCode: {
+        // generate: rootUrl.replace('api', 'loaferCore') + '/qrCode/generate'
+        generate: 'http://localhost:8888/loaferCore/qrCode/generate'
     }
 }

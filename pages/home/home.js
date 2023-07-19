@@ -14,7 +14,28 @@ Page({
     },
     goToLottery() {
         wx.navigateTo({
-          url: '/pages/lottery-information/lottery-information'
+            url: '/pages/lottery-information/lottery-information'
+        })
+    },
+    scanCode: function () {
+        var that = this
+        wx.scanCode().then(res => {
+            console.log('======success======');
+            console.log(res.result);
+            wx.showModal({
+                title: '扫码成功！',
+                content: res.result,
+                showCancel: false,
+                confirmText: "确定"
+            })
+        }).catch(res => {
+            console.log('======fail======');
+            console.log(res);
+        }).finally(res => console.log("=====complete===="));
+    },
+    gotoReceiptsAndPayments() {
+        wx.navigateTo({
+          url: '../../pages/receipts-and-payments/receipts-and-payments',
         })
     },
     /**
@@ -47,7 +68,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow() {
-        
+
     },
 
     /**

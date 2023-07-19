@@ -12,11 +12,11 @@
     </view>
 
     <view class="tabs">
-        <view>
+        <view bindtap="scanCode">
             <image src="../../images/scanner.png"></image>
             <block>扫一扫</block>
         </view>
-        <view>
+        <view bindtap="gotoReceiptsAndPayments">
             <image src="../../images/pay.png"></image>
             <block>付钱/收钱</block>
         </view>

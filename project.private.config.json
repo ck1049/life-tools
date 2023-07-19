@@ -3,14 +3,14 @@
     "projectname": "life-tools",
     "setting": {
         "compileHotReLoad": true,
-        "urlCheck": true
+        "urlCheck": false
     },
     "condition": {
         "miniprogram": {
             "list": [
                 {
                     "name": "",
-                    "pathName": "pages/trend/trend",
+                    "pathName": "pages/receipts-and-payments/receipts-and-payments",
                     "query": "",
                     "launchMode": "default",
                     "scene": null
