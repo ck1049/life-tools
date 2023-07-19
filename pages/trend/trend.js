@@ -1,4 +1,4 @@
-import * as echarts from '../../ec-canvas/echarts.min.js';
+let echarts = require('../ec-canvas/echarts.min.js');
 
 const app = getApp();
 const api = require('../../config/api.js')
@@ -74,7 +74,7 @@ Page({
         })
 
         let url = api.lottery.historicalInformation.replace('{enName}', this.data.enName)
-        .replace('{minIssueNumber}', '9999999').replace('{pageSize}', '7');
+            .replace('{minIssueNumber}', '9999999').replace('{pageSize}', '7');
         console.log(url);
         wx.request({
             url,
@@ -91,7 +91,9 @@ Page({
 
     onLoad(option) {
         console.log(option);
-        this.setData({enName: option.enName || 'lotto'})
+        this.setData({
+            enName: option.enName || 'lotto'
+        })
         this.refresh(res => {
             let dataList = res.data;
 
@@ -101,9 +103,9 @@ Page({
                 boundaryGap: false,
                 data: dataList.map(item => item.issueNumber),
                 show: true,
-                nameTextStyle:{
+                nameTextStyle: {
                     // padding:[0,25]
-                 }
+                }
             }
             // var xAxis1 = JSON.parse(JSON.stringify(xAxis));
             // xAxis1.nameTextStyle = {};
@@ -113,51 +115,56 @@ Page({
                 type: 'line',
                 // smooth: true,
                 data: dataList.map(item => item.detailList[0].singleBetBonus / 10000),
-                label:{
-                    show:true,
-                    position:"top",
+                label: {
+                    show: true,
+                    position: "top",
                     formatter: param => param.value + '万',
                     fontSize: 10
                 }
-            },{
+            }, {
                 name: '中奖注数',
                 type: 'line',
                 // smooth: true,
                 yAxisIndex: 1,
                 data: dataList.map(item => item.detailList[0].winningBetsNum),
-                label:{
-                    show:true,
-                    position:"top",
+                label: {
+                    show: true,
+                    position: "top",
                     formatter: param => param.value + '注',
                     fontSize: 10
                 }
             }];
-            var amountYAxisIndex0Max =  Math.max(Math.max(...amountSeries[0].data.concat(1000)));
-            var amountYAxisIndex1Max =  Math.max(Math.max(...amountSeries[1].data.concat(15)));
+            var amountYAxisIndex0Max = Math.max(Math.max(...amountSeries[0].data.concat(1000)));
+            var amountYAxisIndex1Max = Math.max(Math.max(...amountSeries[1].data.concat(15)));
             let amountYAxis = [{
-                type: 'value',
-                // name: series[0].name,
-                min: 500,
-                max: amountYAxisIndex0Max,
-                interval: (amountYAxisIndex0Max - 500) / 5,
-                splitLine: {show: false},
-                axisLabel: {
-                    show: false,
-                    formatter: '{value} 万'
+                    type: 'value',
+                    // name: series[0].name,
+                    min: 500,
+                    max: amountYAxisIndex0Max,
+                    interval: (amountYAxisIndex0Max - 500) / 5,
+                    splitLine: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: false,
+                        formatter: '{value} 万'
+                    }
+                },
+                {
+                    type: 'value',
+                    // name: series[1].name,
+                    min: 0,
+                    max: amountYAxisIndex1Max,
+                    interval: amountYAxisIndex1Max / 5,
+                    splitLine: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: false,
+                        formatter: '{value} 注'
+                    }
                 }
-            },
-            {
-                type: 'value',
-                // name: series[1].name,
-                min: 0,
-                max: amountYAxisIndex1Max,
-                interval: amountYAxisIndex1Max / 5,
-                splitLine: {show: false},
-                axisLabel: {
-                    show: false,
-                    formatter: '{value} 注'
-                }
-            }];
+            ];
 
             let bonusPoolSeries = [{
                 name: '奖池走势',
@@ -166,21 +173,23 @@ Page({
                 color: 'red',
                 data: dataList.map(item => item.accumulatedPrizePool),
                 show: true,
-                label:{
-                    show:true,
-                    position:"top",
+                label: {
+                    show: true,
+                    position: "top",
                     formatter: param => param.value + '亿',
                     fontSize: 10
                 },
             }];
-            var bonusPoolYAxisIndex0Max =  Math.max(Math.max(...bonusPoolSeries[0].data.concat(10)));
+            var bonusPoolYAxisIndex0Max = Math.max(Math.max(...bonusPoolSeries[0].data.concat(10)));
             var bonusPoolYAxis = {
                 type: 'value',
                 // name: series[1].name,
                 min: 0,
                 max: bonusPoolYAxisIndex0Max,
                 interval: bonusPoolYAxisIndex0Max / 5,
-                splitLine: {show: false},
+                splitLine: {
+                    show: false
+                },
                 axisLabel: {
                     show: false,
                     formatter: '{value} 亿'

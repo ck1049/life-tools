@@ -11,8 +11,7 @@
         "pages/trend/trend"
     ],
     "tabBar": {
-        "list": [
-            {
+        "list": [{
                 "pagePath": "pages/home/home",
                 "text": "首页",
                 "iconPath": "images/home-gray.png",
