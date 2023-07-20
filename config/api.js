@@ -1,5 +1,5 @@
 const rootUrl = 'https://www.loafer.online';
-const rootUrl = 'http://127.0.0.1:8888';
+// const rootUrl = 'http://127.0.0.1:8888';
 // const rootUrl = 'http://127.0.0.1:8888';
 
 module.exports = {
