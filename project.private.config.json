@@ -10,7 +10,7 @@
             "list": [
                 {
                     "name": "",
-                    "pathName": "pages/receipts-and-payments/receipts-and-payments",
+                    "pathName": "pages/home/home",
                     "query": "",
                     "launchMode": "default",
                     "scene": null

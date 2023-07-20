@@ -21,13 +21,27 @@ Page({
         var that = this
         wx.scanCode().then(res => {
             console.log('======success======');
-            console.log(res.result);
-            wx.showModal({
-                title: '扫码成功！',
-                content: res.result,
-                showCancel: false,
-                confirmText: "确定"
-            })
+            const result = res.result;
+            console.log(result);
+            if (result.startsWith("http://") || result.startsWith("https://")) {
+                wx.navigateTo({
+                    url: '/pages/web-view/web-view?url=' + result,
+                })
+            } else if (result.startsWith("wxp://")) {
+                wx.showModal({
+                    title: 'redirect error!',
+                    content: '暂不支持打开此类型链接。',
+                    showCancel: false,
+                    confirmText: "确定"
+                })
+            } else {
+                wx.showModal({
+                    title: '扫码成功！',
+                    content: result,
+                    showCancel: false,
+                    confirmText: "确定"
+                })
+            }
         }).catch(res => {
             console.log('======fail======');
             console.log(res);
@@ -35,8 +49,14 @@ Page({
     },
     gotoReceiptsAndPayments() {
         wx.navigateTo({
-          url: '../../pages/receipts-and-payments/receipts-and-payments',
+            url: '../../pages/receipts-and-payments/receipts-and-payments',
         })
+    },
+    comingSoon() {
+        wx.showToast({
+            title: "敬请期待！",
+            duration: 1200
+          })
     },
     /**
      * 生命周期函数--监听页面加载

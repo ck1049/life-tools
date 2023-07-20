@@ -1,6 +1,14 @@
 // pages/receipts-and-payments/receipts-and-payments.js
 const api = require("../../config/api.js");
-const base64 = require('../../utils/base64').Base64;
+// const interceptor = require("../../config/interceptor.js").loginInterceptor;
+import {
+    Base64
+} from 'js-base64';
+import {
+    encode,
+    decode
+} from 'js-base64';
+const app = getApp();
 
 Page({
 
@@ -8,7 +16,6 @@ Page({
      * 页面的初始数据
      */
     data: {
-        qrTxt: 'https://github.com/liuxdi/wx-qr',
         qrCodeUrl: ''
     },
 
@@ -17,50 +24,27 @@ Page({
      */
     onLoad(options) {
         let url = api.qrCode.generate;
-        console.log(url);
         wx.showLoading({
-            title: '二维码生成中！',
+            title: '二维码生成中！'
         })
-        wx.request({
-            url,
-            method: 'POST',
-            header: {
-                'tokenId': 'c89291aee03cf335103cd08ea9f1c4f0'
-            },
+        app.authDownloadFile({
+            url: url,
+            that: this,
             data: {
-                'width': '100',
-                'height': '100',
-                'ratio': 4,
-                'content': 'https://www.loafer.online/loaferCore/doc.html'
+                width: 400,
+                height: 400,
+                content: 'wxp://f2f0-aMBOGyCFEaYeuNojQLDbbx66-i2Kz6oXk9wJ_bjrog'
             },
-            success: res => {
-                // 将arraybuffer转换成Base64格式
-                // const base64Data = wx.arrayBufferToBase64(res.data);
-                var base64Data = base64.encode(res.data);
-                let filePath = `${wx.env.USER_DATA_PATH}/qrCode.png`;
-                console.log(filePath);
-                console.log(base64Data);
-                // 将Base64格式的图片数据转换成临时文件路径
-                wx.getFileSystemManager().writeFile({
-                    filePath,
-                    data: base64Data,
-                    encoding: 'base64',
-                    success: (res) => {
-                        console.log(res);
-                        //在前端使用image标签展示图片
-                        this.setData({
-                            imageUrl: filePath
-                        });
-                    },
-                    fail: (error) => {
-                        console.error('转换图片失败：', error);
-                    }
-                });
-                console.log('base64Data===', this.data.qrCodeUrl);
+            success: function(res) {
+                console.log("this.url:" + JSON.stringify(this.that));
+                this.that.setData({qrCodeUrl: res.tempFilePath});
+                console.log("========" + JSON.stringify(this.that.data));
             },
-            fail: res => console.log("=====请求失败！====="),
+            fail: res => console.log("===fail===" + JSON.stringify(res)),
             complete: res => wx.hideLoading()
-        })
+        });
+
+        console.log(api.rootUrl + url);
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

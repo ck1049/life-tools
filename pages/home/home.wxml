@@ -20,11 +20,11 @@
             <image src="../../images/pay.png"></image>
             <block>付钱/收钱</block>
         </view>
-        <view>
+        <view bindtap="comingSoon">
             <image src="../../images/ride.png"></image>
             <block>出行</block>
         </view>
-        <view>
+        <view bindtap="comingSoon">
             <image src="../../images/card-package.png"></image>
             <block>卡包</block>
         </view>

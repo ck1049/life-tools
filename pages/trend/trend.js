@@ -2,6 +2,7 @@ let echarts = require('../ec-canvas/echarts.min.js');
 
 const app = getApp();
 const api = require('../../config/api.js')
+const interceptor = require("../../config/interceptor.js").loginInterceptor;
 
 function initChart(lazyComponent, xAxis, yAxis, series, title) {
     lazyComponent.init((canvas, width, height, dpr) => {
@@ -76,9 +77,10 @@ Page({
         let url = api.lottery.historicalInformation.replace('{enName}', this.data.enName)
             .replace('{minIssueNumber}', '9999999').replace('{pageSize}', '7');
         console.log(url);
-        wx.request({
+        app.authRequest({
             url,
             method: 'GET',
+            interceptor: interceptor,
             success: res => {
                 lambda(res);
             },

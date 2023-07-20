@@ -9,7 +9,8 @@
         "pages/life/life",
         "pages/mine/mine",
         "pages/trend/trend",
-        "pages/receipts-and-payments/receipts-and-payments"
+        "pages/receipts-and-payments/receipts-and-payments",
+        "pages/web-view/web-view"
     ],
     "tabBar": {
         "list": [
