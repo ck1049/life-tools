@@ -1,5 +1,18 @@
 <!--index.wxml-->
 <view class="container">
-    <ec-canvas id="amount-trend-line" canvas-id="amount-trend-line" ec="{{ amountTrend }}" style="border-bottom: 1px solid lightgray;"></ec-canvas>
-    <ec-canvas id="bonus-pool-trend-line" canvas-id="bonus-pool-trend-line" ec="{{ bonusPool }}"></ec-canvas>
+    <swiper class="swiper-container" indicator-dots="{{swiper.indicatorDots}}"
+        autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}">
+        <swiper-item>
+            <view class="swiper-item">
+                <ec-canvas id="amount-trend-line" canvas-id="amount-trend-line" ec="{{ amountTrend }}" style="border-bottom: 1px solid lightgray;"></ec-canvas>
+                <ec-canvas id="bonus-pool-trend-line" canvas-id="bonus-pool-trend-line" ec="{{ bonusPool }}"></ec-canvas>
+            </view>
+        </swiper-item>
+        <swiper-item>
+            <view class="swiper-item">
+
+            </view>
+        </swiper-item>
+    </swiper>
+
 </view>

@@ -10,8 +10,8 @@
             "list": [
                 {
                     "name": "",
-                    "pathName": "pages/home/home",
-                    "query": "",
+                    "pathName": "pages/trend/trend",
+                    "query": "enName=lotto",
                     "launchMode": "default",
                     "scene": null
                 }
