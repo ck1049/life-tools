@@ -12,7 +12,7 @@ Page({
         pageNum: 1,
         pageSize: 10,
         name: "双色球",
-        enName: "twoColorBall",
+        enName: "TWO_COLOR_BALL",
         minIssueNumber: 99999999,
         infoList: [{
             issueNumber: '2023079',

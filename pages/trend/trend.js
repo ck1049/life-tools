@@ -102,7 +102,7 @@ Page({
     onLoad(option) {
         console.log(option);
         this.setData({
-            enName: option.enName || 'lotto'
+            enName: option.enName || 'LOTTO'
         })
         this.refresh(res => {
             let dataList = res.data;
