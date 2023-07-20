@@ -1,4 +1,6 @@
 {
     "usingComponents": {},
-    "navigationStyle": "custom"
+    "navigationBarBackgroundColor": "#EBB41F",
+    "borderBottomColor": "transparent",
+    "backgroundColor": "#EBB41F"
 }
