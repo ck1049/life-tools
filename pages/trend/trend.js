@@ -147,6 +147,13 @@ Page({
             ]
         }
     },
+    switchTableComponet() {
+        if (this.data.tableComponentPath == 'wx://view') {
+            this.setData({tableComponentPath: 'components/table/table'});
+        } else {
+            this.setData({tableComponentPath: 'wx://view'});
+        }
+    },
 
     /**
      * 刷新页面数据
@@ -182,7 +189,6 @@ Page({
     },
 
     onLoad(option) {
-        console.log(option);
         this.setData({
             enName: option.enName || 'LOTTO'
         })

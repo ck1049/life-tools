@@ -3,6 +3,9 @@ Component({
     /**
      * 组件的属性列表
      */
+    options: {
+        styleIsolation: 'apply-shared'
+    },
     properties: {
         headerFontSize: { // 标题行字体大小
             type: Number,
@@ -38,8 +41,7 @@ Component({
      * 组件的初始数据
      */
     data: {
-        scrollX: false,
-        scrollY: false,
+        tableWidth: 0,
         tdWidths: {}
     },
     /**
@@ -79,17 +81,13 @@ Component({
                 var headerWidth = headerInfo.title.length * this.properties.headerFontSize;
                 // 该列所有单元格宽度
                 var contentLengthArray = this.properties.data.map(item => ('' + item[headerInfo.key]).length);
-                console.log("====contentLengthArray====" + contentLengthArray);
                 // 内容单元格宽度
                 var contentWidth = Math.max(...contentLengthArray) * this.properties.columnFontSize;
                 tdWidths[headerInfo.key] = Math.max(headerWidth, contentWidth);
             });
 
-            this.setData({
-                tdWidths,
-                scrollX: true, // 设置为可水平滚动
-                scrollY: true, // 设置为可垂直滚动
-            });
+            this.setData({ tdWidths, tableWidth: Object.values(tdWidths).reduce((acc, curr) => acc + curr, 0) });
+            console.log(this.data);
         }
     }
 })

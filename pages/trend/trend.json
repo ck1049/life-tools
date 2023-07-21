@@ -1,11 +1,11 @@
 {
     "usingComponents": {
       "ec-canvas": "../ec-canvas/ec-canvas",
-      "loafer-table": "../../components/table/table"
+      "table": "../../components/table/table"
     },
     "componentPlaceholder": {
         "ec-canvas": "view",
-        "loafer-table": "view"
+        "table": "view"
       }
   }
   

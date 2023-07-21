@@ -44,6 +44,14 @@ ec-canvas {
     box-sizing: border-box;
 }
 
-.th, .td {
-    height: 100rpx !important;
+.table .th::shadow {
+    font-size: 30rpx;
+}
+
+.table .td::shadow {
+    font-size: 25rpx;
+}
+
+.table .tr::shadow {
+    color: springgreen;
 }

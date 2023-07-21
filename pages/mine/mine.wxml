@@ -1,2 +1,4 @@
 <!--pages/mine/mine.wxml-->
-<text>pages/mine/mine.wxml</text>
+<view class="container">
+    <table class="table" header-font-size="20" column-font-size="15" headers="{{ redBallsTrend.headers }}" data="{{ redBallsTrend.data }}" bindtap="switchTableComponet"></table>
+</view>
