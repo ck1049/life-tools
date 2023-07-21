@@ -43,3 +43,7 @@ ec-canvas {
     padding: 20rpx 20rpx;
     box-sizing: border-box;
 }
+
+.th, .td {
+    height: 100rpx !important;
+}

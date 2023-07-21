@@ -8,7 +8,8 @@ page {
     height: 0;
 }
 
-.container, .lottery-overview {
+.container,
+.lottery-overview {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -21,9 +22,10 @@ page {
     background-color: white;
     border-radius: 20rpx;
     width: 90%;
-} 
+}
 
-.item-main, .item-top {
+.item-main,
+.item-top {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -54,8 +56,13 @@ page {
     height: 40rpx;
 }
 
-.item-top, .item-content {
+.item-top,
+.item-content {
     padding-left: 10rpx;
+}
+
+.item-content {
+    margin-left: 0;
 }
 
 .item-icon image {
@@ -63,7 +70,8 @@ page {
     height: 80rpx;
 }
 
-.item-info, .item-winning-numbers {
+.item-info,
+.item-winning-numbers {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -72,6 +80,8 @@ page {
 
 .item-winning-numbers {
     margin-bottom: 20rpx;
+    box-sizing: border-box;
+    height: 70rpx;
 }
 
 .item-info view {
@@ -84,11 +94,14 @@ page {
     border-radius: 50%;
     margin-left: 15rpx;
     margin-right: 15rpx;
-    font-size: small;
-    text-align: center;
+    font-size: medium;
     color: white;
     font-weight: bold;
-    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .redBall {
@@ -107,16 +120,35 @@ page {
     justify-content: space-around;
     align-items: center;
     width: 100%;
+    height: 60rpx;
 }
 
-.trend, .awardsTool {
+.trend,
+.awardsTool {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
 }
 
+.awardsTool view,
+.trend view {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    /* border: aqua 1px solid; */
+}
+
 .item-bottom image {
     width: 50rpx;
     height: 50rpx;
+}
+
+.bottom-font {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }

@@ -1,7 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-    <swiper class="swiper-container" indicator-dots="{{swiper.indicatorDots}}"
-        autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}">
+    <swiper class="swiper-container" indicator-dots="{{swiper.indicatorDots}}" autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}">
         <swiper-item>
             <view class="swiper-item">
                 <ec-canvas id="amount-trend-line" canvas-id="amount-trend-line" ec="{{ amountTrend }}" style="border-bottom: 1px solid lightgray;"></ec-canvas>
@@ -10,7 +9,7 @@
         </swiper-item>
         <swiper-item>
             <view class="swiper-item">
-
+                <loafer-table header-font-size="20" column-font-size="15" height="200" border headers="{{ redBallsTrend.headers }}" data="{{ redBallsTrend.data }}"></loafer-table>
             </view>
         </swiper-item>
     </swiper>

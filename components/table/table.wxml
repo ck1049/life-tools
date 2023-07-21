@@ -1,0 +1,9 @@
+<!--components/table/table.wxml-->
+<scroll-view scroll-x="true" scroll-y="true" enable-flex="true" class="scroll-container table-container">
+    <view class="th" style="font-size: {{headerFontSize}}px;">
+        <view class="td" wx:for="{{ headers }}" wx:for-item="header" wx:key="index" data-key="{{header.title}}" style="width: {{tdWidths[header.key]}}rpx">{{header.title}}</view>
+    </view>
+    <view class="tr" style="font-size: {{columnFontSize}}px;" wx:for="{{ data }}" wx:for-item="row" wx:key="index">
+        <view class="td" wx:for="{{ row }}" wx:index="key" wx:for-item="value" wx:key="index" data-key="{{key}}" data-value="{{value}}" style="width: {{tdWidths[index]}}rpx">{{ value }}</view>
+    </view>
+</scroll-view>

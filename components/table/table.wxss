@@ -1,0 +1,68 @@
+/* components/table/table.wxss */
+:root {
+    --border-color: lightgray;
+    /* 定义CSS变量 */
+    --th-height: 80rpx;
+    --tr-height: 80rpx;
+    --td-width: 40rpx;
+}
+
+/* components/table/table.wxss */
+.table-container {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.th {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: var(--border-color);
+    height: var(--th-height, 100rpx);
+}
+
+.tr {
+    height: var(--tr-height, 100rpx);
+}
+
+.th,
+.tr {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: var(--border-color);
+}
+
+.th :first-child,
+.tr :first-child {
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: var(--border-color);
+}
+
+.td {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: var(--border-color);
+    width: var(--td-width, 100rpx);
+    height: 100%;
+}

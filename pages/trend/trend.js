@@ -70,6 +70,81 @@ Page({
             autoplay: false,
             interval: 2000,
             duration: 500
+        },
+        redBallsTrend: {
+            headers: [{
+                    title: 'Name',
+                    key: 'name',
+                    // width: 100,
+                    fixed: 'left'
+                },
+                {
+                    title: 'Age',
+                    key: 'age',
+                    // width: 100
+                },
+                {
+                    title: 'Address',
+                    key: 'address',
+                    // width: 200
+                },
+                {
+                    title: 'Province',
+                    key: 'province',
+                    // width: 100
+                },
+                {
+                    title: 'City',
+                    key: 'city',
+                    // width: 100
+                },
+                {
+                    title: 'Postcode',
+                    key: 'zip',
+                    // width: 100
+                }
+            ],
+            data: [{
+                    name: 'John Brown',
+                    age: 18,
+                    address: 'New York No. 1 Lake Park',
+                    province: 'America',
+                    city: 'New York',
+                    zip: 100000
+                },
+                {
+                    name: 'Jim Green',
+                    age: 24,
+                    address: 'Washington, D.C. No. 1 Lake Park',
+                    province: 'America',
+                    city: 'Washington, D.C.',
+                    zip: 100000
+                },
+                {
+                    name: 'Joe Black',
+                    age: 30,
+                    address: 'Sydney No. 1 Lake Park',
+                    province: 'Australian',
+                    city: 'Sydney',
+                    zip: 100000
+                },
+                {
+                    name: 'Jon Snow',
+                    age: 26,
+                    address: 'Ottawa No. 2 Lake Park',
+                    province: 'Canada',
+                    city: 'Ottawa',
+                    zip: 100000
+                },
+                {
+                    name: 'John Brown',
+                    age: 18,
+                    address: 'New York No. 1 Lake Park',
+                    province: 'America',
+                    city: 'New York',
+                    zip: 100000
+                }
+            ]
         }
     },
 
@@ -98,12 +173,24 @@ Page({
             }
         })
     },
+    async renderChartAsync() {
+        return new Promise((resolve, reject) => {
+            // 异步处理渲染任务
+            // ...
+            resolve(); // 渲染完成后调用resolve
+        });
+    },
 
     onLoad(option) {
         console.log(option);
         this.setData({
             enName: option.enName || 'LOTTO'
         })
+
+    },
+    onReady() {
+
+
         this.refresh(res => {
             let dataList = res.data;
 
@@ -206,9 +293,19 @@ Page({
                 }
             };
 
+            // 延迟渲染，解决this.selectComponent因渲染不及时返回null的问题
             initChart(this.selectComponent('#amount-trend-line'), xAxis, amountYAxis, amountSeries, '奖金走势');
             initChart(this.selectComponent('#bonus-pool-trend-line'), xAxis, bonusPoolYAxis, bonusPoolSeries, '奖池走势');
+            // this.renderChartAsync().then(() => {
+            //     // 延迟渲染，解决this.selectComponent因渲染不及时返回null的问题
+            //     initChart(this.selectComponent('#amount-trend-line'), xAxis, amountYAxis, amountSeries, '奖金走势');
+            //     initChart(this.selectComponent('#bonus-pool-trend-line'), xAxis, bonusPoolYAxis, bonusPoolSeries, '奖池走势');
+            // }, 1000);
+            // setTimeout(() => {
+            //     // 延迟渲染，解决this.selectComponent因渲染不及时返回null的问题
+            //     initChart(this.selectComponent('#amount-trend-line'), xAxis, amountYAxis, amountSeries, '奖金走势');
+            //     initChart(this.selectComponent('#bonus-pool-trend-line'), xAxis, bonusPoolYAxis, bonusPoolSeries, '奖池走势');
+            // }, 1000);
         });
-    },
-    onReady() {}
+    }
 });

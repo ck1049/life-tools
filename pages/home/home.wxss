@@ -126,9 +126,10 @@ Page {
     align-items: center;
     width: 20%;
     margin-bottom: 40rpx;
+    font-size: 30rpx;
 }
 
 .mini-apps image {
-    width: 50rpx;
-    height: 50rpx;
+    width: 60rpx;
+    height: 60rpx;
 }

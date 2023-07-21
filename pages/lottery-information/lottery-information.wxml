@@ -30,18 +30,18 @@
             </view>
         </view>
         <view class="item-bottom" wx:if="{{item.trendIcon || item.awardsToolIcon}}">
-            <navigator class="trend" wx:if="{{item.trendIcon}}" url="/pages/trend/trend?enName={{item.enName}}">
+            <navigator style="height: 100%;" class="trend" wx:if="{{item.trendIcon}}" url="/pages/trend/trend?enName={{item.enName}}">
                 <view>
                     <image src="{{item.trendIcon}}" />
                 </view>
-                <view style="color: dodgerblue;">走势图</view>
+                <view class="bottom-font" style="color: dodgerblue;">走势图</view>
             </navigator>
-            <view wx:if="{{item.trendIcon && item.awardsToolIcon}}" style="color: lightgrey;">|</view>
-            <navigator class="awardsTool" wx:if="{{item.awardsToolIcon}}">
+            <view style="height: 100%;" wx:if="{{item.trendIcon && item.awardsToolIcon}}" style="color: lightgrey;">|</view>
+            <navigator style="height: 100%;" class="awardsTool" wx:if="{{item.awardsToolIcon}}">
                 <view>
                     <image src="{{item.awardsToolIcon}}" />
                 </view>
-                <view style="color: rgb(250, 98, 98);">算奖工具</view>
+                <view class="bottom-font" style="color: rgb(250, 98, 98);">算奖工具</view>
             </navigator>
         </view>
     </view>

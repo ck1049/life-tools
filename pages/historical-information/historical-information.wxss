@@ -96,11 +96,14 @@ page {
     border-radius: 50%;
     margin-left: 15rpx;
     margin-right: 15rpx;
-    font-size: small;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: medium;
     color: white;
     font-weight: bold;
-    padding: 0;
+    box-sizing: border-box;
 }
 
 .redBall {

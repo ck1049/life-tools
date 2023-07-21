@@ -36,6 +36,7 @@ Page({
                     lambda();
                 } else {
                     var _overviewList = res.data.map(item => {
+                        item.icon =  "../../images/twoColorBallIcon.png";
                         item.trendIcon = "../../images/twoColorBallIcon.png";
                         item.awardsToolIcon = "../../images/twoColorBallIcon.png";
                         return item
