@@ -68,25 +68,22 @@ Component({
             // 计算每列的宽度
             // 这里需要根据实际数据计算宽度，可以通过遍历数据获取每列的最大宽度
             let tdWidths = {};
-            const headersLength = this.properties.headers.length;
-            for (var i = 0; i < headersLength; i++) {
-                var headerInfo = this.properties.headers[i];
+            this.properties.headers.forEach(headerInfo => {
                 if (headerInfo.width) {
                     // 列信息设置了width
                     tdWidths[headerInfo.key] = headerInfo.width;
-                    continue;
+                    return;
                 }
                 // 根据内容自适应
                 // 标题单元格宽度
-                var headerWidth = this.properties.headers[i].title.length * this.properties.headerFontSize;
+                var headerWidth = headerInfo.title.length * this.properties.headerFontSize;
                 // 该列所有单元格宽度
                 var contentLengthArray = this.properties.data.map(item => ('' + item[headerInfo.key]).length);
                 console.log("====contentLengthArray====" + contentLengthArray);
                 // 内容单元格宽度
                 var contentWidth = Math.max(...contentLengthArray) * this.properties.columnFontSize;
                 tdWidths[headerInfo.key] = Math.max(headerWidth, contentWidth);
-            }
-            console.log("====列宽====", tdWidths);
+            });
 
             this.setData({
                 tdWidths,
