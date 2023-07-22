@@ -2,7 +2,6 @@ let echarts = require('../ec-canvas/echarts.min.js');
 
 const app = getApp();
 const api = require('../../config/api.js')
-const interceptor = require("../../config/interceptor.js").loginInterceptor;
 
 function initChart(lazyComponent, xAxis, yAxis, series, title) {
     lazyComponent.init((canvas, width, height, dpr) => {
@@ -306,19 +305,16 @@ Page({
     /**
      * 刷新页面数据
      */
-    refresh(lambda, title) {
+    requestAmountTrend(url, lambda, title) {
         wx.showLoading({
             title: title || '加载中',
             mask: true
         })
 
-        let url = api.lottery.historicalInformation.replace('{enName}', this.data.enName)
-            .replace('{minIssueNumber}', '9999999').replace('{pageSize}', '7');
         console.log(url);
         app.authRequest({
             url,
             method: 'GET',
-            interceptor: interceptor,
             success: res => {
                 lambda(res);
             },
@@ -342,7 +338,10 @@ Page({
         })
     },
     onReady() {
-        this.refresh(res => {
+        // 奖金走势图
+        let amountTrendUrl = api.lottery.historicalInformation.replace('{enName}', this.data.enName)
+        .replace('{minIssueNumber}', '9999999').replace('{pageSize}', '7');
+        this.requestAmountTrend(amountTrendUrl, res => {
             let dataList = res.data;
 
             let xAxis = {
@@ -457,6 +456,12 @@ Page({
             //     initChart(this.selectComponent('#amount-trend-line'), xAxis, amountYAxis, amountSeries, '奖金走势');
             //     initChart(this.selectComponent('#bonus-pool-trend-line'), xAxis, bonusPoolYAxis, bonusPoolSeries, '奖池走势');
             // }, 1000);
-        });
+        }, '奖金走势加载中！');
+
+
+        // 彩票号码走势
+        let lotteryTrendUrl = '';
+        // 红球冷热走势
+        
     }
 });
