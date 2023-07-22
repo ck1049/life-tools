@@ -76,5 +76,5 @@ ec-canvas {
     white-space: nowrap;
     overflow: auto;
     word-wrap: break-word;
-    border: 1px solid lightgray;
+    /* border: 1px solid lightgray; */
 }

@@ -59,7 +59,7 @@
     font-size: 26rpx;
     line-height: 96rpx;
     white-space: nowrap;
-    
+
     padding-left: 20rpx;
     padding-right: 20rpx;
     box-sizing: border-box;
@@ -71,4 +71,8 @@
     left: 0;
     margin-right: 40rpx;
     padding-left: 24rpx;
+}
+
+.table-row:nth-child(even) .table-row-td {
+    background-color: #e5e6eb;
 }

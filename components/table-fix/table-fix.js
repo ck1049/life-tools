@@ -14,10 +14,6 @@ Component({
         data: {
             type: Array,
             value: []
-        },
-        headerTap: { // header的点击事件
-            type: Function,
-            value: null
         }
     },
 
@@ -30,24 +26,11 @@ Component({
      * 组件的生命周期函数
      */
     lifetimes: {
-        attached() {
-            // 在组件渲染前执行的操作
-            console.log('组件被附加到页面节点树，执行初始化操作');
-            // 可以在这里调用其他方法或进行其他初始化操作
-            console.log(this.properties);
-        },
-
-        // 其他生命周期函数（可选）
-        created() {},
-        ready() {
-        },
-        detached() {},
     },
 
     /**
      * 组件的方法列表
      */
     methods: {
-
     }
 })

@@ -21,7 +21,7 @@
 
 <!-- 蓝球走势 -->
 <view class="blue-ball-trend scroll-x" hidden="{{ !(tabs[2].key == selectedTab) }}">
-    <table2 class="scroll-x" headers="{{ redBallsTrend.headers }}" data="{{ redBallsTrend.data }}"></table2>
+    <table-fix class="scroll-x" headers="{{ redBallsTrend.headers }}" data="{{ redBallsTrend.data }}"></table-fix>
 </view>
 
 <!-- 红球冷热 -->

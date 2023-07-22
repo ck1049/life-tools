@@ -2,12 +2,12 @@
     "usingComponents": {
       "ec-canvas": "../ec-canvas/ec-canvas",
       "table": "../../components/table/table",
-      "table2": "../../components/table2/table2"
+      "table-fix": "../../components/table-fix/table-fix"
     },
     "componentPlaceholder": {
         "ec-canvas": "view",
         "table": "view",
-        "table2": "view"
+        "table-fix": "view"
       }
   }
   
