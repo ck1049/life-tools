@@ -14,31 +14,31 @@
     </view>
 
     <!-- 红球走势 -->
-    <view class="red-ball-trend" hidden="{{ !tabs[1].selected }}">
+    <view class="red-ball-trend" hidden="{{ !(tabs[1].key == selectedTab) }}">
     </view>
 
     <!-- 蓝球走势 -->
-    <view class="blue-ball-trend" hidden="{{ !tabs[2].selected }}">
+    <view class="blue-ball-trend" hidden="{{ !(tabs[2].key == selectedTab) }}">
     </view>
 
     <!-- 红球冷热 -->
-    <view class="red-ball-heat" hidden="{{ !tabs[3].selected }}">
+    <view class="red-ball-heat" hidden="{{ !(tabs[3].key == selectedTab) }}">
     </view>
 
     <!-- 蓝球冷热 -->
-    <view class="blue-ball-heat" hidden="{{ !tabs[4].selected }}">
+    <view class="blue-ball-heat" hidden="{{ !(tabs[4].key == selectedTab) }}">
     </view>
 
     <!-- 大小 -->
-    <view class="size-trend" hidden="{{ !tabs[5].selected }}">
+    <view class="size-trend" hidden="{{ !(tabs[5].key == selectedTab) }}">
     </view>
 
     <!-- 奇偶 -->
-    <view class="parity-trend" hidden="{{ !tabs[6].selected }}">
+    <view class="parity-trend" hidden="{{ !(tabs[6].key == selectedTab) }}">
     </view>
 
     <!-- 质合 -->
-    <view class="prime-composite-trend" hidden="{{ !tabs[7].selected }}">
+    <view class="prime-composite-trend" hidden="{{ !(tabs[7].key == selectedTab) }}">
     </view>
 
 </view>
