@@ -2,50 +2,65 @@
 Page {
     width: 100%;
     height: 100%;
+
+}
+
+.scroll-x {
+    overflow-x: scroll;
+}
+
+.tabs {
+    width: 1200rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    font-size: 30rpx;
+    padding: 5rpx 5rpx 10rpx;
+    box-sizing: border-box;
+    color: gray;
+}
+
+.tab {
+    text-align: center;
+    white-space: nowrap;
+    overflow-x: scroll;
+    box-sizing: border-box;
+}
+
+.selected-tab {
+    font-style: blod;
+    color: black;
 }
 
 .container {
     width: 100%;
     height: 100%;
-    background-color: #ddd;
     padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-}
-.swiper-container {
-    width: 100%;
-    height: 100%;
-    padding: 0 20rpx 20rpx;
-    box-sizing: border-box;
-    /* border: lime solid 1px; */
+    /* overflow: hidden; */
 }
 
-swiper-item {
-    width: 90%;
-    border-end-start-radius: 20rpx;
-    border-end-end-radius: 20rpx;
-    background-color: white;
-}
-
-.swiper-item{
+.amount-trend {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     box-sizing: border-box;
-  }
+    width: 90%;
+    border-radius: 20rpx;
+    background-color: white;
+    margin-top: 20rpx;
+}
 
 ec-canvas {
     width: 100%;
     height: 500rpx;
     padding: 20rpx 20rpx;
     box-sizing: border-box;
-}
-
-.table {
-    width: 100%;
-    height: 500rpx;
-    position: fixed;
 }

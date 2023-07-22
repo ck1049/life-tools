@@ -34,6 +34,10 @@ Component({
         border: {
             type: Boolean,
             value: false
+        },
+        headerTap: { // header的点击事件
+            type: Function,
+            value: null
         }
     },
 
@@ -66,6 +70,15 @@ Component({
      * 组件的方法列表
      */
     methods: {
+        headerTap(e) {
+            var detail = { selectedHeader: e.currentTarget.dataset.key };
+            var options = {
+                bubbles: false, // 事件是否冒泡
+                composed: false, // 事件是否可以穿越组件边界，为false时，事件将只能在引用组件的节点树上触发，不进入其他任何组件内部
+                capturePhase: false // 事件是否拥有捕获阶段
+            }
+            this.triggerEvent('headerTapEvent', detail, options);
+        },
         calculateTdWidths() {
             // 计算每列的宽度
             // 这里需要根据实际数据计算宽度，可以通过遍历数据获取每列的最大宽度

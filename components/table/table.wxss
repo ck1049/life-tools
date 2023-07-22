@@ -1,7 +1,17 @@
 /* components/table/table.wxss */
+.page {
+    --border-color: lightgray;
+    /* 定义CSS变量 */
+    --th-height: 80rpx;
+    --tr-height: 80rpx;
+    --td-width: 40rpx;
+    --header-font-size: 20rpx;
+    --column-font-size: 15rpx;
+}
+
 .table-box {
     height: 100%;
-    overflow: scroll;
+    overflow: auto;
     margin: 30rpx;
     background: #fff;
     border-radius: 16rpx;
@@ -17,7 +27,6 @@
     word-break: keep-all;
     background-color: #FFFFFF;
     border-radius: 16rpx;
-    overflow: scroll;
 }
 
 .tr {
@@ -26,8 +35,7 @@
 
 .th {
     display: table-cell;
-    height: 80rpx;
-    line-height: 80rpx;
+    height: 100%;
     line-height: 80rpx;
     text-align: center;
     border: 2rpx solid #F3F4F7;
@@ -52,7 +60,7 @@
 .th:first-child,
 .td:first-child {
     position: sticky;
-    left: -2rpx;
+    left: 0;
     background: #fff;
 }
 

@@ -1,9 +1,9 @@
 <!--components/table/table.wxml-->
 <view class="table-box">
-    <view class="table">
+    <view class="table table-class">
         <!-- 表格标题 -->
         <view class="tr">
-            <view class="th header" wx:for="{{ headers }}" wx:for-item="header" wx:key="index">{{ header.title }}</view>
+            <view class="th header" wx:for="{{ headers }}" wx:for-item="header" wx:key="index" data-key="{{ header.key }}" bindtap="headerTap">{{ header.title }}</view>
         </view>
         <!-- 表格内容 -->
         <view class="tr" wx:for="{{ data }}" wx:for-item="row" wx:key="index">

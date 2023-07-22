@@ -10,7 +10,7 @@
             "list": [
                 {
                     "name": "",
-                    "pathName": "pages/mine/mine",
+                    "pathName": "pages/trend/trend",
                     "query": "",
                     "launchMode": "default",
                     "scene": null

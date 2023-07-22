@@ -1,18 +1,44 @@
 <!--index.wxml-->
+<view class="scroll-x">
+    <view class="tabs">
+        <view class="tab {{ tab.key == selectedTab ? 'selected-tab' : '' }}" wx:for="{{ tabs }}" wx:for-item="tab" wx:key="index" bindtap="switchTab" data-selected-tab="{{ tab.key }}">{{ tab.title }}</view>
+    </view>
+</view>
+
 <view class="container">
-    <table class="table" headers="{{ redBallsTrend.headers }}" data="{{ redBallsTrend.data }}"></table>
-    <swiper class="swiper-container" indicator-dots="{{swiper.indicatorDots}}" autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}">
-        <swiper-item>
-            <view class="swiper-item">
-                <ec-canvas id="amount-trend-line" canvas-id="amount-trend-line" ec="{{ amountTrend }}" style="border-bottom: 1px solid lightgray;"></ec-canvas>
-                <ec-canvas id="bonus-pool-trend-line" canvas-id="bonus-pool-trend-line" ec="{{ bonusPool }}"></ec-canvas>
-            </view>
-        </swiper-item>
-        <swiper-item style="overflow: scroll;">
-            <!-- <view class="swiper-item" style="overflow: scroll;" catchtouchmove="onOuterSwiperTouchMove">
-                <table class="table" headers="{{ redBallsTrend.headers }}" data="{{ redBallsTrend.data }}"></table>
-            </view> -->
-        </swiper-item>
-    </swiper>
+    <!-- <table headers="{{ redBallsTrend.headers }}" data="{{ redBallsTrend.data }}" bind:headerTapEvent="headerTapEvent"></table> -->
+    <!-- 奖金走势 -->
+    <view class="amount-trend" hidden="{{ !(tabs[0].key == selectedTab) }}">
+        <ec-canvas id="amount-trend-line" canvas-id="amount-trend-line" ec="{{ amountTrend }}" style="border-bottom: 1px solid lightgray;"></ec-canvas>
+        <ec-canvas id="bonus-pool-trend-line" canvas-id="bonus-pool-trend-line" ec="{{ bonusPool }}"></ec-canvas>
+    </view>
+
+    <!-- 红球走势 -->
+    <view class="red-ball-trend" hidden="{{ !tabs[1].selected }}">
+    </view>
+
+    <!-- 蓝球走势 -->
+    <view class="blue-ball-trend" hidden="{{ !tabs[2].selected }}">
+    </view>
+
+    <!-- 红球冷热 -->
+    <view class="red-ball-heat" hidden="{{ !tabs[3].selected }}">
+    </view>
+
+    <!-- 蓝球冷热 -->
+    <view class="blue-ball-heat" hidden="{{ !tabs[4].selected }}">
+    </view>
+
+    <!-- 大小 -->
+    <view class="size-trend" hidden="{{ !tabs[5].selected }}">
+    </view>
+
+    <!-- 奇偶 -->
+    <view class="parity-trend" hidden="{{ !tabs[6].selected }}">
+    </view>
+
+    <!-- 质合 -->
+    <view class="prime-composite-trend" hidden="{{ !tabs[7].selected }}">
+    </view>
 
 </view>

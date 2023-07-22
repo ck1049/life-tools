@@ -71,6 +71,31 @@ Page({
             interval: 2000,
             duration: 500
         },
+        tabs: [{
+            title: '奖金走势',
+            key: 'amountTrend'
+        }, {
+            title: '红球走势',
+            key: 'redBallTrend'
+        }, {
+            title: '蓝球走势',
+            key: 'blueBallTrend'
+        }, {
+            title: '红球冷热',
+            key: 'redBallHeat'
+        }, {
+            title: '蓝球冷热',
+            key: 'blueBallHeat'
+        }, {
+            title: '大小',
+            key: 'sizeTrend'
+        }, {
+            title: '奇偶',
+            key: 'parityTrend'
+        }, {
+            title: '质合',
+            key: 'primeCompositeTrend'
+        }],
         redBallsTrend: {
             headers: [{
                     title: 'Name',
@@ -265,18 +290,14 @@ Page({
                     zip: 100000
                 }
             ]
-        }
+        },
+        selectedTab: 'amountTrend'
     },
-    switchTableComponet() {
-        if (this.data.tableComponentPath == 'wx://view') {
-            this.setData({
-                tableComponentPath: 'components/table/table'
-            });
-        } else {
-            this.setData({
-                tableComponentPath: 'wx://view'
-            });
-        }
+    switchTab(e) {
+        this.setData({
+            selectedTab: e.currentTarget.dataset.selectedTab
+        });
+        console.log(this.data.selectedTab);
     },
     onOuterSwiperTouchMove(event) {
         // 阻止外部swiper的滑动事件冒泡到内部swiper
@@ -317,13 +338,10 @@ Page({
 
     onLoad(option) {
         this.setData({
-            enName: option.enName || 'LOTTO'
+            enName: option.enName || 'LOTTO',
         })
-
     },
     onReady() {
-
-
         this.refresh(res => {
             let dataList = res.data;
 
