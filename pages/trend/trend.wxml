@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <view class="container">
+    <table class="table" headers="{{ redBallsTrend.headers }}" data="{{ redBallsTrend.data }}"></table>
     <swiper class="swiper-container" indicator-dots="{{swiper.indicatorDots}}" autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}">
         <swiper-item>
             <view class="swiper-item">
@@ -7,10 +8,10 @@
                 <ec-canvas id="bonus-pool-trend-line" canvas-id="bonus-pool-trend-line" ec="{{ bonusPool }}"></ec-canvas>
             </view>
         </swiper-item>
-        <swiper-item>
-            <view class="swiper-item">
-                <table class="table" header-font-size="20" column-font-size="15" headers="{{ redBallsTrend.headers }}" data="{{ redBallsTrend.data }}" bindtap="switchTableComponet"></table>
-            </view>
+        <swiper-item style="overflow: scroll;">
+            <!-- <view class="swiper-item" style="overflow: scroll;" catchtouchmove="onOuterSwiperTouchMove">
+                <table class="table" headers="{{ redBallsTrend.headers }}" data="{{ redBallsTrend.data }}"></table>
+            </view> -->
         </swiper-item>
     </swiper>
 

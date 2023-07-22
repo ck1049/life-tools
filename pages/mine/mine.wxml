@@ -1,4 +1,13 @@
 <!--pages/mine/mine.wxml-->
-<view class="container">
-    <table class="table" header-font-size="20" column-font-size="15" headers="{{ redBallsTrend.headers }}" data="{{ redBallsTrend.data }}" bindtap="switchTableComponet"></table>
+<view class="table-box">
+    <view class="table">
+        <!-- 表格标题 -->
+        <view class="tr">
+            <view class="th header" wx:for="{{ redBallsTrend.headers }}" wx:for-item="header" wx:key="index">{{ header.title }}</view>
+        </view>
+        <!-- 表格内容 -->
+        <view class="tr" wx:for="{{ redBallsTrend.data }}" wx:for-item="row" wx:key="index">
+            <view class="td" wx:for="{{ row }}" wx:for-index="key" wx:key="key" wx:for-item="value">{{ value }}</view>
+        </view>
+    </view>
 </view>

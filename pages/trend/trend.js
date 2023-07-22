@@ -143,18 +143,145 @@ Page({
                     province: 'America',
                     city: 'New York',
                     zip: 100000
+                },
+                {
+                    name: 'John Brown',
+                    age: 18,
+                    address: 'New York No. 1 Lake Park',
+                    province: 'America',
+                    city: 'New York',
+                    zip: 100000
+                },
+                {
+                    name: 'Jim Green',
+                    age: 24,
+                    address: 'Washington, D.C. No. 1 Lake Park',
+                    province: 'America',
+                    city: 'Washington, D.C.',
+                    zip: 100000
+                },
+                {
+                    name: 'Joe Black',
+                    age: 30,
+                    address: 'Sydney No. 1 Lake Park',
+                    province: 'Australian',
+                    city: 'Sydney',
+                    zip: 100000
+                },
+                {
+                    name: 'Jon Snow',
+                    age: 26,
+                    address: 'Ottawa No. 2 Lake Park',
+                    province: 'Canada',
+                    city: 'Ottawa',
+                    zip: 100000
+                },
+                {
+                    name: 'John Brown',
+                    age: 18,
+                    address: 'New York No. 1 Lake Park',
+                    province: 'America',
+                    city: 'New York',
+                    zip: 100000
+                },
+                {
+                    name: 'John Brown',
+                    age: 18,
+                    address: 'New York No. 1 Lake Park',
+                    province: 'America',
+                    city: 'New York',
+                    zip: 100000
+                },
+                {
+                    name: 'Jim Green',
+                    age: 24,
+                    address: 'Washington, D.C. No. 1 Lake Park',
+                    province: 'America',
+                    city: 'Washington, D.C.',
+                    zip: 100000
+                },
+                {
+                    name: 'Joe Black',
+                    age: 30,
+                    address: 'Sydney No. 1 Lake Park',
+                    province: 'Australian',
+                    city: 'Sydney',
+                    zip: 100000
+                },
+                {
+                    name: 'Jon Snow',
+                    age: 26,
+                    address: 'Ottawa No. 2 Lake Park',
+                    province: 'Canada',
+                    city: 'Ottawa',
+                    zip: 100000
+                },
+                {
+                    name: 'John Brown',
+                    age: 18,
+                    address: 'New York No. 1 Lake Park',
+                    province: 'America',
+                    city: 'New York',
+                    zip: 100000
+                },
+                {
+                    name: 'John Brown',
+                    age: 18,
+                    address: 'New York No. 1 Lake Park',
+                    province: 'America',
+                    city: 'New York',
+                    zip: 100000
+                },
+                {
+                    name: 'Jim Green',
+                    age: 24,
+                    address: 'Washington, D.C. No. 1 Lake Park',
+                    province: 'America',
+                    city: 'Washington, D.C.',
+                    zip: 100000
+                },
+                {
+                    name: 'Joe Black',
+                    age: 30,
+                    address: 'Sydney No. 1 Lake Park',
+                    province: 'Australian',
+                    city: 'Sydney',
+                    zip: 100000
+                },
+                {
+                    name: 'Jon Snow',
+                    age: 26,
+                    address: 'Ottawa No. 2 Lake Park',
+                    province: 'Canada',
+                    city: 'Ottawa',
+                    zip: 100000
+                },
+                {
+                    name: 'John Brown',
+                    age: 18,
+                    address: 'New York No. 1 Lake Park',
+                    province: 'America',
+                    city: 'New York',
+                    zip: 100000
                 }
             ]
         }
     },
     switchTableComponet() {
         if (this.data.tableComponentPath == 'wx://view') {
-            this.setData({tableComponentPath: 'components/table/table'});
+            this.setData({
+                tableComponentPath: 'components/table/table'
+            });
         } else {
-            this.setData({tableComponentPath: 'wx://view'});
+            this.setData({
+                tableComponentPath: 'wx://view'
+            });
         }
     },
-
+    onOuterSwiperTouchMove(event) {
+        // 阻止外部swiper的滑动事件冒泡到内部swiper
+        // event.stopPropagation();
+    },
     /**
      * 刷新页面数据
      */
