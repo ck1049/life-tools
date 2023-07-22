@@ -37,7 +37,7 @@ Page {
 
 .container {
     width: 100%;
-    height: 100%;
+    height: auto;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -63,4 +63,23 @@ ec-canvas {
     height: 500rpx;
     padding: 20rpx 20rpx;
     box-sizing: border-box;
+}
+
+.red-ball-trend {
+    width: auto;
+    height: 100%;
+    border: 1px solid lightgray;
+}
+
+.table-head,
+.table-row {
+    display: table-row;
+}
+
+.table-head-td,
+.table-row-td {
+    white-space: nowrap;
+    overflow: auto;
+    word-wrap: break-word;
+    border: 1px solid lightgray;
 }

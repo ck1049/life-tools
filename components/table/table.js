@@ -7,14 +7,6 @@ Component({
         styleIsolation: 'apply-shared'
     },
     properties: {
-        headerFontSize: { // 标题行字体大小
-            type: Number,
-            value: 30 // 默认30rpx
-        },
-        columnFontSize: { // 内容单元格字体大小
-            type: Number,
-            value: 25 // 默认30rpx
-        },
         headers: {
             type: Array,
             value: []
@@ -22,18 +14,6 @@ Component({
         data: {
             type: Array,
             value: []
-        },
-        width: {
-            type: Number,
-            value: 0
-        },
-        height: {
-            type: Number,
-            value: 0
-        },
-        border: {
-            type: Boolean,
-            value: false
         },
         headerTap: { // header的点击事件
             type: Function,
@@ -45,8 +25,6 @@ Component({
      * 组件的初始数据
      */
     data: {
-        tableWidth: 0,
-        tdWidths: {}
     },
     /**
      * 组件的生命周期函数
@@ -61,7 +39,6 @@ Component({
         // 其他生命周期函数（可选）
         created() {},
         ready() {
-            this.calculateTdWidths();
         },
         detached() {},
     },
@@ -78,29 +55,6 @@ Component({
                 capturePhase: false // 事件是否拥有捕获阶段
             }
             this.triggerEvent('headerTapEvent', detail, options);
-        },
-        calculateTdWidths() {
-            // 计算每列的宽度
-            // 这里需要根据实际数据计算宽度，可以通过遍历数据获取每列的最大宽度
-            let tdWidths = {};
-            this.properties.headers.forEach(headerInfo => {
-                if (headerInfo.width) {
-                    // 列信息设置了width
-                    tdWidths[headerInfo.key] = headerInfo.width;
-                    return;
-                }
-                // 根据内容自适应
-                // 标题单元格宽度
-                var headerWidth = headerInfo.title.length * this.properties.headerFontSize;
-                // 该列所有单元格宽度
-                var contentLengthArray = this.properties.data.map(item => ('' + item[headerInfo.key]).length);
-                // 内容单元格宽度
-                var contentWidth = Math.max(...contentLengthArray) * this.properties.columnFontSize;
-                tdWidths[headerInfo.key] = Math.max(headerWidth, contentWidth);
-            });
-
-            this.setData({ tdWidths, tableWidth: Object.values(tdWidths).reduce((acc, curr) => acc + curr, 0) });
-            console.log(this.data);
         }
     }
 })

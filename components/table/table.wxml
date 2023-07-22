@@ -1,22 +1,12 @@
-<!--components/table/table.wxml-->
-<view class="table-box">
-    <view class="table table-class">
-        <!-- 表格标题 -->
-        <view class="tr">
-            <view class="th header" wx:for="{{ headers }}" wx:for-item="header" wx:key="index" data-key="{{ header.key }}" bindtap="headerTap">{{ header.title }}</view>
-        </view>
-        <!-- 表格内容 -->
-        <view class="tr" wx:for="{{ data }}" wx:for-item="row" wx:key="index">
-            <view class="td" wx:for="{{ row }}" wx:for-index="key" wx:key="key" wx:for-item="value">{{ value }}</view>
-        </view>
-    </view>
-</view>
-
-<!-- <view class="table">
-    <view class="th" style="font-size: {{headerFontSize}}px;">
-        <view class="td {{ index === 0 ? 'border-left' : '' }}" wx:for="{{ headers }}" wx:for-item="header" wx:key="index" data-key="{{ header.title }}" style="width: {{ tdWidths[header.key] }}rpx">{{ header.title }}</view>
-    </view>
-    <view class="tr" wx:for="{{ data }}" wx:for-item="row" wx:key="index" style="font-size: {{columnFontSize}}px;">
-        <view class="td {{ index == headers[0].key ? 'border-left' : '' }}" wx:for="{{ row }}" wx:index="index" wx:for-item="value" wx:key="index" data-key="{{ index }}" data-value="{{ value }}" style="width: {{ tdWidths[index] }}rpx;">{{ value }}</view>
-    </view>
-</view> -->
+<ScrollView class="table" scroll-x scroll-y bindscrolltolower="handleScrollToLower">
+    <View>
+        <View class="table-head">
+            <View class="table-head-td" wx:for="{{ headers }}" wx:for-item="header" wx:key="index">
+                <Text class="table-head-td-text">{{ header.title }}</Text>
+            </View>
+        </View>
+        <View class="table-row" wx:for="{{ data }}" wx:for-item="row" wx:key="index">
+            <Text class="table-row-td" wx:for="{{ row }}" wx:for-index="key" wx:key="key" wx:for-item="value">{{ value }}</Text>
+        </View>
+    </View>
+</ScrollView>
