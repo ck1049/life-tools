@@ -1,6 +1,5 @@
 // pages/historical-information/historical-information.js
 const api = require("../../config/api.js")
-const interceptor = require("../../config/interceptor.js").loginInterceptor;
 const app = getApp();
 
 Page({
@@ -73,7 +72,6 @@ Page({
             url: api.lottery.historicalInformation.replace('{enName}', this.data.enName)
             .replace('{minIssueNumber}', this.data.minIssueNumber).replace('{pageSize}', this.data.pageSize),
             method: 'GET',
-            interceptor: interceptor,
             success: res => {
                 lambda(res);
                 this.setData({

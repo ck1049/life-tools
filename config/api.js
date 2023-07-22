@@ -9,7 +9,8 @@ module.exports = {
     },
     lottery: {
         lotteryInformation: '/api/lottery/lotteryInformation',
-        historicalInformation: '/api/lottery/historicalInformation/{enName}/{minIssueNumber}/{pageSize}'
+        historicalInformation: '/api/lottery/historicalInformation/{enName}/{minIssueNumber}/{pageSize}',
+        lotteryTrendUrl: ''
     },
     twoColorBall: {
 

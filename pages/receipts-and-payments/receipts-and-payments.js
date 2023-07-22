@@ -1,6 +1,5 @@
 // pages/receipts-and-payments/receipts-and-payments.js
 const api = require("../../config/api.js");
-// const interceptor = require("../../config/interceptor.js").loginInterceptor;
 import {
     Base64
 } from 'js-base64';

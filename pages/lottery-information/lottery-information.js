@@ -2,7 +2,6 @@
 // 获取应用实例
 const app = getApp()
 const api = require('../../config/api.js');
-const interceptor = require('../../config/interceptor.js');
 
 Page({
     data: {
@@ -28,7 +27,6 @@ Page({
         console.log(api.lottery.lotteryInformation);
         app.authRequest({
             url: api.lottery.lotteryInformation,
-            interceptor: interceptor,
             method: 'GET',
             success: res => {
                 if (lambda) {
