@@ -65,15 +65,10 @@ ec-canvas {
     box-sizing: border-box;
 }
 
-.red-ball-trend {
+.red-ball-trend, .red-ball-trend {
     width: auto;
     height: 100%;
     border: 1px solid lightgray;
-}
-
-.table-head,
-.table-row {
-    display: table-row;
 }
 
 .table-head-td,
