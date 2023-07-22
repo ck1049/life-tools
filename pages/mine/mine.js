@@ -239,7 +239,9 @@ Page({
                     zip: 100000
                 }
             ]
-        }
+        },
+        tableHeight: (20 + 1) * 96,
+        tableWidth: 200 * 6 + 60,
     },
 
     /**
