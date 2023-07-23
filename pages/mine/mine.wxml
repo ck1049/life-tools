@@ -9,6 +9,6 @@
     </View>
     <!-- 表行 -->
     <View class="table-row" wx:for="{{ redBallsTrend.data }}" wx:for-item="row" wx:key="index">
-        <Text class="table-row-td" wx:for="{{ row }}" wx:for-index="key" wx:key="key" wx:for-item="value">{{ value }}</Text>
+        <Text class="table-row-td" wx:for="{{ redBallsTrend.headers }}" wx:key="header-index" wx:for-item="header">{{ row[header.key] }}</Text>
     </View>
 </scroll-view>
