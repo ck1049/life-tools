@@ -5,12 +5,12 @@ const rootUrl = 'https://www.loafer.online';
 module.exports = {
     rootUrl,
     lotto: {
-        index: '/api/lotto/index/{pageNum}/{pageSize}'
+        index: '/lottery/lotto/index/{pageNum}/{pageSize}'
     },
     lottery: {
-        lotteryInformation: '/api/lottery/lotteryInformation',
-        historicalInformation: '/api/lottery/historicalInformation/{enName}/{minIssueNumber}/{pageSize}',
-        lotteryTrendUrl: ''
+        lotteryInformation: '/lottery/lottery/lotteryInformation',
+        historicalInformation: '/lottery/lottery/historicalInformation/{enName}/{minIssueNumber}/{pageSize}',
+        trendUrl: '/lottery/lottery/trend?enName={enName}'
     },
     twoColorBall: {
 

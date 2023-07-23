@@ -96,199 +96,12 @@ Page({
             key: 'primeCompositeTrend'
         }],
         redBallsTrend: {
-            headers: [{
-                    title: 'Name',
-                    key: 'name',
-                    // width: 100,
-                    fixed: 'left'
-                },
-                {
-                    title: 'Age',
-                    key: 'age',
-                    // width: 100
-                },
-                {
-                    title: 'Address',
-                    key: 'address',
-                    // width: 200
-                },
-                {
-                    title: 'Province',
-                    key: 'province',
-                    // width: 100
-                },
-                {
-                    title: 'City',
-                    key: 'city',
-                    // width: 100
-                },
-                {
-                    title: 'Postcode',
-                    key: 'zip',
-                    // width: 100
-                }
-            ],
-            data: [{
-                    name: 'John Brown',
-                    age: 18,
-                    address: 'New York No. 1 Lake Park',
-                    province: 'America',
-                    city: 'New York',
-                    zip: 100000
-                },
-                {
-                    name: 'Jim Green',
-                    age: 24,
-                    address: 'Washington, D.C. No. 1 Lake Park',
-                    province: 'America',
-                    city: 'Washington, D.C.',
-                    zip: 100000
-                },
-                {
-                    name: 'Joe Black',
-                    age: 30,
-                    address: 'Sydney No. 1 Lake Park',
-                    province: 'Australian',
-                    city: 'Sydney',
-                    zip: 100000
-                },
-                {
-                    name: 'Jon Snow',
-                    age: 26,
-                    address: 'Ottawa No. 2 Lake Park',
-                    province: 'Canada',
-                    city: 'Ottawa',
-                    zip: 100000
-                },
-                {
-                    name: 'John Brown',
-                    age: 18,
-                    address: 'New York No. 1 Lake Park',
-                    province: 'America',
-                    city: 'New York',
-                    zip: 100000
-                },
-                {
-                    name: 'John Brown',
-                    age: 18,
-                    address: 'New York No. 1 Lake Park',
-                    province: 'America',
-                    city: 'New York',
-                    zip: 100000
-                },
-                {
-                    name: 'Jim Green',
-                    age: 24,
-                    address: 'Washington, D.C. No. 1 Lake Park',
-                    province: 'America',
-                    city: 'Washington, D.C.',
-                    zip: 100000
-                },
-                {
-                    name: 'Joe Black',
-                    age: 30,
-                    address: 'Sydney No. 1 Lake Park',
-                    province: 'Australian',
-                    city: 'Sydney',
-                    zip: 100000
-                },
-                {
-                    name: 'Jon Snow',
-                    age: 26,
-                    address: 'Ottawa No. 2 Lake Park',
-                    province: 'Canada',
-                    city: 'Ottawa',
-                    zip: 100000
-                },
-                {
-                    name: 'John Brown',
-                    age: 18,
-                    address: 'New York No. 1 Lake Park',
-                    province: 'America',
-                    city: 'New York',
-                    zip: 100000
-                },
-                {
-                    name: 'John Brown',
-                    age: 18,
-                    address: 'New York No. 1 Lake Park',
-                    province: 'America',
-                    city: 'New York',
-                    zip: 100000
-                },
-                {
-                    name: 'Jim Green',
-                    age: 24,
-                    address: 'Washington, D.C. No. 1 Lake Park',
-                    province: 'America',
-                    city: 'Washington, D.C.',
-                    zip: 100000
-                },
-                {
-                    name: 'Joe Black',
-                    age: 30,
-                    address: 'Sydney No. 1 Lake Park',
-                    province: 'Australian',
-                    city: 'Sydney',
-                    zip: 100000
-                },
-                {
-                    name: 'Jon Snow',
-                    age: 26,
-                    address: 'Ottawa No. 2 Lake Park',
-                    province: 'Canada',
-                    city: 'Ottawa',
-                    zip: 100000
-                },
-                {
-                    name: 'John Brown',
-                    age: 18,
-                    address: 'New York No. 1 Lake Park',
-                    province: 'America',
-                    city: 'New York',
-                    zip: 100000
-                },
-                {
-                    name: 'John Brown',
-                    age: 18,
-                    address: 'New York No. 1 Lake Park',
-                    province: 'America',
-                    city: 'New York',
-                    zip: 100000
-                },
-                {
-                    name: 'Jim Green',
-                    age: 24,
-                    address: 'Washington, D.C. No. 1 Lake Park',
-                    province: 'America',
-                    city: 'Washington, D.C.',
-                    zip: 100000
-                },
-                {
-                    name: 'Joe Black',
-                    age: 30,
-                    address: 'Sydney No. 1 Lake Park',
-                    province: 'Australian',
-                    city: 'Sydney',
-                    zip: 100000
-                },
-                {
-                    name: 'Jon Snow',
-                    age: 26,
-                    address: 'Ottawa No. 2 Lake Park',
-                    province: 'Canada',
-                    city: 'Ottawa',
-                    zip: 100000
-                },
-                {
-                    name: 'John Brown',
-                    age: 18,
-                    address: 'New York No. 1 Lake Park',
-                    province: 'America',
-                    city: 'New York',
-                    zip: 100000
-                }
-            ]
+            headers: [],
+            data: []
+        },
+        blueBallsTrend: {
+            headers: [],
+            data: []
         },
         selectedTab: 'amountTrend'
     },
@@ -303,9 +116,9 @@ Page({
         // event.stopPropagation();
     },
     /**
-     * 刷新页面数据
+     * 请求数据
      */
-    requestAmountTrend(url, lambda, title) {
+    requestTrendData(url, lambda, title) {
         wx.showLoading({
             title: title || '加载中',
             mask: true
@@ -332,6 +145,55 @@ Page({
         });
     },
 
+    // 将trend接口返回的数据转成表格数据格式
+    numberListToIssueList(resList, color) {
+        const backgroundColor = {red: 'rgb(250, 98, 98)', blue: 'dodgerblue'};
+        // 返回map<issue, [item]>
+        let issueListMap = resList.filter(item => item.color == color).reduce((result, item) => {
+            const issue = item.issue;
+            if (!result[issue]) {
+                // map中还没有以issue为key的<issue, [item]>元素，则添加新的元素
+                result[issue] = [];
+            }
+            result[issue].push(item);
+            return result;
+        }, {});
+
+        // 红球趋势表头
+        let ballHeaders = [{
+            title: '期次',
+            key: 'issue'
+        }];
+        let numberList = issueListMap[Object.keys(issueListMap)[0]].map(item => ({
+            'title': item.number,
+            'key': item.number
+        }));
+
+        ballHeaders = [...ballHeaders, ...numberList];
+        // 表格数据内容
+        let data = [];
+
+
+        Object.keys(issueListMap).forEach(key => {
+            const itemList = issueListMap[key];
+            const dataItem = {};
+            dataItem['issue'] = { value: key.substring(2) + '期', style: null };
+            for (let i = 0; i < itemList.length; i++) {
+                const numObj = itemList[i];
+                let intervalCount = numObj.intervalCount || numObj.number;
+                let style = numObj.intervalCount ? null : "color: white;background-color: " + backgroundColor[color];
+                dataItem[numObj.number] = {value: intervalCount, style: style}
+            }
+            data.push([dataItem]);
+        });
+            // console.log(data);
+
+        return {
+            'headers': ballHeaders,
+            'data': data
+        };
+    },
+
     onLoad(option) {
         this.setData({
             enName: option.enName || 'LOTTO',
@@ -340,8 +202,8 @@ Page({
     onReady() {
         // 奖金走势图
         let amountTrendUrl = api.lottery.historicalInformation.replace('{enName}', this.data.enName)
-        .replace('{minIssueNumber}', '9999999').replace('{pageSize}', '7');
-        this.requestAmountTrend(amountTrendUrl, res => {
+            .replace('{minIssueNumber}', '9999999').replace('{pageSize}', '7');
+        this.requestTrendData(amountTrendUrl, res => {
             let dataList = res.data;
 
             let xAxis = {
@@ -460,8 +322,18 @@ Page({
 
 
         // 彩票号码走势
-        let lotteryTrendUrl = '';
-        // 红球冷热走势
-        
+        let lotteryTrendUrl = api.lottery.trendUrl.replace('{enName}', this.data.enName);
+        this.requestTrendData(lotteryTrendUrl, res => {
+            let dataList = res.data;
+            let redBallTrend = this.numberListToIssueList(dataList, 'red');
+            let blueBallTrend = this.numberListToIssueList(dataList, 'blue');
+            this.setData({
+                ['redBallsTrend.headers']: redBallTrend.headers,
+                ['redBallsTrend.data']: redBallTrend.data,
+                ['blueBallsTrend.headers']: blueBallTrend.headers,
+                ['blueBallsTrend.data']: blueBallTrend.data
+            });
+        }, '红球/蓝球走势加载中！');
+
     }
 });

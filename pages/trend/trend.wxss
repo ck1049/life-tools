@@ -76,5 +76,23 @@ ec-canvas {
     white-space: nowrap;
     overflow: auto;
     word-wrap: break-word;
+    font-size: 30rpx;
     /* border: 1px solid lightgray; */
+}
+
+.table-row-td {
+    padding-top: 5rpx;
+    padding-bottom: 5rpx;
+    box-sizing: border-box;
+}
+
+.table-row-td-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60rpx;
+    width: 60rpx;
+    font-size: 30rpx;
+    box-sizing: border-box;
+    border-radius: 50%;
 }

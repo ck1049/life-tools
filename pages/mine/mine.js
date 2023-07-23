@@ -39,11 +39,11 @@ Page({
                 }
             ],
             data: [{
-                name: 'John Brown',
                 age: 18,
-                address: 'New York No. 1 Lake Park',
                 province: 'America',
                 city: 'New York',
+                name: 'John Brown',
+                address: 'New York No. 1 Lake Park',
                 zip: 100000
             },
             {
