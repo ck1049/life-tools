@@ -95,4 +95,9 @@ ec-canvas {
     font-size: 30rpx;
     box-sizing: border-box;
     border-radius: 50%;
+    overflow-y: hidden;
+}
+
+.table-row  .table-row-td:first-child .table-row-td-text {
+    width: auto;
 }
