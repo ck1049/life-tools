@@ -2,6 +2,7 @@ let echarts = require('../ec-canvas/echarts.min.js');
 
 const app = getApp();
 const api = require('../../config/api.js')
+const groupingBy = require('../../utils/util').groupingBy;
 
 function initChart(lazyComponent, xAxis, yAxis, series, title) {
     lazyComponent.init((canvas, width, height, dpr) => {
@@ -45,6 +46,56 @@ function initChart(lazyComponent, xAxis, yAxis, series, title) {
 
 }
 
+// 将trend接口返回的数据转成表格数据格式
+function numberListToIssueList(resList, color) {
+    const backgroundColor = {
+        red: 'rgb(250, 98, 98)',
+        blue: 'dodgerblue'
+    };
+    // 返回map<issue, [item]>
+    let issueListMap = groupingBy(resList.filter(item => item.color == color), 'issue');
+
+    // 红球趋势表头
+    let ballHeaders = [{
+        title: '期次',
+        key: 'issue'
+    }];
+    let numberList = issueListMap[Object.keys(issueListMap)[0]].map(item => ({
+        'title': item.number,
+        'key': item.number
+    }));
+
+    ballHeaders = [...ballHeaders, ...numberList];
+    // 表格数据内容
+    let data = [];
+
+
+    Object.keys(issueListMap).forEach(key => {
+        const itemList = issueListMap[key];
+        const dataItem = {};
+        dataItem['issue'] = {
+            value: key.substring(2) + '期',
+            style: null
+        };
+        for (let i = 0; i < itemList.length; i++) {
+            const numObj = itemList[i];
+            let intervalCount = numObj.intervalCount || numObj.number;
+            let style = numObj.intervalCount ? null : "color: white;background-color: " + backgroundColor[color];
+            dataItem[numObj.number] = {
+                value: intervalCount,
+                style: style
+            }
+        }
+        data.push(dataItem);
+    });
+    // console.log(data);
+
+    return {
+        'headers': ballHeaders,
+        'data': data
+    };
+}
+
 Page({
     onShareAppMessage: function (res) {
         return {
@@ -61,14 +112,6 @@ Page({
         },
         bonusPool: {
             lazyLoad: true
-        },
-        swiper: {
-            background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
-            indicatorDots: true,
-            vertical: false,
-            autoplay: false,
-            interval: 2000,
-            duration: 500
         },
         tabs: [{
             title: '奖金走势',
@@ -103,7 +146,9 @@ Page({
             headers: [],
             data: []
         },
-        selectedTab: 'amountTrend'
+        selectedTab: 'amountTrend',
+        redBallHeat: [],
+        blueBallHeat: []
     },
     switchTab(e) {
         this.setData({
@@ -144,56 +189,6 @@ Page({
             resolve(); // 渲染完成后调用resolve
         });
     },
-
-    // 将trend接口返回的数据转成表格数据格式
-    numberListToIssueList(resList, color) {
-        const backgroundColor = {red: 'rgb(250, 98, 98)', blue: 'dodgerblue'};
-        // 返回map<issue, [item]>
-        let issueListMap = resList.filter(item => item.color == color).reduce((result, item) => {
-            const issue = item.issue;
-            if (!result[issue]) {
-                // map中还没有以issue为key的<issue, [item]>元素，则添加新的元素
-                result[issue] = [];
-            }
-            result[issue].push(item);
-            return result;
-        }, {});
-
-        // 红球趋势表头
-        let ballHeaders = [{
-            title: '期次',
-            key: 'issue'
-        }];
-        let numberList = issueListMap[Object.keys(issueListMap)[0]].map(item => ({
-            'title': item.number,
-            'key': item.number
-        }));
-
-        ballHeaders = [...ballHeaders, ...numberList];
-        // 表格数据内容
-        let data = [];
-
-
-        Object.keys(issueListMap).forEach(key => {
-            const itemList = issueListMap[key];
-            const dataItem = {};
-            dataItem['issue'] = { value: key.substring(2) + '期', style: null };
-            for (let i = 0; i < itemList.length; i++) {
-                const numObj = itemList[i];
-                let intervalCount = numObj.intervalCount || numObj.number;
-                let style = numObj.intervalCount ? null : "color: white;background-color: " + backgroundColor[color];
-                dataItem[numObj.number] = {value: intervalCount, style: style}
-            }
-            data.push([dataItem]);
-        });
-            // console.log(data);
-
-        return {
-            'headers': ballHeaders,
-            'data': data
-        };
-    },
-
     onLoad(option) {
         this.setData({
             enName: option.enName || 'LOTTO',
@@ -321,12 +316,16 @@ Page({
         }, '奖金走势加载中！');
 
 
+        let dataList = [];
+        var redBallTrend = {};
+        var blueBallTrend = {};
         // 彩票号码走势
         let lotteryTrendUrl = api.lottery.trendUrl.replace('{enName}', this.data.enName);
         this.requestTrendData(lotteryTrendUrl, res => {
-            let dataList = res.data;
-            let redBallTrend = this.numberListToIssueList(dataList, 'red');
-            let blueBallTrend = this.numberListToIssueList(dataList, 'blue');
+            dataList = res.data;
+            redBallTrend = numberListToIssueList(dataList, 'red');
+            blueBallTrend = numberListToIssueList(dataList, 'blue');
+            console.log("===redBallTrend1===", JSON.stringify(redBallTrend));
             this.setData({
                 ['redBallsTrend.headers']: redBallTrend.headers,
                 ['redBallsTrend.data']: redBallTrend.data,
@@ -334,6 +333,33 @@ Page({
                 ['blueBallsTrend.data']: blueBallTrend.data
             });
         }, '红球/蓝球走势加载中！');
+        console.log("===redBallTrend2===", JSON.stringify(redBallTrend));
+
+
+        // 红球冷热
+        let redHeatDataList = this.data.redBallsTrend.headers.filter(item => item.key != 'issue').map(item => ({
+            number: item.number
+        }));
+        console.log("===redHeatDataList===", JSON.stringify(redBallTrend));
+
+        // 按照号码分组map<number, [item]>
+        let numberListMap = groupingBy(dataList.filter(item => item.color == 'red'), 'number');
+        redHeatDataList.forEach(heatData => {
+            let number = heatData.number;
+            let numberList = numberListMap[number];
+            let numberHitList = numberList.filter(item => item.hit);
+            // 近50期出现次数
+            heatData.nearCount = numberHitList.size();
+            // 当前遗漏
+            heatData.currentOmission = numberList[numberList.size() - 1].issue - numberHitList[heatData.nearCount].issue;
+            // 平均遗漏
+            heatData.avgOmission = Math.round((50 - heatData.nearCount) * 1.0 / heatData.nearCount);
+        });
+
+        this.setData({
+            redBallHeat: redHeatDataList
+        })
+        console.log("===redBallHeat===", JSON.stringify(this.data.redBallHeat));
 
     }
 });

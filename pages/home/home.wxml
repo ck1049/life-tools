@@ -6,7 +6,7 @@
             <view style="font-size: small; color: gray;">多云 37℃</view>
         </view>
         <view class="search fa fa-search">
-            <input class="search-input" type="text" placeholder="搜一搜..." />
+            <input class="search-input" type="text" placeholder="搜一搜..." confirm-type="search" bindconfirm="search" value="{{ searchKey }}" />
         </view>
         <view class="plus-circle">+</view>
     </view>

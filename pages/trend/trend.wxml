@@ -26,6 +26,18 @@
 
 <!-- 红球冷热 -->
 <view class="red-ball-heat" hidden="{{ !(tabs[3].key == selectedTab) }}">
+    <view class="heat-header">
+        <view>号码</view>
+        <view>50期出现次数</view>
+        <view>当前遗漏</view>
+        <view>平均遗漏</view>
+    </view>
+    <view class="heat-row" wx:for="{{ redBallHeat }}" wx:key="index" wx:item="item">
+        <view>{{ item.number }}</view>
+        <view><ec-canvas id="ec-canvas-red-{{item.number}}" canvas-id="ec-canvas-red-{{item.number}}" ec="{{ item.ec }}"></ec-canvas>{{ item.nearCount }}</view>
+        <view>{{ item.currentOmission }}</view>
+        <view>{{ item.avgOmission }}</view>
+    </view>
 </view>
 
 <!-- 蓝球冷热 -->

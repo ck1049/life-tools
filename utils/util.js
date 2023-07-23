@@ -14,6 +14,18 @@ const formatNumber = n => {
   return n[1] ? n : `0${n}`
 }
 
+const groupingBy = (array, key) => {
+    return array.reduce((result, item) => {
+        let __key = item[key];
+        if (!result[__key]) {
+            result[__key] = [];
+        }
+        result[__key].push(item);
+        return result;
+    }, {})
+}
+
 module.exports = {
-  formatTime
+  formatTime,
+  groupingBy
 }

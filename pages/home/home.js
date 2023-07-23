@@ -5,12 +5,22 @@ Page({
      * 页面的初始数据
      */
     data: {
+        searchKey: '',
         miniApps: [{
             id: 1,
             name: '彩票',
             icon: "../../images/lottery-avatar.png",
             url: "../../pages/lottery-information/lottery-information"
         }]
+    },
+    search(e) {
+        let searchKey = e.detail.value;
+        let url = 'https://www.baidu.com/s?wd=' + searchKey
+        if (searchKey) {
+            wx.navigateTo({
+              url: '../../pages/web-view/web-view?url=' + encodeURIComponent(url)
+            })
+        }
     },
     goToLottery() {
         wx.navigateTo({
@@ -25,7 +35,7 @@ Page({
             console.log(result);
             if (result.startsWith("http://") || result.startsWith("https://")) {
                 wx.navigateTo({
-                    url: '/pages/web-view/web-view?url=' + result,
+                    url: '/pages/web-view/web-view?url=' + encodeURIComponent(result),
                 })
             } else if (result.startsWith("wxp://")) {
                 wx.showModal({

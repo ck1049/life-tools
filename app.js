@@ -44,7 +44,6 @@ App({
             data: options.data,
             // that: options.that,
             success: res => {
-                options.success(res);
                 if (res.statusCode === 40100) {
                     // 未登录
                     wx.navigateTo({
@@ -55,6 +54,7 @@ App({
                     this.globalData.tokenId = res.header.tokenId;
                     wx.setStorageSync('tokenId', res.header.tokenId)
                 }
+                options.success(res);
             },
             fail: res => options.fail(res),
             complete: res => options.complete(res)

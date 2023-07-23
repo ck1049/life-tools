@@ -1,13 +1,11 @@
 {
     "usingComponents": {
       "ec-canvas": "../ec-canvas/ec-canvas",
-      "table": "../../components/table/table",
-      "table-fix": "../../components/table-fix/table-fix"
+      "table": "../../components/table/table"
     },
     "componentPlaceholder": {
         "ec-canvas": "view",
-        "table": "view",
-        "table-fix": "view"
+        "table": "view"
       }
   }
   

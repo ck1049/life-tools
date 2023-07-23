@@ -101,3 +101,35 @@ ec-canvas {
 .table-row  .table-row-td:first-child .table-row-td-text {
     width: auto;
 }
+
+.red-ball-heat, .blue-ball-heat {
+    margin-top: 10rpx;
+}
+
+.heat-header, .heat-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.heat-header {
+    background-color: #ddd;
+}
+
+.heat-header view, .heat-row view {
+    border: 1px solid lightgray;
+    text-align: center;
+}
+
+.heat-header view:nth-child(1), .heat-row view:nth-child(1) {
+    width: 15%;
+}
+
+.heat-header view:nth-child(2), .heat-row view:nth-child(2) {
+    width: 45%;
+}
+
+.heat-header view:nth-child(3), .heat-row view:nth-child(3), .heat-header view:nth-child(4), .heat-row view:nth-child(4) {
+    width: 20%;
+}
