@@ -8,24 +8,24 @@
 <view class="container">
     <!-- <table headers="{{ redBallsTrend.headers }}" data="{{ redBallsTrend.data }}" bind:headerTapEvent="headerTapEvent"></table> -->
     <!-- 奖金走势 -->
-    <view class="amount-trend" hidden="{{ !(tabs[0].key == selectedTab) }}">
+    <view class="amount-trend" hidden="{{ tabs[0].key != selectedTab }}">
         <ec-canvas id="amount-trend-line" canvas-id="amount-trend-line" ec="{{ amountTrend }}" style="border-bottom: 1px solid lightgray;"></ec-canvas>
         <ec-canvas id="bonus-pool-trend-line" canvas-id="bonus-pool-trend-line" ec="{{ bonusPool }}"></ec-canvas>
     </view>
-
 </view>
+
 <!-- 红球走势 -->
-<view class="red-ball-trend scroll-x" hidden="{{ !(tabs[1].key == selectedTab) }}">
+<view class="red-ball-trend scroll-x" hidden="{{ tabs[1].key != selectedTab }}">
     <table class="scroll-x" headers="{{ redBallsTrend.headers }}" data="{{ redBallsTrend.data }}"></table>
 </view>
 
 <!-- 蓝球走势 -->
-<view class="blue-ball-trend scroll-x" hidden="{{ !(tabs[2].key == selectedTab) }}">
+<view class="blue-ball-trend scroll-x" hidden="{{ tabs[2].key != selectedTab }}">
     <table class="scroll-x" headers="{{ blueBallsTrend.headers }}" data="{{blueBallsTrend.data }}"></table>
 </view>
 
 <!-- 红球冷热 -->
-<view class="red-ball-heat" hidden="{{ !(tabs[3].key == selectedTab) }}">
+<view class="red-ball-heat" hidden="{{ tabs[3].key != selectedTab }}">
     <view class="heat-header">
         <view>号码</view>
         <view>50期出现次数</view>
@@ -33,25 +33,30 @@
         <view>平均遗漏</view>
     </view>
     <view class="heat-row" wx:for="{{ redBallHeat }}" wx:key="index" wx:item="item">
-        <view>{{ item.number }}</view>
-        <view><ec-canvas id="ec-canvas-red-{{item.number}}" canvas-id="ec-canvas-red-{{item.number}}" ec="{{ item.ec }}"></ec-canvas>{{ item.nearCount }}</view>
+        <view><text class="heat-number-text" style="color: white; background-color: rgb(250, 98, 98);">{{ item.number }}</text></view>
+        <view style="display: flex; flex-direction: row; justify-content: center;align-items: center;">
+            <ec-canvas id="ec-canvas-red-{{item.number}}" canvas-id="ec-canvas-red-{{item.number}}" ec="{{ item.ec }}"></ec-canvas>
+            <view style="border: none;">{{ item.nearCount }}</view>
+        </view>
         <view>{{ item.currentOmission }}</view>
         <view>{{ item.avgOmission }}</view>
     </view>
 </view>
 
 <!-- 蓝球冷热 -->
-<view class="blue-ball-heat" hidden="{{ !(tabs[4].key == selectedTab) }}">
+<view class="blue-ball-heat" hidden="{{ false }}">
+<!-- <view class="blue-ball-heat" hidden="{{ tabs[4].key != selectedTab }}"> -->
+    <ec-canvas id="ec-canvas-blue-01" canvas-id="ec-canvas-blue-01" ec="{{ amountTrend }}"></ec-canvas>
 </view>
 
 <!-- 大小 -->
-<view class="size-trend" hidden="{{ !(tabs[5].key == selectedTab) }}">
+<view class="size-trend" hidden="{{ tabs[5].key != selectedTab }}">
 </view>
 
 <!-- 奇偶 -->
-<view class="parity-trend" hidden="{{ !(tabs[6].key == selectedTab) }}">
+<view class="parity-trend" hidden="{{ tabs[6].key != selectedTab }}">
 </view>
 
 <!-- 质合 -->
-<view class="prime-composite-trend" hidden="{{ !(tabs[7].key == selectedTab) }}">
+<view class="prime-composite-trend" hidden="{{ tabs[7].key != selectedTab }}">
 </view>

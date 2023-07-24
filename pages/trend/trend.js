@@ -155,6 +155,7 @@ Page({
             selectedTab: e.currentTarget.dataset.selectedTab
         });
         console.log(this.data.selectedTab);
+        console.log("tab[4].key == selectedTab ?", this.data.tabs[4].key == this.data.selectedTab);
     },
     onOuterSwiperTouchMove(event) {
         // 阻止外部swiper的滑动事件冒泡到内部swiper
@@ -182,19 +183,13 @@ Page({
             }
         })
     },
-    async renderChartAsync() {
-        return new Promise((resolve, reject) => {
-            // 异步处理渲染任务
-            // ...
-            resolve(); // 渲染完成后调用resolve
-        });
-    },
     onLoad(option) {
         this.setData({
             enName: option.enName || 'LOTTO',
         })
     },
     onReady() {
+
         // 奖金走势图
         let amountTrendUrl = api.lottery.historicalInformation.replace('{enName}', this.data.enName)
             .replace('{minIssueNumber}', '9999999').replace('{pageSize}', '7');
@@ -315,51 +310,102 @@ Page({
             // }, 1000);
         }, '奖金走势加载中！');
 
-
-        let dataList = [];
-        var redBallTrend = {};
-        var blueBallTrend = {};
         // 彩票号码走势
         let lotteryTrendUrl = api.lottery.trendUrl.replace('{enName}', this.data.enName);
         this.requestTrendData(lotteryTrendUrl, res => {
-            dataList = res.data;
-            redBallTrend = numberListToIssueList(dataList, 'red');
-            blueBallTrend = numberListToIssueList(dataList, 'blue');
-            console.log("===redBallTrend1===", JSON.stringify(redBallTrend));
+            let dataList = res.data;
+            let redBallTrend = numberListToIssueList(dataList, 'red');
+            let blueBallTrend = numberListToIssueList(dataList, 'blue');
             this.setData({
                 ['redBallsTrend.headers']: redBallTrend.headers,
                 ['redBallsTrend.data']: redBallTrend.data,
                 ['blueBallsTrend.headers']: blueBallTrend.headers,
                 ['blueBallsTrend.data']: blueBallTrend.data
             });
+
+            // 红球冷热
+            let redHeatDataList = redBallTrend.headers.filter(item => item.key != 'issue').map(item => ({
+                'number': item.key
+            }));
+
+            // 按照号码分组map<number, [item]>
+            let numberListMap = groupingBy(dataList.filter(item => item.color == 'red'), 'number');
+            redHeatDataList.forEach(heatData => {
+                let number = heatData.number;
+                let numberList = numberListMap[number];
+                let numberHitList = numberList.filter(item => item.hit);
+
+                // 近50期出现次数
+                heatData.nearCount = numberHitList.length;
+                // 当前遗漏
+                heatData.currentOmission = numberList[numberList.length - 1].issue - numberHitList[heatData.nearCount - 1].issue;
+                // 平均遗漏
+                heatData.avgOmission = Math.round((50 - heatData.nearCount) * 1.0 / heatData.nearCount);
+                heatData.ec = {
+                    lazyLoad: true
+                }
+            });
+
+            this.setData({
+                redBallHeat: redHeatDataList
+            })
+
+            redHeatDataList.forEach(heatData => {
+                // 近50期出现次数的横向柱状图
+                let xAxis = [{
+                    type: 'category',
+                    name: '期次',
+                    boundaryGap: false,
+                    data: ['01', '01', '01', '01'],
+                    show: false
+                }];
+                let yAxis = [{
+                    type: 'category',
+                    splitLine: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: false
+                    }
+                }];
+                let series = [{
+                    name: 'series',
+                    type: 'bar',
+                    color: 'red',
+                    data: [10, 15, 20, ]
+                }];
+                // let canvasId = '#ec-canvas-red-' + heatData.number;
+                // let lazyComponent = this.selectComponent(canvasId);
+                // initChart(lazyComponent, xAxis, yAxis, series, 'dd');
+
+
+            });
+
+            // 近50期出现次数的横向柱状图
+            let xAxis = [{
+                type: 'category',
+                name: '期次',
+                boundaryGap: false,
+                data: ['01', '01', '01', '01'],
+                show: false
+            }];
+            let yAxis = [{
+                type: 'category',
+                splitLine: {
+                    show: false
+                },
+                axisLabel: {
+                    show: false
+                }
+            }];
+            let series = [{
+                name: 'series',
+                type: 'bar',
+                color: 'red',
+                data: [10, 15, 20 ]
+            }];
+            initChart(this.selectComponent('#ec-canvas-blue-01'), xAxis, yAxis, series, '奖池走势');
+
         }, '红球/蓝球走势加载中！');
-        console.log("===redBallTrend2===", JSON.stringify(redBallTrend));
-
-
-        // 红球冷热
-        let redHeatDataList = this.data.redBallsTrend.headers.filter(item => item.key != 'issue').map(item => ({
-            number: item.number
-        }));
-        console.log("===redHeatDataList===", JSON.stringify(redBallTrend));
-
-        // 按照号码分组map<number, [item]>
-        let numberListMap = groupingBy(dataList.filter(item => item.color == 'red'), 'number');
-        redHeatDataList.forEach(heatData => {
-            let number = heatData.number;
-            let numberList = numberListMap[number];
-            let numberHitList = numberList.filter(item => item.hit);
-            // 近50期出现次数
-            heatData.nearCount = numberHitList.size();
-            // 当前遗漏
-            heatData.currentOmission = numberList[numberList.size() - 1].issue - numberHitList[heatData.nearCount].issue;
-            // 平均遗漏
-            heatData.avgOmission = Math.round((50 - heatData.nearCount) * 1.0 / heatData.nearCount);
-        });
-
-        this.setData({
-            redBallHeat: redHeatDataList
-        })
-        console.log("===redBallHeat===", JSON.stringify(this.data.redBallHeat));
-
     }
 });
