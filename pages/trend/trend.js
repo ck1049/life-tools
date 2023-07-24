@@ -115,28 +115,36 @@ Page({
         },
         tabs: [{
             title: '奖金走势',
-            key: 'amountTrend'
+            key: 'amountTrend',
+            hidden: false
         }, {
             title: '红球走势',
-            key: 'redBallTrend'
+            key: 'redBallTrend',
+            hidden: true
         }, {
             title: '蓝球走势',
-            key: 'blueBallTrend'
+            key: 'blueBallTrend',
+            hidden: true
         }, {
             title: '红球冷热',
-            key: 'redBallHeat'
+            key: 'redBallHeat',
+            hidden: true
         }, {
             title: '蓝球冷热',
-            key: 'blueBallHeat'
+            key: 'blueBallHeat',
+            hidden: true
         }, {
             title: '大小',
-            key: 'sizeTrend'
+            key: 'sizeTrend',
+            hidden: true
         }, {
             title: '奇偶',
-            key: 'parityTrend'
+            key: 'parityTrend',
+            hidden: true
         }, {
             title: '质合',
-            key: 'primeCompositeTrend'
+            key: 'primeCompositeTrend',
+            hidden: true
         }],
         redBallsTrend: {
             headers: [],
@@ -154,8 +162,7 @@ Page({
         this.setData({
             selectedTab: e.currentTarget.dataset.selectedTab
         });
-        console.log(this.data.selectedTab);
-        console.log("tab[4].key == selectedTab ?", this.data.tabs[4].key == this.data.selectedTab);
+        // console.log("tab[4].key == selectedTab ?", this.data.tabs[4].key == this.data.selectedTab);
     },
     onOuterSwiperTouchMove(event) {
         // 阻止外部swiper的滑动事件冒泡到内部swiper
@@ -345,66 +352,101 @@ Page({
                     lazyLoad: true
                 }
             });
+            // redHeatDataList.forEach(heatData => {
+
+            // });
 
             this.setData({
                 redBallHeat: redHeatDataList
             })
 
+            let max = Math.max(...redHeatDataList.map(item => item.nearCount));
             redHeatDataList.forEach(heatData => {
+                let nearCount = heatData.nearCount;
+                heatData.width = Math.round(nearCount / max * 0.9 * 100) + '%'; // canvas的 style：width
                 // 近50期出现次数的横向柱状图
                 let xAxis = [{
-                    type: 'category',
-                    name: '期次',
-                    boundaryGap: false,
-                    data: ['01', '01', '01', '01'],
-                    show: false
-                }];
-                let yAxis = [{
-                    type: 'category',
+                    type: 'value',
                     splitLine: {
                         show: false
                     },
+                    axisLine: {
+                        "show": false
+                    }, // x轴坐标轴，false为隐藏，true为显示
                     axisLabel: {
+                        show: false
+                    }, // 隐藏x轴坐标轴的数值
+                    axisTick: {
+                        show: false
+                    }, // 隐藏x轴坐标轴刻度线
+                    boundaryGap: false,
+                    min: 0,
+                    max: nearCount,
+                    interval: 1
+                }];
+                let radius = Math.round(10 / 12 * nearCount);
+                let yAxis = [{
+                    type: 'category',
+                    data: ['01'],
+                    splitLine: {
+                        show: false
+                    },
+                    axisLine: {
+                        "show": false
+                    },
+                    axisLabel: {
+                        show: false
+                    },
+                    axisTick: {
                         show: false
                     }
                 }];
                 let series = [{
                     name: 'series',
                     type: 'bar',
-                    color: 'red',
-                    data: [10, 15, 20, ]
+                    color: 'rgb(250, 98, 98)',
+                    data: [nearCount],
+                    itemStyle: {
+                        normal: {
+                            // barBorderRadius: [0, radius, radius, 0],
+                            barBorderRadius: [0, 10, 10, 0]
+                        }
+                    } // 设置顶部左右两侧的圆角半径为5，使其呈现弧形效果
                 }];
-                // let canvasId = '#ec-canvas-red-' + heatData.number;
-                // let lazyComponent = this.selectComponent(canvasId);
-                // initChart(lazyComponent, xAxis, yAxis, series, 'dd');
-
+                let grid = {
+                    containLabel: true,
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0
+                };
+                let options = {
+                    xAxis,
+                    yAxis,
+                    series,
+                    grid
+                };
+                setTimeout(() => {
+                    this.selectComponent("#ec-canvas-red-" + heatData.number).init((canvas, width, height, dpr) => {
+                        // console.log(canvas, width, height, dpr);
+                        let barWidth = Math.round(height * 0.8);
+                        options.series.barWidth = barWidth; // 柱状图宽度
+                        let chart = echarts.init(canvas, null, {
+                            width,
+                            height,
+                            devicePixelRatio: dpr
+                        });
+                        canvas.setChart(chart);
+                        chart.setOption(options);
+                        return chart;
+                    });
+                }, 2000);
 
             });
 
-            // 近50期出现次数的横向柱状图
-            let xAxis = [{
-                type: 'category',
-                name: '期次',
-                boundaryGap: false,
-                data: ['01', '01', '01', '01'],
-                show: false
-            }];
-            let yAxis = [{
-                type: 'category',
-                splitLine: {
-                    show: false
-                },
-                axisLabel: {
-                    show: false
-                }
-            }];
-            let series = [{
-                name: 'series',
-                type: 'bar',
-                color: 'red',
-                data: [10, 15, 20 ]
-            }];
-            initChart(this.selectComponent('#ec-canvas-blue-01'), xAxis, yAxis, series, '奖池走势');
+            this.setData({
+                'redBallHeat': redHeatDataList
+            });
 
         }, '红球/蓝球走势加载中！');
     }
