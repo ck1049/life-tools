@@ -1,6 +1,6 @@
-const rootUrl = 'https://www.loafer.online';
-// const rootUrl = 'http://127.0.0.1:8888';
-// const rootUrl = 'http://127.0.0.1:8888';
+const rootUrl = 'https://www.loafer.online'; // prod
+// const rootUrl = 'http://127.0.0.1:8888'; // loafer-core
+// const rootUrl = 'http://127.0.0.1:8090'; // lottery
 
 module.exports = {
     rootUrl,
@@ -10,7 +10,7 @@ module.exports = {
     lottery: {
         lotteryInformation: '/lottery/lottery/lotteryInformation',
         historicalInformation: '/lottery/lottery/historicalInformation/{enName}/{minIssueNumber}/{pageSize}',
-        trendUrl: '/lottery/lottery/trend?enName={enName}'
+        trendUrl: '/lottery/lottery/trend/{enName}/{pageSize}'
     },
     twoColorBall: {
 

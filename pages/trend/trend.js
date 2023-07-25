@@ -53,36 +53,28 @@ Page({
         },
         tabs: [{
             title: '奖金走势',
-            key: 'amountTrend',
-            hidden: false
+            key: 'amountTrend'
         }, {
             title: '红球走势',
-            key: 'redBallTrend',
-            hidden: true
+            key: 'redBallTrend'
         }, {
             title: '蓝球走势',
-            key: 'blueBallTrend',
-            hidden: true
+            key: 'blueBallTrend'
         }, {
             title: '红球冷热',
-            key: 'redBallHeat',
-            hidden: true
+            key: 'redBallHeat'
         }, {
             title: '蓝球冷热',
-            key: 'blueBallHeat',
-            hidden: true
+            key: 'blueBallHeat'
         }, {
             title: '大小',
-            key: 'sizeTrend',
-            hidden: true
+            key: 'sizeTrend'
         }, {
             title: '奇偶',
-            key: 'parityTrend',
-            hidden: true
+            key: 'parityTrend'
         }, {
             title: '质合',
-            key: 'primeCompositeTrend',
-            hidden: true
+            key: 'primeCompositeTrend'
         }],
         redBallsTrend: {
             headers: [],
@@ -126,7 +118,7 @@ Page({
         let amountTrendUrl = api.lottery.historicalInformation.replace('{enName}', this.data.enName)
             .replace('{minIssueNumber}', '9999999').replace('{pageSize}', '7');
         // 彩票号码走势url
-        let lotteryTrendUrl = api.lottery.trendUrl.replace('{enName}', this.data.enName);
+        let lotteryTrendUrl = api.lottery.trendUrl.replace('{enName}', this.data.enName).replace('{pageSize}', '50');
 
         // api请求数据，奖金走势结果赋值
         requestTrendData(amountTrendUrl)
@@ -134,19 +126,16 @@ Page({
             .then(() => {
                 // api请求数据，号码走势结果赋值
                 requestTrendData(lotteryTrendUrl).then(res => numberTrendRes = res.data);
-                initAmountTrendChart(amountTrendRes, this)
             })
             .then(() => {
-                if (this.data.tabs[0].key != this.data.selectedTab) {
-                    let e = {
-                        currentTarget: {
-                            dataset: {
-                                selectedTab: this.data.selectedTab
-                            }
+                let e = {
+                    currentTarget: {
+                        dataset: {
+                            selectedTab: this.data.selectedTab
                         }
-                    };
-                    this.switchTab(e);
-                }
+                    }
+                };
+                this.switchTab(e);
             });
     },
     onLoad(option) {
@@ -155,7 +144,7 @@ Page({
         })
     },
     onReady() {
-        this.refreshData();
+        setTimeout(() => this.refreshData(), 100);
     },
     /**
      * 页面相关事件处理函数--监听用户下拉动作

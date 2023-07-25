@@ -6,7 +6,6 @@
 </view>
 
 <view class="container">
-    <!-- <table headers="{{ redBallsTrend.headers }}" data="{{ redBallsTrend.data }}" bind:headerTapEvent="headerTapEvent"></table> -->
     <!-- 奖金走势 -->
     <view class="amount-trend" hidden="{{ tabs[0].key != selectedTab }}">
         <ec-canvas id="amount-trend-line" canvas-id="amount-trend-line" ec="{{ amountTrend }}" style="border-bottom: 1px solid lightgray;"></ec-canvas>
