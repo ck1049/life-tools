@@ -36,7 +36,7 @@
         <view><text class="heat-number-text" style="color: white; background-color: rgb(250, 98, 98);">{{ item.number }}</text></view>
         <view style="display: flex; flex-direction: row; justify-content: flex-start;align-items: center;">
             <ec-canvas class="heat-canvas" style="width: {{ item.width }};" id="ec-canvas-red-{{item.number}}" canvas-id="ec-canvas-red-{{item.number}}" ec="{{ item.ec }}"></ec-canvas>
-            <text style="border: none; width: 15%; text-align: left; padding-left: 1%;">{{ item.nearCount }}</text>
+            <text style="border: none; width: 15%; text-align: left; padding-left: 2%;">{{ item.nearCount }}</text>
         </view>
         <view>{{ item.currentOmission }}</view>
         <view>{{ item.avgOmission }}</view>
@@ -56,7 +56,7 @@
         <view><text class="heat-number-text" style="color: white; background-color: dodgerblue;">{{ item.number }}</text></view>
         <view style="display: flex; flex-direction: row; justify-content: flex-start;align-items: center;">
             <ec-canvas class="heat-canvas" style="width: {{ item.width }};" id="ec-canvas-blue-{{item.number}}" canvas-id="ec-canvas-blue-{{item.number}}" ec="{{ item.ec }}"></ec-canvas>
-            <text style="border: none; width: 15%; text-align: left; padding-left: 1%;">{{ item.nearCount }}</text>
+            <text style="border: none; width: 15%; text-align: left; padding-left: 2%;">{{ item.nearCount }}</text>
         </view>
         <view>{{ item.currentOmission }}</view>
         <view>{{ item.avgOmission }}</view>
