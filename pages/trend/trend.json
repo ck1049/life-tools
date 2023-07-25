@@ -1,11 +1,11 @@
 {
     "usingComponents": {
-      "ec-canvas": "../ec-canvas/ec-canvas",
-      "table": "../../components/table/table"
+        "ec-canvas": "../ec-canvas/ec-canvas",
+        "table": "../../components/table/table"
     },
     "componentPlaceholder": {
         "ec-canvas": "view",
         "table": "view"
-      }
-  }
-  
+    },
+    "enablePullDownRefresh": true
+}

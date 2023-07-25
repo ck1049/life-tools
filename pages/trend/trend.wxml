@@ -46,7 +46,21 @@
 <!-- 蓝球冷热 -->
 <!-- <view class="blue-ball-heat" hidden="{{ false }}"> -->
 <view class="blue-ball-heat" hidden="{{ tabs[4].key != selectedTab }}">
-    <ec-canvas id="ec-canvas-blue-01" canvas-id="ec-canvas-blue-01" ec="{{ amountTrend }}"></ec-canvas>
+    <view class="heat-header">
+        <view>号码</view>
+        <view>50期出现次数</view>
+        <view>当前遗漏</view>
+        <view>平均遗漏</view>
+    </view>
+    <view class="heat-row" wx:for="{{ blueBallHeat }}" wx:key="index" wx:item="item">
+        <view><text class="heat-number-text" style="color: white; background-color: dodgerblue;">{{ item.number }}</text></view>
+        <view style="display: flex; flex-direction: row; justify-content: flex-start;align-items: center;">
+            <ec-canvas class="heat-canvas" style="width: {{ item.width }};" id="ec-canvas-blue-{{item.number}}" canvas-id="ec-canvas-blue-{{item.number}}" ec="{{ item.ec }}"></ec-canvas>
+            <text style="border: none; width: 15%; text-align: left; padding-left: 1%;">{{ item.nearCount }}</text>
+        </view>
+        <view>{{ item.currentOmission }}</view>
+        <view>{{ item.avgOmission }}</view>
+    </view>
 </view>
 
 <!-- 大小 -->
