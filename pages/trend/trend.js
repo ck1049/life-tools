@@ -5,9 +5,9 @@ const initNumberTrendTable = require('./numberTrend.js').initTable;
 const initNumberHeatChart = require('./numberHeat.js').initChart;
 
 // 奖金走势
-let amountTrendRes = [];
+let amountTrendRes;
 // 号码走势
-let numberTrendRes = [];
+let numberTrendRes;
 
 /**
  * 请求数据
@@ -138,7 +138,13 @@ Page({
             })
             .then(() => {
                 if (this.data.tabs[0].key != this.data.selectedTab) {
-                    let e = { currentTarget: { dataset: {selectedTab: this.data.selectedTab} } };
+                    let e = {
+                        currentTarget: {
+                            dataset: {
+                                selectedTab: this.data.selectedTab
+                            }
+                        }
+                    };
                     this.switchTab(e);
                 }
             });
