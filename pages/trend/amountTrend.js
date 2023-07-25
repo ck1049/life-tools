@@ -34,11 +34,10 @@ function initEcharts(lazyComponent, xAxis, yAxis, series, title) {
             yAxis,
             series
         };
-
+        
         chart.setOption(option);
         return chart;
     });
-
 }
 
 function initChart(dataList, that) {
@@ -135,4 +134,6 @@ function initChart(dataList, that) {
     initEcharts(that.selectComponent('#bonus-pool-trend-line'), xAxis, bonusPoolYAxis, bonusPoolSeries, '奖池走势');
 }
 
-module.exports = { initChart }
+module.exports = {
+    initChart
+}

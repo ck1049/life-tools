@@ -1,4 +1,3 @@
-let echarts = require('../ec-canvas/echarts.min.js');
 const groupingBy = require('../../utils/util').groupingBy;
 
 // 将trend接口返回的数据转成表格数据格式
@@ -15,7 +14,7 @@ function numberListToIssueList(resList, color) {
         title: '期次',
         key: 'issue'
     }];
-    
+
     let numberList = issueListMap[Object.keys(issueListMap)[0]].map(item => ({
         'title': item.number,
         'key': item.number
@@ -61,7 +60,7 @@ function initTable(dataList, that) {
     });
 }
 
-module.exports = { 
+module.exports = {
     initTable,
     numberListToIssueList
 }

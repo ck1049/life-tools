@@ -1,6 +1,5 @@
 let echarts = require('../ec-canvas/echarts.min.js');
 const numberListToIssueList = require('./numberTrend.js').numberListToIssueList;
-
 const groupingBy = require('../../utils/util').groupingBy;
 
 function initChart(dataList, that) {
@@ -13,7 +12,9 @@ function initChart(dataList, that) {
         let ballTrend = numberListToIssueList(dataList, color);
 
         // 红球/蓝球冷热
-        let heatDataList = ballTrend.headers.filter(item => item.key != 'issue').map(item => ({ 'number': item.key }));
+        let heatDataList = ballTrend.headers.filter(item => item.key != 'issue').map(item => ({
+            'number': item.key
+        }));
 
         // 按照号码分组map<number, [item]>
         let numberListMap = groupingBy(dataList.filter(item => item.color == color), 'number');
@@ -28,15 +29,21 @@ function initChart(dataList, that) {
             heatData.currentOmission = numberList[numberList.length - 1].issue - numberHitList[heatData.nearCount - 1].issue;
             // 平均遗漏
             heatData.avgOmission = Math.round((50 - heatData.nearCount) * 1.0 / heatData.nearCount);
-            heatData.ec = { lazyLoad: true }
+            heatData.ec = {
+                lazyLoad: true
+            }
         });
 
         if (color == 'red') {
-            that.setData({ redBallHeat: heatDataList });
+            that.setData({
+                redBallHeat: heatDataList
+            });
         } else {
-            that.setData({ blueBallHeat: heatDataList });
+            that.setData({
+                blueBallHeat: heatDataList
+            });
         }
-        
+
 
         let max = Math.max(...heatDataList.map(item => item.nearCount));
         heatDataList.forEach(heatData => {
@@ -121,9 +128,13 @@ function initChart(dataList, that) {
         });
 
         if (color == 'red') {
-            that.setData({ redBallHeat: heatDataList });
+            that.setData({
+                redBallHeat: heatDataList
+            });
         } else {
-            that.setData({ blueBallHeat: heatDataList });
+            that.setData({
+                blueBallHeat: heatDataList
+            });
         }
     }
 }
