@@ -131,10 +131,16 @@ Page({
         // api请求数据，奖金走势结果赋值
         requestTrendData(amountTrendUrl)
             .then(res => amountTrendRes = res.data)
-            .then(res => {
+            .then(() => {
                 // api请求数据，号码走势结果赋值
                 requestTrendData(lotteryTrendUrl).then(res => numberTrendRes = res.data);
                 initAmountTrendChart(amountTrendRes, this)
+            })
+            .then(() => {
+                if (this.data.tabs[0].key != this.data.selectedTab) {
+                    let e = { currentTarget: { dataset: {selectedTab: this.data.selectedTab} } };
+                    this.switchTab(e);
+                }
             });
     },
     onLoad(option) {
