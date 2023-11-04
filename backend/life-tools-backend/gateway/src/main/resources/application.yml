@@ -1,0 +1,35 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /gateway
+spring:
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      username: nacos
+      password: nacos
+      discovery:
+        namespace: cba3d3fa-ab76-4ae7-a9b9-e7ac16efc865
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOriginPatterns: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            exposedHeaders: "*"
+            allowCredentials: true
+            maxAge: 1800
+      routes:
+        - id: lottery-route
+          uri: lb://lottery-service
+          predicates:
+            - Path=/api/lottery/**
+          filters:
+            - StripPrefix=1
+        - id: oss-route
+          uri: lb://oss-service
+          predicates:
+            - Path=/oss/**
+          filters:
+            - StripPrefix=1

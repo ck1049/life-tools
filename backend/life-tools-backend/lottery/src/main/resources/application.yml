@@ -1,0 +1,17 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /oss
+spring:
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      username: nacos
+      password: nacos
+      discovery:
+        namespace: cba3d3fa-ab76-4ae7-a9b9-e7ac16efc865
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: cba3d3fa-ab76-4ae7-a9b9-e7ac16efc865
+        username: nacos
+        password: nacos
