@@ -2,7 +2,6 @@ package com.loafer.gateway.filter;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -10,19 +9,20 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+/**
+ * 删除/gateway前缀
+ */
 @Data
-@RefreshScope
-@Deprecated
-public class AddPathPrefixFilter implements GlobalFilter, Ordered {
+public class SubPathPrefixFilter implements GlobalFilter, Ordered {
 
-    @Value("${unifyPathPrefix}")
-    private String unifyPathPrefix;
+    @Value("${server.servlet.context-path}")
+    private String contextPath;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String originalPath = exchange.getRequest().getPath().toString();
 
-        String filteredPath = unifyPathPrefix + originalPath;
+        String filteredPath = originalPath.replace(contextPath, "");
 
         ServerHttpRequest originalRequest = exchange.getRequest();
         ServerHttpRequest modifiedRequest = originalRequest.mutate().path(filteredPath).build();

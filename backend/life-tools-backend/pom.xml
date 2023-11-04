@@ -8,6 +8,7 @@
         <module>lottery</module>
         <module>gateway</module>
         <module>oss</module>
+        <module>common</module>
     </modules>
     <version>1.0.0-SNAPSHOT</version>
     <name>life-tools Maven Webapp</name>

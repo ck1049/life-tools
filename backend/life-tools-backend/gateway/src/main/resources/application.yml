@@ -30,6 +30,6 @@ spring:
         - id: oss-route
           uri: lb://oss-service
           predicates:
-            - Path=/oss/**
+            - Path=/api/oss/**
           filters:
             - StripPrefix=1
