@@ -2,6 +2,7 @@ package com.loafer.lottery.convert;
 
 import org.modelmapper.Converter;
 import org.modelmapper.spi.MappingContext;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
@@ -9,6 +10,7 @@ import java.math.BigDecimal;
  * @author loafer
  * @since 2023-11-04 23:53:15
  **/
+@Component
 public class StringIntegerConvert implements Converter<String, Integer> {
 
     @Override

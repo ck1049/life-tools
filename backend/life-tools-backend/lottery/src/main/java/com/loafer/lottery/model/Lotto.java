@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -17,6 +18,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@Accessors(chain = true)
 @ApiModel(value = "Lotto对象", description = "彩票开奖信息")
 public class Lotto implements Serializable {
 

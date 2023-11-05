@@ -14,9 +14,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface ILottoService extends IService<Lotto> {
     /**
      * 从官网查询开奖信息并保存
-     * @param pageNo
+     * @param startIndex 起始位置，不是页码
      * @param pageSize
      * @return
      */
-    Boolean saveFromOfficialWebsite(Integer pageNo, Integer pageSize) throws InterruptedException;
+    Boolean saveFromOfficialWebsite(Integer startIndex, Integer pageSize) throws InterruptedException;
 }

@@ -2,7 +2,7 @@ package com.loafer.lottery.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.loafer.common.utils.SnowflakedUtils;
-import com.loafer.lottery.service.IExtSysLottoService;
+import com.loafer.lottery.service.IExtSysLotteryService;
 import com.loafer.lottery.model.Lotto;
 import com.loafer.lottery.mapper.LottoMapper;
 import com.loafer.lottery.model.LottoPrizeLevel;
@@ -19,7 +19,6 @@ import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -33,14 +32,14 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class LottoServiceImpl extends ServiceImpl<LottoMapper, Lotto> implements ILottoService {
 
-    private IExtSysLottoService IExtSysLottoService;
+    private IExtSysLotteryService extSysLotteryService;
     private ModelMapper modelMapper;
     private ILottoPrizeLevelService lottoPrizeLevelService;
 
     @Override
     @Transactional
-    public Boolean saveFromOfficialWebsite(Integer pageNo, Integer pageSize) throws InterruptedException {
-        List<OfficialLottoInfoVO> lottoInfoList = IExtSysLottoService.getLottoInfo(pageNo, pageSize);
+    public Boolean saveFromOfficialWebsite(Integer startIndex, Integer pageSize) throws InterruptedException {
+        List<OfficialLottoInfoVO> lottoInfoList = extSysLotteryService.getLottoInfo(startIndex, pageSize);
         lottoInfoList.sort(Comparator.comparing(item -> item.getValue().getLastPoolDraw().getLotteryDrawNum()));
 
         List<Lotto> lottoList = new ArrayList<>();
@@ -75,7 +74,9 @@ public class LottoServiceImpl extends ServiceImpl<LottoMapper, Lotto> implements
         remove(Wrappers.lambdaQuery(Lotto.class).in(Lotto::getLotteryDrawNum, lotteryDrawNumList));
         lottoPrizeLevelService.remove(Wrappers.lambdaQuery(LottoPrizeLevel.class).in(LottoPrizeLevel::getLotteryDrawNum, lotteryDrawNumList));
 
-        return saveBatch(lottoList, 50) && lottoPrizeLevelService.saveBatch(lottoPrizeLevelList, 50);
+        boolean result = saveBatch(lottoList, 50);
+        return CollectionUtils.isEmpty(lottoPrizeLevelList) ? result
+                : result && lottoPrizeLevelService.saveBatch(lottoPrizeLevelList, 50);
     }
 
 }

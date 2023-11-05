@@ -5,6 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
+ * 大乐透官方接口返回信息
  * @author loafer
  * @since 2023-11-04 17:17:56
  **/
@@ -12,19 +13,19 @@ import java.util.List;
 public class OfficialLottoInfoVO {
 
     private String dataFrom; // 数据来源
-    private boolean emptyFlag; // 是否为空标志
+    private Boolean emptyFlag; // 是否为空标志
     private String errorCode; // 错误代码
     private String errorMessage; // 错误消息
-    private boolean success; // 是否成功标志
+    private Boolean success; // 是否成功标志
     private Value value; // 值对象
 
     @Data
     public static class Value {
         private LastPoolDraw lastPoolDraw; // 最后一次奖池抽奖
-        private int pageNo; // 页码
-        private int pageSize; // 每页大小
-        private int pages; // 总页数
-        private int total; // 总记录数
+        private Integer pageNo; // 页码
+        private Integer pageSize; // 每页大小
+        private Integer pages; // 总页数
+        private Integer total; // 总记录数
     }
 
     @Data

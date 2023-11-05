@@ -4,19 +4,17 @@ import org.modelmapper.Converter;
 import org.modelmapper.spi.MappingContext;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-
 /**
  * @author loafer
  * @since 2023-11-04 23:53:15
  **/
 @Component
-public class StringBigDecimalConvert implements Converter<String, BigDecimal> {
+public class StringLongConvert implements Converter<String, Long> {
 
     @Override
-    public BigDecimal convert(MappingContext<String, BigDecimal> context) {
+    public Long convert(MappingContext<String, Long> context) {
         if (context.getSource()!= null && !"".equals(context.getSource().replaceAll("[,-]", ""))) {
-            return new BigDecimal(context.getSource().replaceAll("[,-]", ""));
+            return Long.valueOf(context.getSource().replaceAll("[,-]", ""));
         }
         return null;
     }
