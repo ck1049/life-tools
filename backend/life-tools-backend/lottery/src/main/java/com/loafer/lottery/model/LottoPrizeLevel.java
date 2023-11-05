@@ -2,6 +2,8 @@ package com.loafer.lottery.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -45,7 +47,7 @@ public class LottoPrizeLevel implements Serializable {
     private Integer sort;
 
     @ApiModelProperty("中奖金额")
-    private Integer stakeAmount;
+    private BigDecimal stakeAmount;
 
     @ApiModelProperty("格式化的中奖金额")
     private String stakeAmountFormat;
@@ -54,5 +56,5 @@ public class LottoPrizeLevel implements Serializable {
     private Integer stakeCount;
 
     @ApiModelProperty("总奖金金额")
-    private Integer totalPrizeAmount;
+    private BigDecimal totalPrizeAmount;
 }

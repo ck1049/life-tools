@@ -27,12 +27,14 @@ public class SnowflakeConfig {
 
     public static Long DURATION = 1000 * 60 * 60 * 24L;;
 
+    public static String KEY_PREFIX = "snowflake:";
+
     @Bean
     public SnowflakeGenerator snowflakeIdWorker() {
         for (int workerId = 0; workerId < 32; workerId++) {
-            String ip = redisTemplate.boundValueOps(String.valueOf(workerId)).get();
+            String ip = redisTemplate.boundValueOps(KEY_PREFIX + workerId).get();
             if (StringUtils.isBlank(ip) || SERVER_IP_ADDRESS.equals(ip)) {
-                redisTemplate.boundValueOps(String.valueOf(workerId)).set(SERVER_IP_ADDRESS, DURATION, TimeUnit.MICROSECONDS);
+                redisTemplate.boundValueOps(KEY_PREFIX + workerId).set(SERVER_IP_ADDRESS, DURATION, TimeUnit.MILLISECONDS);
                 WORKER_ID = workerId;
                 return new SnowflakeGenerator(workerId, 1);
             }
@@ -43,7 +45,7 @@ public class SnowflakeConfig {
 
     @Scheduled(cron = "0 0 5 * * ?")
     public void resetWorkerId() {
-        redisTemplate.boundValueOps(String.valueOf(WORKER_ID)).set(SERVER_IP_ADDRESS, DURATION, TimeUnit.MICROSECONDS);
+        redisTemplate.boundValueOps(KEY_PREFIX + WORKER_ID).set(SERVER_IP_ADDRESS, DURATION, TimeUnit.MILLISECONDS);
     }
 
 }

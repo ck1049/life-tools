@@ -33,11 +33,11 @@ public class MapperConfig {
                 .addMappings(config -> config.using(new StringBigDecimalConvert())
                         .map(OfficialLottoInfoVO.LastPoolDraw::getPoolBalanceAfterdraw, Lotto::setPoolBalanceAfterdraw));
         modelMapper.createTypeMap(OfficialLottoInfoVO.PrizeLevel.class, LottoPrizeLevel.class)
-                .addMappings(config -> config.using(new StringIntegerConvert())
+                .addMappings(config -> config.using(new StringBigDecimalConvert())
                         .map(OfficialLottoInfoVO.PrizeLevel::getStakeAmount, LottoPrizeLevel::setStakeAmount))
                 .addMappings(config -> config.using(new StringIntegerConvert())
                         .map(OfficialLottoInfoVO.PrizeLevel::getStakeCount, LottoPrizeLevel::setStakeCount))
-                .addMappings(config -> config.using(new StringIntegerConvert())
+                .addMappings(config -> config.using(new StringBigDecimalConvert())
                         .map(OfficialLottoInfoVO.PrizeLevel::getTotalPrizeamount, LottoPrizeLevel::setTotalPrizeAmount))
                 .addMapping(OfficialLottoInfoVO.PrizeLevel::getGroup, LottoPrizeLevel::setGroupName);
 
