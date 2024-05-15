@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +18,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@ApiModel(value = "Dictionary对象", description = "字典表，用于存储常见配置选项，包括模块信息")
+@Schema(description = "字典表，用于存储常见配置选项，包括模块信息")
 public class Dictionary implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,21 +26,21 @@ public class Dictionary implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty("模块，用于指示配置选项属于哪个模块")
+    @Schema(description = "模块，用于指示配置选项属于哪个模块")
     private String module;
 
-    @ApiModelProperty("键名，用于唯一标识每个配置选项")
+    @Schema(description = "键名，用于唯一标识每个配置选项")
     private String keyName;
 
-    @ApiModelProperty("值，存储配置选项的具体数值")
+    @Schema(description = "值，存储配置选项的具体数值")
     private String value;
 
-    @ApiModelProperty("描述，提供有关配置选项的详细信息")
+    @Schema(description = "描述，提供有关配置选项的详细信息")
     private String description;
 
-    @ApiModelProperty("创建时间，记录配置选项的添加时间")
+    @Schema(description = "创建时间，记录配置选项的添加时间")
     private LocalDateTime createdAt;
 
-    @ApiModelProperty("更新时间，记录配置选项的最后更新时间")
+    @Schema(description = "更新时间，记录配置选项的最后更新时间")
     private LocalDateTime updatedAt;
 }

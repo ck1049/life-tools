@@ -1,30 +1,52 @@
 package com.loafer.lottery.config;
 
+import cn.hutool.core.util.RandomUtil;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import org.springdoc.core.customizers.GlobalOpenApiCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
-@EnableSwagger2
 public class Knife4Config {
 
+    /**
+     * 根据@Tag 上的排序，写入x-order
+     *
+     * @return the global open api customizer
+     */
     @Bean
-    public Docket defaultApi2() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(new ApiInfoBuilder()
-                        .title("lottery")
-                        .description("lottery")
-                        .version("1.0.0")
-                        .build())
-                .select()
-                // 指定 Controller 扫描包路径
-                .apis(RequestHandlerSelectors.basePackage("com.loafer.lottery.controller"))
-                .paths(PathSelectors.any())
-                .build();
+    public GlobalOpenApiCustomizer orderGlobalOpenApiCustomizer() {
+        return openApi -> {
+            if (openApi.getTags()!=null){
+                openApi.getTags().forEach(tag -> {
+                    Map<String,Object> map=new HashMap<>();
+                    map.put("x-order", RandomUtil.randomInt(0,100));
+                    tag.setExtensions(map);
+                });
+            }
+            if(openApi.getPaths()!=null){
+                openApi.addExtension("x-test123","333");
+                openApi.getPaths().addExtension("x-abb",RandomUtil.randomInt(1,100));
+            }
+
+        };
     }
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("彩票小工具")
+                        .version("1.0.0")
+                        .description( "彩票小工具")
+                        .termsOfService("http://doc.xiaominfo.com")
+                        .license(new License().name("Apache 2.0")
+                                .url("http://doc.xiaominfo.com")));
+    }
+
 }

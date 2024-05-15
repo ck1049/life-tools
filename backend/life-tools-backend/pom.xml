@@ -14,52 +14,192 @@
     <name>life-tools Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
-    <parent>
-        <groupId>com.loafer</groupId>
-        <artifactId>loafer-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
+    <properties>
+        <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <spring.boot.version>3.2.4</spring.boot.version>
+        <spring.cloud.version>2023.0.1</spring.cloud.version>
+        <spring.cloud.alibaba.version>2023.0.1.0</spring.cloud.alibaba.version>
+        <lombok.version>1.18.28</lombok.version>
+        <mybatis.boot.version>3.0.3</mybatis.boot.version>
+        <mybatis.version>3.5.16</mybatis.version>
+        <mybatis-plus.version>3.5.6</mybatis-plus.version>
+        <zxing.version>3.4.0</zxing.version>
+        <velocity.version>2.3</velocity.version>
+        <knife4j.boot.version>4.3.0</knife4j.boot.version>
+        <pagehelper.boot.version>1.4.6</pagehelper.boot.version>
+        <mysql.version>8.0.30</mysql.version>
+        <jsoup.version>1.15.3</jsoup.version>
+        <hutool.version>5.8.8</hutool.version>
+        <oss.version>3.17.0</oss.version>
+        <modelmapper.version>3.1.0</modelmapper.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <guava.version>33.0.0-jre</guava.version>
+        <servlet.api.version>2.5</servlet.api.version>
+        <tess4j.version>5.9.0</tess4j.version>
+    </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-alibaba-sentinel-datasource</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
 
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring.cloud.alibaba.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.mybatis</groupId>
+                        <artifactId>mybatis-spring</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-dependencies</artifactId>
+                <version>${knife4j.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
+
+            <!--二维码依赖-->
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>${zxing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>javase</artifactId>
+                <version>${zxing.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${oss.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>${modelmapper.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${servlet.api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sourceforge.tess4j</groupId>
+                <artifactId>tess4j</artifactId>
+                <version>${tess4j.version}</version>
+            </dependency>
+        </dependencies>
+
+    </dependencyManagement>
     <build>
         <finalName>life-tools</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.activation.MimetypesFileTypeMap;
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.*;
@@ -429,7 +430,7 @@ public class OssServiceImpl implements IOssService {
         HttpURLConnection conn = null;
         String boundary = "9431149156168";
         try {
-            URL url = new URL(urlStr);
+            URL url = new URI(urlStr).toURL();
             conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(5000);
             conn.setReadTimeout(30000);
@@ -474,15 +475,14 @@ public class OssServiceImpl implements IOssService {
             File file = new File(localFile);
             String filename = file.getName();
             String contentType = new MimetypesFileTypeMap().getContentType(file);
-            if (contentType == null || contentType.equals("")) {
+            if (contentType == null || contentType.isEmpty()) {
                 contentType = "application/octet-stream";
             }
-            StringBuffer strBuf = new StringBuffer();
+            StringBuilder strBuf = new StringBuilder();
             strBuf.append("\r\n").append("--").append(boundary)
                     .append("\r\n");
-            strBuf.append("Content-Disposition: form-data; name=\"file\"; "
-                    + "filename=\"" + filename + "\"\r\n");
-            strBuf.append("Content-Type: " + contentType + "\r\n\r\n");
+            strBuf.append("Content-Disposition: form-data; name=\"file\"; " + "filename=\"").append(filename).append("\"\r\n");
+            strBuf.append("Content-Type: ").append(contentType).append("\r\n\r\n");
             out.write(strBuf.toString().getBytes());
             DataInputStream in = new DataInputStream(new FileInputStream(file));
             int bytes = 0;
@@ -496,7 +496,7 @@ public class OssServiceImpl implements IOssService {
             out.flush();
             out.close();
             // 读取返回数据。
-            strBuf = new StringBuffer();
+            strBuf = new StringBuilder();
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line = null;
             while ((line = reader.readLine()) != null) {

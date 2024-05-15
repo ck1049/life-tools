@@ -1,7 +1,7 @@
 package com.loafer.lottery.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.loafer.common.utils.SnowflakedUtils;
+import com.loafer.common.utils.SnowflakeUtils;
 import com.loafer.lottery.service.IExtSysLotteryService;
 import com.loafer.lottery.model.Lotto;
 import com.loafer.lottery.mapper.LottoMapper;
@@ -49,7 +49,7 @@ public class LottoServiceImpl extends ServiceImpl<LottoMapper, Lotto> implements
             if (officialLottoInfoVO != null && officialLottoInfoVO.getValue() != null && officialLottoInfoVO.getValue().getLastPoolDraw() != null) {
                 OfficialLottoInfoVO.LastPoolDraw lastPoolDraw = officialLottoInfoVO.getValue().getLastPoolDraw();
                 Lotto lotto = modelMapper.map(lastPoolDraw, Lotto.class);
-                long lottoId = SnowflakedUtils.nextId();
+                long lottoId = SnowflakeUtils.nextId();
                 lotto.setId(lottoId);
                 lottoList.add(lotto);
 
@@ -59,7 +59,7 @@ public class LottoServiceImpl extends ServiceImpl<LottoMapper, Lotto> implements
                             .sorted(Comparator.comparing(OfficialLottoInfoVO.PrizeLevel::getSort))
                             .map(item -> {
                                 LottoPrizeLevel level = modelMapper.map(item, LottoPrizeLevel.class);
-                                level.setId(SnowflakedUtils.nextId());
+                                level.setId(SnowflakeUtils.nextId());
                                 level.setLottoId(lottoId);
                                 level.setLotteryDrawNum(lotto.getLotteryDrawNum());
                                 return level;

@@ -1,8 +1,7 @@
 package com.loafer.lottery.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.loafer.common.utils.SnowflakedUtils;
+import com.loafer.common.utils.SnowflakeUtils;
 import com.loafer.lottery.model.TwoColorBall;
 import com.loafer.lottery.mapper.TwoColorBallMapper;
 import com.loafer.lottery.model.TwoColorBallPrizeGrade;
@@ -54,7 +53,7 @@ public class TwoColorBallServiceImpl extends ServiceImpl<TwoColorBallMapper, Two
         resultEntryList.sort(Comparator.comparing(OfficialTwoColorBallInfoVO.ResultEntry::getCode));
 
         for (OfficialTwoColorBallInfoVO.ResultEntry resultEntry : resultEntryList) {
-            long twoColorBallId = SnowflakedUtils.nextId();
+            long twoColorBallId = SnowflakeUtils.nextId();
             TwoColorBall twoColorBall = modelMapper.map(resultEntry, TwoColorBall.class);
             twoColorBall.setId(twoColorBallId);
             // 日期格式转换 YYYY-MM-DD(WEEKDAY) -> YYYY-MM-DD
@@ -66,7 +65,7 @@ public class TwoColorBallServiceImpl extends ServiceImpl<TwoColorBallMapper, Two
             if (!CollectionUtils.isEmpty(prizegradeList)) {
                 twoColorBallPrizeGradeList.addAll(prizegradeList.stream().map(item -> {
                     TwoColorBallPrizeGrade prizeGrade = modelMapper.map(item, TwoColorBallPrizeGrade.class);
-                    prizeGrade.setId(SnowflakedUtils.nextId());
+                    prizeGrade.setId(SnowflakeUtils.nextId());
                     prizeGrade.setTwoColorBallId(twoColorBallId);
                     prizeGrade.setCode(twoColorBall.getCode());
                     return prizeGrade;

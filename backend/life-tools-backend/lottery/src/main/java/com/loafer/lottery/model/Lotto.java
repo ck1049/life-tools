@@ -2,8 +2,8 @@ package com.loafer.lottery.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -19,29 +19,29 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@ApiModel(value = "Lotto对象", description = "彩票开奖信息")
+@Schema(description = "彩票开奖信息")
 public class Lotto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("主键")
+    @Schema(description = "主键")
     private Long id;
 
-    @ApiModelProperty("期号")
+    @Schema(description = "期号")
     private String lotteryDrawNum;
 
-    @ApiModelProperty("中奖号码")
+    @Schema(description = "中奖号码")
     private String lotteryDrawResult;
 
-    @ApiModelProperty("开奖日期")
+    @Schema(description = "开奖日期")
     private String lotteryDrawTime;
 
-    @ApiModelProperty("彩票游戏名称")
+    @Schema(description = "彩票游戏名称")
     private String lotteryGameName;
 
-    @ApiModelProperty("彩票游戏编号")
+    @Schema(description = "彩票游戏编号")
     private String lotteryGameNum;
 
-    @ApiModelProperty("抽奖后奖池余额")
+    @Schema(description = "抽奖后奖池余额")
     private BigDecimal poolBalanceAfterdraw;
 }

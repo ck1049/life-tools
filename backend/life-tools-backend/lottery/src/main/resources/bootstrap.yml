@@ -6,7 +6,16 @@ spring:
       config:
         name: ${spring.application.name}
         server-addr: 127.0.0.1:8848
-        namespace: cba3d3fa-ab76-4ae7-a9b9-e7ac16efc865
+        namespace: life-tools
         username: nacos
         password: nacos
         group: DEFAULT_GROUP
+#    sentinel:
+#      datasource:
+#        db1:
+#          nacos:
+#            server-addr: 127.0.0.1:8848
+#            username: nacos
+#            password: nacos
+#            data-id: lottery-sentinel-flow-rule
+#            rule-type: flow

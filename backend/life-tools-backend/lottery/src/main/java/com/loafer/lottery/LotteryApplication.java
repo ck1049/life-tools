@@ -5,11 +5,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScans;
 
+/**
+ * @author loafer
+ */
 @EnableFeignClients
 @ComponentScan(basePackages = {"com.loafer.common", "com.loafer.lottery"})
-@MapperScan(basePackages = "com.loafer.lottery.mapper")
+@MapperScan(basePackages = {"com.loafer.lottery.mapper"})
 @SpringBootApplication
 public class LotteryApplication {
 

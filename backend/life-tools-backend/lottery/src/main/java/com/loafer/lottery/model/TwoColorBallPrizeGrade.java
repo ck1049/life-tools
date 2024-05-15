@@ -2,8 +2,7 @@ package com.loafer.lottery.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -20,26 +19,26 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @TableName("two_color_ball_prize_grade")
-@ApiModel(value = "TwoColorBallPrizeGrade对象", description = "奖项信息")
+@Schema(description = "奖项信息")
 public class TwoColorBallPrizeGrade implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("主键")
+    @Schema(description = "主键")
     private Long id;
 
-    @ApiModelProperty("双色球开奖信息主键")
+    @Schema(description = "双色球开奖信息主键")
     private Long twoColorBallId;
 
-    @ApiModelProperty("期号")
+    @Schema(description = "期号")
     private String code;
 
-    @ApiModelProperty("类型")
+    @Schema(description = "类型")
     private Integer type;
 
-    @ApiModelProperty("类型数量")
+    @Schema(description = "类型数量")
     private Integer typeNum;
 
-    @ApiModelProperty("类型金额")
+    @Schema(description = "类型金额")
     private Integer typeMoney;
 }

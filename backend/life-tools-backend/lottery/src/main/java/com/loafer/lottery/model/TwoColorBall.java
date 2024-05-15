@@ -1,10 +1,8 @@
 package com.loafer.lottery.model;
 
-import cn.hutool.cache.Cache;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -21,47 +19,47 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @TableName("two_color_ball")
-@ApiModel(value = "TwoColorBall对象", description = "双色球开奖信息")
+@Schema(description = "双色球开奖信息")
 public class TwoColorBall implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("主键")
+    @Schema(description = "主键")
     private Long id;
 
-    @ApiModelProperty("名称")
+    @Schema(description = "名称")
     private String name;
 
-    @ApiModelProperty("期号")
+    @Schema(description = "期号")
     private String code;
 
-    @ApiModelProperty("详情链接")
+    @Schema(description = "详情链接")
     private String detailsLink;
 
-    @ApiModelProperty("视频链接")
+    @Schema(description = "视频链接")
     private String videoLink;
 
-    @ApiModelProperty("日期")
+    @Schema(description = "日期")
     private String date;
 
-    @ApiModelProperty("星期")
+    @Schema(description = "星期")
     private String week;
 
-    @ApiModelProperty("红球")
+    @Schema(description = "红球")
     private String red;
 
-    @ApiModelProperty("蓝球")
+    @Schema(description = "蓝球")
     private String blue;
 
-    @ApiModelProperty("第二个蓝球")
+    @Schema(description = "第二个蓝球")
     private String blue2;
 
-    @ApiModelProperty("销售额")
+    @Schema(description = "销售额")
     private Long sales;
 
-    @ApiModelProperty("奖池金额")
+    @Schema(description = "奖池金额")
     private Long poolMoney;
 
-    @ApiModelProperty("内容")
+    @Schema(description = "内容")
     private String content;
 }

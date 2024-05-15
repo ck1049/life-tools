@@ -1,7 +1,7 @@
 server:
   port: 8080
   servlet:
-    context-path: /gateway
+    context-path: /
 spring:
   cloud:
     nacos:
@@ -9,7 +9,7 @@ spring:
       username: nacos
       password: nacos
       discovery:
-        namespace: cba3d3fa-ab76-4ae7-a9b9-e7ac16efc865
+        namespace: life-tools
     gateway:
       globalcors:
         corsConfigurations:
@@ -33,3 +33,26 @@ spring:
             - Path=/api/oss/**
           filters:
             - StripPrefix=1
+
+knife4j:
+  gateway:
+    enabled: true
+    strategy: discover # discover：服务发现（自动聚合），MANUAL：手动配置路由
+    discover:
+      version: openapi3
+      enabled: true
+      excluded-services:
+        # 排除order开头的配置
+        - gateway.*
+#    routes:
+#      # openapi3
+#      - name: lottery-route
+#        service-name: lottery-service
+#        url: /api/lottery/v3/api-docs
+#        #context-path: /lottery
+#        order: 1
+#      - name: oss-route
+#        service-name: oss-service
+#        url: /api/oss/v3/api-docs
+#        #context-path: /oss
+#        order: 0
