@@ -2,6 +2,7 @@ package com.loafer.lottery.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -11,11 +12,13 @@ import java.util.*;
  * @author loafer
  * @since 2024-05-16 16:40:22
  **/
+@Slf4j
 public class LATUtilsTest {
 
     int[] awardRedBalls = new int[] {7, 17, 22, 30, 34};
     int[] awardBlueBalls = new int[] {5, 7};
     AbstractLATUtils lottoUtils = new LottoUtils();
+    AbstractLATUtils twoColorBallUtils = new TwoColorBallUtils();
 
     /**
      * 随机生成双色球/大乐透号码
@@ -29,10 +32,17 @@ public class LATUtilsTest {
         int[] myBlueBalls = randomLottery[1].stream().mapToInt(Integer::intValue).sorted().toArray();
         long end = System.currentTimeMillis();
 
-        System.out.println("开奖号码：" + Arrays.toString(awardRedBalls) + " " + Arrays.toString(awardBlueBalls));
-        System.out.println("我的号码：" + Arrays.toString(myRedBalls) + " " + Arrays.toString(myBlueBalls));
-        System.out.println("号码生成耗时：" + (end - start) + "ms.");
-
+        log.info("大乐透开奖号码：{} {}", Arrays.toString(awardRedBalls), Arrays.toString(awardBlueBalls));
+        log.info("我的大乐透号码：{} {}", Arrays.toString(myRedBalls), Arrays.toString(myBlueBalls));
+        log.info("大乐透号码生成耗时：{}ms.", end - start);
+        
+        start = System.currentTimeMillis();
+        randomLottery = twoColorBallUtils.randomLottery(7, 2);
+        myRedBalls = randomLottery[0].stream().mapToInt(Integer::intValue).sorted().toArray();
+        myBlueBalls = randomLottery[1].stream().mapToInt(Integer::intValue).sorted().toArray();
+        end = System.currentTimeMillis();
+        log.info("我的双色球号码：{} {}", Arrays.toString(myRedBalls), Arrays.toString(myBlueBalls));
+        log.info("双色球号码生成耗时：{}ms.", end - start);
     }
 
     /**
@@ -49,7 +59,17 @@ public class LATUtilsTest {
         long start = System.currentTimeMillis();
         Map<Long, Long> awardLevelNumMap = lottoUtils.calculateAwardLevelNumMap(myRedBallNum, myBlueBallNum, matchRedBallNum, matchBlueBallNum);
         long end = System.currentTimeMillis();
-        System.out.println(new ObjectMapper().writeValueAsString(awardLevelNumMap));
-        System.out.println("计算耗时：" + (end - start) + "ms.");
+        log.info(new ObjectMapper().writeValueAsString(awardLevelNumMap));
+        log.info("大乐透中奖情况计算耗时：{}ms.", end - start);
+
+        myRedBallNum = 7;
+        myBlueBallNum = 2;
+        matchRedBallNum = 2;
+        matchBlueBallNum = 1;
+        start = System.currentTimeMillis();
+        awardLevelNumMap = twoColorBallUtils.calculateAwardLevelNumMap(myRedBallNum, myBlueBallNum, matchRedBallNum, matchBlueBallNum);
+        end = System.currentTimeMillis();
+        log.info(new ObjectMapper().writeValueAsString(awardLevelNumMap));
+        log.info("双色球中奖情况计算耗时：{}ms.", end - start);
     }
 }
