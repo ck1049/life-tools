@@ -12,11 +12,11 @@ import static com.loafer.lottery.util.MathUtils.combinatorial;
  **/
 public abstract class AbstractLATUtils implements LotteryUtils {
 
-    protected Map<Long, List<RedBlueBall>> REWARD_CONDITION_MAP;
+    protected Map<Long, List<RedBlueBall>> rewardConditionMap;
 
     @Override
     public Map<Long, List<RedBlueBall>> awardCondition() {
-        return REWARD_CONDITION_MAP;
+        return rewardConditionMap;
     }
 
     @Override
@@ -57,7 +57,7 @@ public abstract class AbstractLATUtils implements LotteryUtils {
 
         Map<Long, Long> awardLevelNumMap = new LinkedHashMap<>();
 
-        REWARD_CONDITION_MAP.forEach((awardLevel, awardConditionList) -> {
+        rewardConditionMap.forEach((awardLevel, awardConditionList) -> {
 
             long awardNum = 0;
             for (RedBlueBall redBlueBall : awardConditionList) {

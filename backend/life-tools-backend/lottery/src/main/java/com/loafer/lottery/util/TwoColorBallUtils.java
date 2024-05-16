@@ -13,28 +13,28 @@ import java.util.List;
 public class TwoColorBallUtils extends AbstractLATUtils {
 
     {
-        REWARD_CONDITION_MAP = new LinkedHashMap<>();
+        rewardConditionMap = new LinkedHashMap<>();
         // 一等奖:7个号码相符(6个红色球号码和1个蓝色球号码) (红色球号码顺序不限，下同)
-        REWARD_CONDITION_MAP.put(1L, List.of(new RedBlueBall(6L, 1L)));
+        rewardConditionMap.put(1L, List.of(new RedBlueBall(6L, 1L)));
 
         // 二等奖:6个红色球号码相符；
-        REWARD_CONDITION_MAP.put(2L, List.of(new RedBlueBall(6L, 0L)));
+        rewardConditionMap.put(2L, List.of(new RedBlueBall(6L, 0L)));
 
         // 三等奖:5个红色球号码和1个蓝色球号码相符;
-        REWARD_CONDITION_MAP.put(3L, List.of(new RedBlueBall(5L, 1L)));
+        rewardConditionMap.put(3L, List.of(new RedBlueBall(5L, 1L)));
 
         // 四等奖:5个红色球号码或4个红色球号码和1个蓝色球号码相符；
-        REWARD_CONDITION_MAP.put(4L, List.of(
+        rewardConditionMap.put(4L, List.of(
                 new RedBlueBall(5L, 0L),
                 new RedBlueBall(4L, 1L)));
 
         // 五等奖:4个红色球号码或3个红色球号码和1个蓝色球号码相符；
-        REWARD_CONDITION_MAP.put(5L, List.of(
+        rewardConditionMap.put(5L, List.of(
                 new RedBlueBall(4L, 0L),
                 new RedBlueBall(3L, 1L)));
 
         // 六等奖:1个蓝色球号码相符(有无红色球号码相符均可)；
-        REWARD_CONDITION_MAP.put(6L, List.of(
+        rewardConditionMap.put(6L, List.of(
                 new RedBlueBall(2L, 1L),
                 new RedBlueBall(1L, 1L),
                 new RedBlueBall(0L, 1L)));
