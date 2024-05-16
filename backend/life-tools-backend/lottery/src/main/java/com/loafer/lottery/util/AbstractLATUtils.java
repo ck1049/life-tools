@@ -32,7 +32,7 @@ public abstract class AbstractLATUtils implements LotteryUtils {
      * @return 机选彩票结果
      */
     public Set<Integer>[] randomLottery(long redBallNum, long blueBallNum) {
-        if (!verifyLottery(redBallNum, blueBallNum)) {
+        if (!verifyPurchaseBallNum(redBallNum, blueBallNum)) {
             throw new IllegalArgumentException("彩票随机生成失败，请检查输入参数");
         }
         Set<Integer> redBallSet = new HashSet<>();
@@ -50,6 +50,11 @@ public abstract class AbstractLATUtils implements LotteryUtils {
 
     @Override
     public Map<Long, Long> calculateAwardLevelNumMap(long myRedBallNum, long myBlueBallNum, long matchRedBallNum, long matchBlueBallNum) {
+
+        if (!verifyPurchaseBallNum(myRedBallNum, myBlueBallNum) || !verifyMatchBallNum(matchRedBallNum, matchBlueBallNum)) {
+            throw new IllegalArgumentException("计算奖金等级失败，请检查输入参数");
+        }
+
         Map<Long, Long> awardLevelNumMap = new LinkedHashMap<>();
 
         REWARD_CONDITION_MAP.forEach((awardLevel, awardConditionList) -> {
@@ -101,8 +106,19 @@ public abstract class AbstractLATUtils implements LotteryUtils {
      * @param blueBallNum 准备选购的蓝球数
      * @return 校验结果
      */
-    protected boolean verifyLottery(long redBallNum, long blueBallNum) {
+    protected boolean verifyPurchaseBallNum(long redBallNum, long blueBallNum) {
         return redBallNum >= awardRedBallNum() && blueBallNum >= awardBlueBallNum()
                 && redBallNum <= totalRedBallNum() && blueBallNum <= totalBlueBallNum();
+    }
+
+    /**
+     * 校验输入的中奖红蓝球数是否合法
+     * @param matchRedBallNum 中奖红球数
+     * @param matchBlueBallNum 中奖蓝球数
+     * @return 校验结果
+     */
+    protected boolean verifyMatchBallNum(long matchRedBallNum, long matchBlueBallNum) {
+        return matchRedBallNum <= awardRedBallNum() && matchBlueBallNum <= awardBlueBallNum()
+                && matchRedBallNum >= 0 && matchBlueBallNum >= 0;
     }
 }
