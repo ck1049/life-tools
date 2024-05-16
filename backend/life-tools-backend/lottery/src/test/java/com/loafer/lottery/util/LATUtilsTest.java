@@ -37,10 +37,10 @@ public class LATUtilsTest {
 
     /**
      * 根据单/复式类型和匹配号码计算中奖等级情况
-     * @throws JsonProcessingException
+     * @throws JsonProcessingException json序列化异常
      */
     @Test
-    public void testAwardAnalysis() throws JsonProcessingException {
+    public void testCalculateAwardSituation() throws JsonProcessingException {
 
         long myRedBallNum = 6;
         long myBlueBallNum = 3;
