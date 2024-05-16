@@ -1,14 +1,12 @@
 package com.loafer.lottery.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * @author loafer
  * @since 2024-05-16 02:05:34
  **/
-@Getter
+@Data
 @EqualsAndHashCode
 public class RedBlueBall {
 
@@ -23,8 +21,11 @@ public class RedBlueBall {
     /**
      * 总奖金
      */
-    @Setter
     private Long totalAward;
+    /**
+     * 奖级
+     */
+    private Long level;
 
     public RedBlueBall(long redBallNum, long blueBallNum) {
         this.redBallNum = redBallNum;

@@ -185,6 +185,7 @@ public abstract class AbstractLATUtils implements LotteryUtils {
                 // 根据这种情况，计算出每个奖级的中奖注数
                 List<AwardAnalysis> awardLevelNumList = calculateAwardLevelNumList(myRedBallNum, myBlueBallNum, redCondition, blueCondition, multiple);
                 redBlueBall.setTotalAward(awardLevelNumList.stream().mapToLong(AwardAnalysis::getAward).sum());
+                redBlueBall.setLevel(level);
                 analysis.getChildren().put(redBlueBall, awardLevelNumList);
             }
 
