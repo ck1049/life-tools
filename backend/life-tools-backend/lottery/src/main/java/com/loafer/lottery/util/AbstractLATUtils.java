@@ -119,7 +119,7 @@ public abstract class AbstractLATUtils implements LotteryUtils {
 
             AwardAnalysis analysis = new AwardAnalysis();
             analysis.setLevel(level);
-            if (level <= 2) {
+            if (level <= 2 && awardNum > 0) {
                 // 追加奖金为单注固定奖金的比例，例如：大乐透80%，双色球暂时不支持追加
                 analysis.setAward((long) (singleAward * (awardNum + multiple * appendAwardRatio)));
             } else {
@@ -177,15 +177,16 @@ public abstract class AbstractLATUtils implements LotteryUtils {
                 // 计算满足条件的组合数
                 // 红球组合 = 组合(开奖红球个数, 本奖级红球条件) * 组合(所有未中奖红球个数, 选购未中奖红球个数)
                 // 蓝球组合 = 组合(开奖蓝球个数, 本奖级蓝球条件) * 组合(所有未中奖蓝球个数, 选购未中奖蓝球个数)
-                awardNum += combinatorial(awardRedBallNum(), redCondition)
+                long elementAwardNum = combinatorial(awardRedBallNum(), redCondition)
                         * combinatorial(totalRedBallNum() - awardRedBallNum(), myRedBallNum - redCondition)
                         * combinatorial(awardBlueBallNum(), blueCondition)
                         * combinatorial(totalBlueBallNum() - awardBlueBallNum(), myBlueBallNum - blueCondition);
-
+                awardNum += elementAwardNum;
                 // 根据这种情况，计算出每个奖级的中奖注数
                 List<AwardAnalysis> awardLevelNumList = calculateAwardLevelNumList(myRedBallNum, myBlueBallNum, redCondition, blueCondition, multiple);
                 redBlueBall.setTotalAward(awardLevelNumList.stream().mapToLong(AwardAnalysis::getAward).sum());
                 redBlueBall.setLevel(level);
+                redBlueBall.setProbability(BigDecimal.valueOf(elementAwardNum).divide(BigDecimal.valueOf(totalProbability), 10, RoundingMode.HALF_UP));
                 analysis.getChildren().put(redBlueBall, awardLevelNumList);
             }
 
