@@ -12,6 +12,7 @@ import java.util.*;
 public class LottoUtils extends AbstractLATUtils {
 
     {
+        // 非静态代码块初始化中奖条件
         rewardConditionMap = new LinkedHashMap<>();
         // 一等奖：投注号码与当期开奖号码全部相同(顺序不限，下同)，即中奖；
         rewardConditionMap.put(1L, List.of(new RedBlueBall(5L, 2L)));
