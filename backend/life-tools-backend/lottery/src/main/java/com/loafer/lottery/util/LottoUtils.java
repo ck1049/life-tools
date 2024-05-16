@@ -67,10 +67,4 @@ public class LottoUtils extends AbstractLATUtils {
     public Long awardBlueBallNum() {
                 return 2L;
     }
-
-    @Override
-    protected boolean verifyLottery(long redBallNum, long blueBallNum) {
-        return redBallNum >= awardRedBallNum() && blueBallNum >= awardBlueBallNum()
-                && redBallNum <= totalRedBallNum() && blueBallNum <= totalBlueBallNum();
-    }
 }

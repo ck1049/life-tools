@@ -111,5 +111,8 @@ public abstract class AbstractLATUtils implements LotteryUtils {
      * @param blueBallNum
      * @return
      */
-    protected abstract boolean verifyLottery(long redBallNum, long blueBallNum);
+    protected boolean verifyLottery(long redBallNum, long blueBallNum) {
+        return redBallNum >= awardRedBallNum() && blueBallNum >= awardBlueBallNum()
+                && redBallNum <= totalRedBallNum() && blueBallNum <= totalBlueBallNum();
+    }
 }
