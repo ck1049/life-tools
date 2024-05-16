@@ -1,8 +1,13 @@
 package com.loafer.lottery.util;
 
+import com.loafer.lottery.model.AwardAnalysis;
+import com.loafer.lottery.model.PrizeLevel;
+import com.loafer.lottery.model.RedBlueBall;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.loafer.lottery.util.MathUtils.combinatorial;
 
@@ -14,14 +19,17 @@ import static com.loafer.lottery.util.MathUtils.combinatorial;
  **/
 public abstract class AbstractLATUtils implements LotteryUtils {
 
+
+    protected float appendAwardRatio = 0;
+
     /**
      * 中间条件
      */
-    protected Map<Long, List<RedBlueBall>> rewardConditionMap;
+    protected List<PrizeLevel> rewardConditionList;
 
     @Override
-    public Map<Long, List<RedBlueBall>> awardCondition() {
-        return rewardConditionMap;
+    public List<PrizeLevel> awardCondition() {
+        return rewardConditionList;
     }
 
     @Override
@@ -61,18 +69,38 @@ public abstract class AbstractLATUtils implements LotteryUtils {
      * @param matchBlueBallNum 中奖的蓝球个数
      * @return 每个奖级的中奖注数
      */
-    public Map<Long, Long> calculateAwardLevelNumMap(long myRedBallNum, long myBlueBallNum, long matchRedBallNum, long matchBlueBallNum) {
+    public List<AwardAnalysis> calculateAwardLevelNumList(long myRedBallNum, long myBlueBallNum, long matchRedBallNum, long matchBlueBallNum) {
+        return calculateAwardLevelNumList(myRedBallNum, myBlueBallNum, matchRedBallNum, matchBlueBallNum, 0);
+    }
+
+    /**
+     * 计算每个奖级的中奖注数
+     * @param myRedBallNum 选购的红球个数
+     * @param myBlueBallNum 选购的蓝球个数
+     * @param matchRedBallNum 中奖的红球个数
+     * @param matchBlueBallNum 中奖的蓝球个数
+     * @param multiple 倍数
+     * @return 每个奖级的中奖注数
+     */
+    public List<AwardAnalysis> calculateAwardLevelNumList(long myRedBallNum, long myBlueBallNum, long matchRedBallNum, long matchBlueBallNum, long multiple) {
 
         if (!verifyPurchaseBallNum(myRedBallNum, myBlueBallNum) || !verifyMatchBallNum(matchRedBallNum, matchBlueBallNum)) {
             throw new IllegalArgumentException("计算奖金等级失败，请检查输入参数");
         }
 
-        Map<Long, Long> awardLevelNumMap = new LinkedHashMap<>();
+        List<AwardAnalysis> result = new ArrayList<>();
 
-        rewardConditionMap.forEach((awardLevel, awardConditionList) -> {
+        // 计算转换成单式的总注数
+        long totalCombination = combinatorial(myRedBallNum, awardRedBallNum()) * combinatorial(myBlueBallNum, awardBlueBallNum());
+
+        rewardConditionList.forEach(prizeLevel -> {
+            // 奖级
+            Long level = prizeLevel.getLevel();
+            // 单倍奖金
+            long singleAward = prizeLevel.getAward();
 
             long awardNum = 0;
-            for (RedBlueBall redBlueBall : awardConditionList) {
+            for (RedBlueBall redBlueBall : prizeLevel.getAwardConditionList()) {
                 Long redCondition = redBlueBall.getRedBallNum();
                 Long blueCondition = redBlueBall.getBlueBallNum();
 
@@ -89,9 +117,20 @@ public abstract class AbstractLATUtils implements LotteryUtils {
                 }
             }
 
-            awardLevelNumMap.put(awardLevel, awardNum);
+            AwardAnalysis analysis = new AwardAnalysis();
+            analysis.setLevel(level);
+            if (level <= 2) {
+                // 追加奖金为单注固定奖金的比例，例如：大乐透80%，双色球暂时不支持追加
+                analysis.setAward((long) (singleAward * (awardNum + multiple * appendAwardRatio)));
+            } else {
+                analysis.setAward(singleAward * awardNum);
+            }
+            analysis.setAwardNum(awardNum);
+            analysis.setPrice(totalCombination * (singlePrice + multiple));
+            analysis.setMultiple(multiple);
+            result.add(analysis);
         });
-        return awardLevelNumMap;
+        return result;
     }
 
     /**
@@ -100,21 +139,38 @@ public abstract class AbstractLATUtils implements LotteryUtils {
      * @param myBlueBallNum 选购的蓝球个数
      * @return 每个奖级的中奖注数
      */
-    public Map<Long, BigDecimal> calculateAwardLevelProbabilityMap(long myRedBallNum, long myBlueBallNum) {
+    public List<AwardAnalysis> calculateAwardLevelProbabilityList(long myRedBallNum, long myBlueBallNum) {
+        return calculateAwardLevelProbabilityList(myRedBallNum, myBlueBallNum, 0);
+    }
+
+    /**
+     * 计算每个奖级的中奖概率
+     * @param myRedBallNum 选购的红球个数
+     * @param myBlueBallNum 选购的蓝球个数
+     * @param multiple 倍数
+     * @return 每个奖级的中奖注数
+     */
+    public List<AwardAnalysis> calculateAwardLevelProbabilityList(long myRedBallNum, long myBlueBallNum, long multiple) {
 
         if (!verifyPurchaseBallNum(myRedBallNum, myBlueBallNum)) {
             throw new IllegalArgumentException("计算奖金概率失败，请检查输入参数");
         }
 
-        Map<Long, BigDecimal> awardLevelProbabilityMap = new LinkedHashMap<>();
+        List<AwardAnalysis> result = new ArrayList<>();
 
         // 所有组合数
         long totalProbability = combinatorial(totalRedBallNum(), myRedBallNum) * combinatorial(totalBlueBallNum(), myBlueBallNum);
 
-        rewardConditionMap.forEach((awardLevel, awardConditionList) -> {
+        rewardConditionList.forEach(prizeLevel -> {
 
+            Long level = prizeLevel.getLevel();
+            AwardAnalysis analysis = new AwardAnalysis();
+            analysis.setLevel(level);
+            analysis.setMultiple(multiple);
+            analysis.setPrice(combinatorial(myRedBallNum, awardRedBallNum()) * combinatorial(myBlueBallNum, awardBlueBallNum()) * (singlePrice + multiple));
+            
             long awardNum = 0;
-            for (RedBlueBall redBlueBall : awardConditionList) {
+            for (RedBlueBall redBlueBall : prizeLevel.getAwardConditionList()) {
                 Long redCondition = redBlueBall.getRedBallNum();
                 Long blueCondition = redBlueBall.getBlueBallNum();
 
@@ -126,11 +182,16 @@ public abstract class AbstractLATUtils implements LotteryUtils {
                         * combinatorial(awardBlueBallNum(), blueCondition)
                         * combinatorial(totalBlueBallNum() - awardBlueBallNum(), myBlueBallNum - blueCondition);
 
+                // 根据这种情况，计算出每个奖级的中奖注数
+                List<AwardAnalysis> awardLevelNumList = calculateAwardLevelNumList(myRedBallNum, myBlueBallNum, redCondition, blueCondition, multiple);
+                redBlueBall.setTotalAward(awardLevelNumList.stream().mapToLong(AwardAnalysis::getAward).sum());
+                analysis.getChildren().put(redBlueBall, awardLevelNumList);
             }
 
-            awardLevelProbabilityMap.put(awardLevel, BigDecimal.valueOf(awardNum).divide(BigDecimal.valueOf(totalProbability), 10, RoundingMode.HALF_UP));
+            analysis.setProbability(BigDecimal.valueOf(awardNum).divide(BigDecimal.valueOf(totalProbability), 10, RoundingMode.HALF_UP));
+            result.add(analysis);
         });
-        return awardLevelProbabilityMap;
+        return result;
     }
 
     /**

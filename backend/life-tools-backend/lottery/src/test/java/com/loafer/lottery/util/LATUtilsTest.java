@@ -2,10 +2,10 @@ package com.loafer.lottery.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.loafer.lottery.model.AwardAnalysis;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -58,9 +58,9 @@ public class LATUtilsTest {
         long matchRedBallNum = 3;
         long matchBlueBallNum = 2;
         long start = System.currentTimeMillis();
-        Map<Long, Long> awardLevelNumMap = lottoUtils.calculateAwardLevelNumMap(myRedBallNum, myBlueBallNum, matchRedBallNum, matchBlueBallNum);
+        List<AwardAnalysis> analysisList = lottoUtils.calculateAwardLevelNumList(myRedBallNum, myBlueBallNum, matchRedBallNum, matchBlueBallNum, 1L);
         long end = System.currentTimeMillis();
-        log.info(new ObjectMapper().writeValueAsString(awardLevelNumMap));
+        log.info(new ObjectMapper().writeValueAsString(analysisList));
         log.info("大乐透中奖情况计算耗时：{}ms.", end - start);
 
         myRedBallNum = 7;
@@ -68,9 +68,9 @@ public class LATUtilsTest {
         matchRedBallNum = 2;
         matchBlueBallNum = 1;
         start = System.currentTimeMillis();
-        awardLevelNumMap = twoColorBallUtils.calculateAwardLevelNumMap(myRedBallNum, myBlueBallNum, matchRedBallNum, matchBlueBallNum);
+        analysisList = twoColorBallUtils.calculateAwardLevelNumList(myRedBallNum, myBlueBallNum, matchRedBallNum, matchBlueBallNum, 1L);
         end = System.currentTimeMillis();
-        log.info(new ObjectMapper().writeValueAsString(awardLevelNumMap));
+        log.info(new ObjectMapper().writeValueAsString(analysisList));
         log.info("双色球中奖情况计算耗时：{}ms.", end - start);
     }
 
@@ -81,9 +81,9 @@ public class LATUtilsTest {
     @Test
     public void testCalculateAwardLevelProbability() throws JsonProcessingException {
         long start = System.currentTimeMillis();
-        Map<Long, BigDecimal> awardLevelProbabilityMap = lottoUtils.calculateAwardLevelProbabilityMap(6, 3);
+        List<AwardAnalysis> analysisList = lottoUtils.calculateAwardLevelProbabilityList(6, 3, 1L);
         long end = System.currentTimeMillis();
-        log.info(new ObjectMapper().writeValueAsString(awardLevelProbabilityMap));
+        log.info(new ObjectMapper().writeValueAsString(analysisList));
         log.info("大乐透中奖概率计算耗时：{}ms.", end - start);
     }
 }
