@@ -12,7 +12,7 @@ import static com.loafer.lottery.util.MathUtils.combinatorial;
  **/
 public abstract class AbstractLATUtils implements LotteryUtils {
 
-    protected static Map<Long, List<RedBlueBall>> REWARD_CONDITION_MAP;
+    protected Map<Long, List<RedBlueBall>> REWARD_CONDITION_MAP;
 
     @Override
     public Map<Long, List<RedBlueBall>> awardCondition() {

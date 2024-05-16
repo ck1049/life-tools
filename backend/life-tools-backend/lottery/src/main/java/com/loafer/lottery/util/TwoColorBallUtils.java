@@ -12,7 +12,7 @@ import java.util.List;
  **/
 public class TwoColorBallUtils extends AbstractLATUtils {
 
-    static {
+    {
         REWARD_CONDITION_MAP = new LinkedHashMap<>();
         // 一等奖:7个号码相符(6个红色球号码和1个蓝色球号码) (红色球号码顺序不限，下同)
         REWARD_CONDITION_MAP.put(1L, List.of(new RedBlueBall(6L, 1L)));
