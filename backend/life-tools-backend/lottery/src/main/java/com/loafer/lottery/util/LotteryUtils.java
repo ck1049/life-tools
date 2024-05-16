@@ -12,49 +12,45 @@ import java.util.Set;
 public interface LotteryUtils {
 
     /**
-     * 获取可投注红球总数
-     * @return
+     * @return 最大可选红球个数
      */
     Long totalRedBallNum();
 
     /**
-     * 获取可投注蓝球总数
-     * @return
+     * @return 最大可选蓝球个数
      */
     Long totalBlueBallNum();
 
     /**
-     * 标准开奖红球数
-     * @return
+     * @return 标准开奖红球数
      */
     Long awardRedBallNum();
 
     /**
-     * 标准开奖蓝球数
-     * @return
+     * @return 标准开奖蓝球数
      */
     Long awardBlueBallNum();
 
     /**
      * 获取各奖级中奖条件
-     * @return
+     * @return 各奖级中奖条件
      */
     Map<Long, List<RedBlueBall>> awardCondition();
 
     /**
-     * 随机生成彩票
-     * @return
+     * 随机生成复试彩票
+     * @return 机选(单式)彩票结果
      */
     Set<Integer>[] randomLottery();
 
     /**
-     * 计算各奖级中奖数量
+     * 计算每个奖级的中奖注数
      *
-     * @param myRedBallNum     投注的红球数量
-     * @param myBlueBallNum
-     * @param matchRedBallNum
-     * @param matchBlueBallNum
-     * @return
+     * @param myRedBallNum 选购的红球个数
+     * @param myBlueBallNum 选购的蓝球个数
+     * @param matchRedBallNum 中奖的红球个数
+     * @param matchBlueBallNum 中奖的蓝球个数
+     * @return 每个奖级的中奖注数
      */
     Map<Long, Long> calculateAwardLevelNumMap(long myRedBallNum, long myBlueBallNum, long matchRedBallNum, long matchBlueBallNum);
 }

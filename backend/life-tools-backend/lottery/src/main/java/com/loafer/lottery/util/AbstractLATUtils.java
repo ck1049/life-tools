@@ -27,9 +27,9 @@ public abstract class AbstractLATUtils implements LotteryUtils {
     /**
      * 随机生成复试彩票
      *
-     * @param redBallNum
-     * @param blueBallNum
-     * @return
+     * @param redBallNum 准备选购的红球个数
+     * @param blueBallNum 准备选购的蓝球个数
+     * @return 机选彩票结果
      */
     public Set<Integer>[] randomLottery(long redBallNum, long blueBallNum) {
         if (!verifyLottery(redBallNum, blueBallNum)) {
@@ -48,15 +48,6 @@ public abstract class AbstractLATUtils implements LotteryUtils {
         return new Set[]{redBallSet, blueBallSet};
     }
 
-    /**
-     * 计算每个奖级的中奖注数
-     *
-     * @param myRedBallNum
-     * @param myBlueBallNum
-     * @param matchRedBallNum
-     * @param matchBlueBallNum
-     * @return
-     */
     @Override
     public Map<Long, Long> calculateAwardLevelNumMap(long myRedBallNum, long myBlueBallNum, long matchRedBallNum, long matchBlueBallNum) {
         Map<Long, Long> awardLevelNumMap = new LinkedHashMap<>();
@@ -76,7 +67,6 @@ public abstract class AbstractLATUtils implements LotteryUtils {
                             * combinatorial(myRedBallNum - matchRedBallNum, awardRedBallNum() - redCondition)
                             * combinatorial(matchBlueBallNum, blueCondition)
                             * combinatorial(myBlueBallNum - matchBlueBallNum, awardBlueBallNum() - blueCondition);
-                    ;
                 }
             }
 
@@ -88,9 +78,9 @@ public abstract class AbstractLATUtils implements LotteryUtils {
     /**
      * 匹配成功数量
      *
-     * @param awardBalls
-     * @param myBalls
-     * @return
+     * @param awardBalls 开奖号码球
+     * @param myBalls 选购的号码球
+     * @return 中奖球数
      */
     public long matchBallNum(int[] awardBalls, int[] myBalls) {
         long matchRedBallNum = 0;
@@ -107,9 +97,9 @@ public abstract class AbstractLATUtils implements LotteryUtils {
 
     /**
      * 校验输入的投注红蓝球数是否合法
-     * @param redBallNum
-     * @param blueBallNum
-     * @return
+     * @param redBallNum 准备选购的红球数
+     * @param blueBallNum 准备选购的蓝球数
+     * @return 校验结果
      */
     protected boolean verifyLottery(long redBallNum, long blueBallNum) {
         return redBallNum >= awardRedBallNum() && blueBallNum >= awardBlueBallNum()
