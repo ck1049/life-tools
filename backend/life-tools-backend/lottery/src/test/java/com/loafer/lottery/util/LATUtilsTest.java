@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -71,5 +72,18 @@ public class LATUtilsTest {
         end = System.currentTimeMillis();
         log.info(new ObjectMapper().writeValueAsString(awardLevelNumMap));
         log.info("双色球中奖情况计算耗时：{}ms.", end - start);
+    }
+
+    /**
+     * 根据单/复式类型计算各奖概率情况
+     * @throws JsonProcessingException json序列化异常
+     */
+    @Test
+    public void testCalculateAwardLevelProbability() throws JsonProcessingException {
+        long start = System.currentTimeMillis();
+        Map<Long, BigDecimal> awardLevelProbabilityMap = lottoUtils.calculateAwardLevelProbabilityMap(6, 3);
+        long end = System.currentTimeMillis();
+        log.info(new ObjectMapper().writeValueAsString(awardLevelProbabilityMap));
+        log.info("大乐透中奖概率计算耗时：{}ms.", end - start);
     }
 }
