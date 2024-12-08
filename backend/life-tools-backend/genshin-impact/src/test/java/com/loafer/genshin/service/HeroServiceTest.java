@@ -25,17 +25,16 @@ public class HeroServiceTest {
     private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
     @Test
-    public void testSave() throws InterruptedException {
+    public void testSave() {
         HeroDoc hero = new HeroDoc();
-        hero.setId(1L);
-        hero.setName("芙宁娜");
-        hero.setBirthday(LocalDate.of(1500, 10, 13));
+//        hero.setId(1L);
+        hero.setName("雷电影");
+        hero.setBirthday(LocalDate.of(1000, 6, 26));
         hero.setSex("女");
-        hero.setArmsType("单手剑");
-        hero.setElement("水");
+        hero.setArmsType("长柄武器");
+        hero.setElement("雷");
         HeroDoc heroDoc = heroService.save(hero).block();
         log.info("testSave result: {}", heroDoc);
-        log.info("testSave end");
     }
 
     @Test
