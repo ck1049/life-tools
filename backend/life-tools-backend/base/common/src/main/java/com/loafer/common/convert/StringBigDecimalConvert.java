@@ -1,4 +1,4 @@
-package com.loafer.lottery.convert;
+package com.loafer.common.convert;
 
 import org.modelmapper.Converter;
 import org.modelmapper.spi.MappingContext;
@@ -13,11 +13,17 @@ import java.math.BigDecimal;
 @Component
 public class StringBigDecimalConvert implements Converter<String, BigDecimal> {
 
+    private static final StringBigDecimalConvert INSTANCE = new StringBigDecimalConvert();
+
     @Override
     public BigDecimal convert(MappingContext<String, BigDecimal> context) {
-        if (context.getSource()!= null && !"".equals(context.getSource().replaceAll("[,-]", ""))) {
+        if (context.getSource()!= null && !context.getSource().replaceAll("[,-]", "").isEmpty()) {
             return new BigDecimal(context.getSource().replaceAll("[,-]", ""));
         }
         return null;
+    }
+
+    public static StringBigDecimalConvert getInstance() {
+        return INSTANCE;
     }
 }

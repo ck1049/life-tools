@@ -1,7 +1,9 @@
 package com.loafer.genshin.controller;
 
 import com.loafer.genshin.api.request.HeroSaveRequest;
+import com.loafer.genshin.api.response.CommonResponse;
 import com.loafer.genshin.properties.NacosConfigProperties;
+import com.loafer.genshin.service.domain.HeroDomainService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -19,6 +21,8 @@ public class HeroController {
 
     @Resource(name = "genshinNacosConfigProperties")
     private NacosConfigProperties nacosConfigProperties;
+    @Resource
+    private HeroDomainService heroDomainService;
 
     @Operation(summary = "健康检查")
     @GetMapping("/health")
@@ -28,7 +32,7 @@ public class HeroController {
 
     @Operation(summary = "保存英雄信息")
     @PostMapping("/save")
-    public String save(@Valid @RequestBody HeroSaveRequest heroSaveRequest){
-        return "success";
+    public CommonResponse<String> save(@Valid @RequestBody HeroSaveRequest heroSaveRequest){
+        return heroDomainService.save(heroSaveRequest);
     }
 }
