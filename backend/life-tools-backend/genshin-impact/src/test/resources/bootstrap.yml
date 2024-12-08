@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: genshin-service
+  cloud:
+    nacos:
+      config:
+        name: ${spring.application.name}
+        server-addr: 127.0.0.1:8848
+        namespace: life-tools
+        username: nacos
+        password: nacos
+        group: DEFAULT_GROUP
+#    sentinel:
+#      datasource:
+#        db1:
+#          nacos:
+#            server-addr: 127.0.0.1:8848
+#            username: nacos
+#            password: nacos
+#            data-id: genshin-sentinel-flow-rule
+#            rule-type: flow

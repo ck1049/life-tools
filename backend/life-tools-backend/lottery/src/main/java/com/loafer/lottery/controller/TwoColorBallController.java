@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
+/**
+ * @author loafer
+ * @since 2024-12-08 14:00:18
+ **/
+@Tag(name = "双色球")
 @RestController
 @RequestMapping("/twoColorBall")
-@Tag(name = "双色球")
 @AllArgsConstructor
 public class TwoColorBallController {
 

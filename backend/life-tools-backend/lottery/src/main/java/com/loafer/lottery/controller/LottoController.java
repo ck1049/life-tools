@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author loafer
+ * @since 2024-12-08 14:00:18
+ **/
 @RestController
 @RequestMapping("/lotto")
 @Tag(name = "大乐透")

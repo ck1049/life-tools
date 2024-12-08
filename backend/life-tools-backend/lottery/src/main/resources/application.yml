@@ -3,6 +3,8 @@ server:
   servlet:
     context-path: /lottery
 spring:
+  profiles:
+    active: dev
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848
@@ -10,20 +12,9 @@ spring:
       password: nacos
       discovery:
         namespace: life-tools
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3308/lottery2?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
-    username: root
-    password: 123456
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-  data:
-    redis:
-      host: 127.0.0.1
-      port: 6379
-      password: 123456
-      database: 0
 mybatis:
   configuration:
     map-underscore-to-camel-case: true

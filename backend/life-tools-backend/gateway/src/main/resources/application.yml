@@ -33,6 +33,12 @@ spring:
             - Path=/api/oss/**
           filters:
             - StripPrefix=1
+        - id: genshin-route
+          uri: lb://genshin-service
+          predicates:
+            - Path=/api/genshin/**
+          filters:
+            - StripPrefix=1
 
 knife4j:
   gateway:
