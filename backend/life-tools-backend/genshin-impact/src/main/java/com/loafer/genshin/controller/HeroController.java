@@ -5,10 +5,14 @@ import com.loafer.genshin.api.response.CommonResponse;
 import com.loafer.genshin.properties.NacosConfigProperties;
 import com.loafer.genshin.service.domain.HeroDomainService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
+import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.web.bind.annotation.*;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author loafer
@@ -34,5 +38,25 @@ public class HeroController {
     @PostMapping("/save")
     public CommonResponse<String> save(@Valid @RequestBody HeroSaveRequest heroSaveRequest){
         return heroDomainService.save(heroSaveRequest);
+    }
+
+    @Operation(summary = "根据姓名查询分页信息")
+    @GetMapping("/searchAfterByName")
+    public CommonResponse<List<SearchHit<HashMap>>> searchAfterByName(
+            @Parameter(name = "name", description = "姓名", example = "芙宁娜")
+            @RequestParam(value = "name", required = false) String name,
+            @Parameter(name = "lastId", description = "上次查询结束id", example = "1")
+            @RequestParam(value = "lastId", required = false, defaultValue = "0") Long lastId) {
+        return heroDomainService.searchAfterByName(name, lastId);
+    }
+
+    @Operation(summary = "根据姓名查询分页信息(使用script)")
+    @GetMapping("/searchAfterByNameUseScript")
+    public CommonResponse<List<SearchHit<HashMap>>> searchAfterByNameUseScript(
+            @Parameter(name = "name", description = "姓名", example = "芙宁娜")
+            @RequestParam(value = "name", required = false) String name,
+            @Parameter(name = "lastId", description = "上次查询结束id", example = "1")
+            @RequestParam(value = "lastId", required = false, defaultValue = "0") Long lastId) {
+        return heroDomainService.searchAfterByNameUseScript(name, lastId);
     }
 }
