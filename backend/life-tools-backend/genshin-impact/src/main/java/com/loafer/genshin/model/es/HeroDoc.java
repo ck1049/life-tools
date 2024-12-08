@@ -34,7 +34,7 @@ public class HeroDoc implements Serializable {
     /**
      * 名称
      */
-    @Field(name = "name", type = FieldType.Text)
+    @Field(name = "name", type = FieldType.Text, analyzer = "ik_smart")
     private String name;
     /**
      * 生日
