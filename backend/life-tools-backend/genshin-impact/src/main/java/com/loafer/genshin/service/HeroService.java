@@ -22,6 +22,12 @@ public interface HeroService {
     Mono<HeroDoc> save(HeroDoc heroDoc);
 
     /**
+     * 批量插入文档
+     * @param heroDocList heroDocList
+     */
+    Flux<HeroDoc> bulkSave(List<HeroDoc> heroDocList);
+
+    /**
      * es查询全部记录
      * @return list
      */

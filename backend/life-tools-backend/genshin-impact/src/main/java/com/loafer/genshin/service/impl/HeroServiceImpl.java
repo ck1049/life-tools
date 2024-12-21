@@ -5,7 +5,9 @@ import co.elastic.clients.elasticsearch._types.SortOrder;
 import com.loafer.genshin.model.es.HeroDoc;
 import com.loafer.genshin.repository.HeroRepository;
 import com.loafer.genshin.service.HeroService;
+import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.elasticsearch.client.elc.NativeQuery;
 import org.springframework.data.elasticsearch.client.elc.NativeQueryBuilder;
@@ -19,10 +21,7 @@ import org.springframework.data.elasticsearch.core.script.Script;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * 英雄表服务实现类
@@ -30,6 +29,7 @@ import java.util.Objects;
  * @author loafer
  * @since 2024-12-08 01:26:02
  **/
+@Slf4j
 @Service("heroService")
 public class HeroServiceImpl implements HeroService {
 
@@ -39,9 +39,20 @@ public class HeroServiceImpl implements HeroService {
     private ReactiveElasticsearchOperations reactiveElasticsearchOperations;
     private final IndexCoordinates index = IndexCoordinates.of("hero");
 
+    @PostConstruct
+    private void init() {
+        // repository保存文档时创建的索引会缺失索引配置，所以这里提前创建索引
+        reactiveElasticsearchOperations.indexOps(HeroDoc.class).create();
+    }
+
     @Override
     public Mono<HeroDoc> save(HeroDoc heroDoc) {
         return reactiveElasticsearchOperations.save(heroDoc);
+    }
+
+    @Override
+    public Flux<HeroDoc> bulkSave(List<HeroDoc> heroDocList) {
+        return heroRepository.saveAll(heroDocList);
     }
 
     @Override

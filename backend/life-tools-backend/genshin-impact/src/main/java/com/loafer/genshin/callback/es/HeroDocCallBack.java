@@ -8,6 +8,8 @@ import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
+
 /**
  * @author loafer
  * @since 2024-12-08 17:44:20
@@ -19,7 +21,13 @@ public class HeroDocCallBack implements ReactiveBeforeConvertCallback<HeroDoc> {
     @Override
     public Mono<HeroDoc> onBeforeConvert(HeroDoc entity, IndexCoordinates index) {
         if (entity.getId() == null) {
-            entity.setId(SnowflakeUtils.nextId());
+            entity.setId(String.valueOf(SnowflakeUtils.nextId()));
+        }
+        if (entity.getCreateTime() == null) {
+            entity.setCreateTime(LocalDateTime.now());
+        }
+        if (entity.getUpdateTime() == null) {
+            entity.setUpdateTime(entity.getCreateTime());
         }
         return Mono.just(entity);
     }
