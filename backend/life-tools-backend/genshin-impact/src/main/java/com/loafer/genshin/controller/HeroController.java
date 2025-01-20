@@ -1,5 +1,6 @@
 package com.loafer.genshin.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.loafer.genshin.api.request.HeroSaveRequest;
 import com.loafer.genshin.api.response.CommonResponse;
 import com.loafer.genshin.properties.NacosConfigProperties;
@@ -36,7 +37,7 @@ public class HeroController {
 
     @Operation(summary = "保存英雄信息")
     @PostMapping("/save")
-    public CommonResponse<String> save(@Valid @RequestBody HeroSaveRequest heroSaveRequest){
+    public CommonResponse<String> save(@Valid @RequestBody HeroSaveRequest heroSaveRequest) throws JsonProcessingException {
         return heroDomainService.save(heroSaveRequest);
     }
 

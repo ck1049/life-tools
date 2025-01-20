@@ -1,5 +1,7 @@
 package com.loafer.genshin.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.loafer.common.convert.StringIntegerConvert;
 import com.loafer.common.convert.StringLocalDateConvert;
 import com.loafer.common.convert.StringLongConvert;
@@ -14,6 +16,11 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class MapperConfig {
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper().registerModule(new JavaTimeModule());
+    }
 
     @Bean
     public ModelMapper modelMapper() {

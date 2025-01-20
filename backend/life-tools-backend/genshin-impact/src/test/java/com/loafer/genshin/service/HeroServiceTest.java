@@ -30,7 +30,8 @@ public class HeroServiceTest {
     @Resource
     private HeroService heroService;
 
-    private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
+    @Resource
+    private ObjectMapper objectMapper;
     private final Fairy fairy = Fairy.create(Locale.CHINA);
     private static final String[] ARMS_TYPE = {"单手剑", "双手剑", "长柄武器", "弓", "法器"};
     private static final String[] ELEMENT = {"火", "冰", "雷", "水", "风", "草", "岩"};

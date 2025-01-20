@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @author loafer
  * @since 2024-12-08 00:14:38
  **/
-@ComponentScan(basePackages = {"com.loafer.common", "com.loafer.genshin"})
+@ComponentScan(basePackages = {"com.loafer.common", "com.loafer.genshin", "com.loafer.mq"})
 @SpringBootApplication
 public class GenshinImpactApplication {
 

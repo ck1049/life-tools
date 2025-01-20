@@ -18,6 +18,7 @@
         <module>cloud</module>
         <module>datasource</module>
         <module>elasticsearch</module>
+        <module>mq</module>
     </modules>
 
 </project>

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.loafer.genshin.api.response.CommonResponse;
 import com.loafer.genshin.exception.BusinessException;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -25,7 +26,8 @@ import static com.loafer.common.exception.enums.GlobalErrorCodeConstants.INTERNA
 @Slf4j
 public class GlobalWebExceptionHandler {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    @Resource
+    private ObjectMapper objectMapper;
 
     /**
      * 参数校验异常处理器

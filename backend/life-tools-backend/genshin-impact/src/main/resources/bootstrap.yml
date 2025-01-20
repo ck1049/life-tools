@@ -3,13 +3,16 @@ spring:
     name: genshin-service
   cloud:
     nacos:
+      server-addr: 127.0.0.1:8848
+      username: nacos
+      password: nacos
+      discovery:
+        namespace: life-tools
       config:
         name: ${spring.application.name}
-        server-addr: 127.0.0.1:8848
         namespace: life-tools
-        username: nacos
-        password: nacos
         group: DEFAULT_GROUP
+        timeout: 5000
 #    sentinel:
 #      datasource:
 #        db1:

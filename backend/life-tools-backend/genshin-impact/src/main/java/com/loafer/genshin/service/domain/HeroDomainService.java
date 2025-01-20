@@ -1,5 +1,6 @@
 package com.loafer.genshin.service.domain;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.loafer.genshin.api.request.HeroSaveRequest;
 import com.loafer.genshin.api.response.CommonResponse;
 import org.springframework.data.elasticsearch.core.SearchHit;
@@ -18,7 +19,7 @@ public interface HeroDomainService {
      * @param heroSaveRequest 请求对象
      * @return 保存结果
      */
-    CommonResponse<String> save(HeroSaveRequest heroSaveRequest);
+    CommonResponse<String> save(HeroSaveRequest heroSaveRequest) throws JsonProcessingException;
 
     /**
      * 根据姓名查询分页信息
