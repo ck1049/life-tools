@@ -11,6 +11,7 @@
         <module>oss</module>
         <module>genshin-impact</module>
         <module>genshin-impact-api</module>
+        <module>ai</module>
     </modules>
     <version>1.0.0-SNAPSHOT</version>
     <name>life-tools Maven Webapp</name>
@@ -20,7 +21,7 @@
         <java.version>21</java.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <spring.boot.version>3.2.4</spring.boot.version>
+        <spring.boot.version>3.3.9</spring.boot.version>
         <spring.cloud.version>2023.0.1</spring.cloud.version>
         <spring.cloud.alibaba.version>2023.0.1.0</spring.cloud.alibaba.version>
         <lombok.version>1.18.28</lombok.version>
@@ -41,6 +42,11 @@
         <servlet.api.version>2.5</servlet.api.version>
         <tess4j.version>5.9.0</tess4j.version>
         <jfairy.version>0.6.5</jfairy.version>
+        <!-- Spring AI -->
+        <spring-ai.version>1.0.0-M5</spring-ai.version>
+
+        <!-- Spring AI Alibaba -->
+        <spring-ai-alibaba.version>1.0.0-M5.1</spring-ai-alibaba.version>
     </properties>
 
     <dependencyManagement>
@@ -66,6 +72,23 @@
                 <version>${spring.cloud.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring-ai.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-core</artifactId>
+                <version>1.0.0-M5</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud.ai</groupId>
+                <artifactId>spring-ai-alibaba-starter</artifactId>
+                <version>${spring-ai-alibaba.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -197,6 +220,23 @@
         </dependencies>
 
     </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>aliyunmaven</id>
+            <name>aliyun</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </repository>
+    </repositories>
+
     <build>
         <finalName>life-tools</finalName>
         <plugins>

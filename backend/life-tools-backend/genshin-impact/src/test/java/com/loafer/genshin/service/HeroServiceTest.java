@@ -4,7 +4,6 @@ import com.devskiller.jfairy.Fairy;
 import com.devskiller.jfairy.producer.person.Person;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.loafer.genshin.GenshinImpactApplication;
 import com.loafer.genshin.model.es.HeroDoc;
 import jakarta.annotation.Resource;
