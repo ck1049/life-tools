@@ -19,7 +19,7 @@ spring:
         namespace: life-tools
   ai:
     dashscope:
-      api-key: ${AI_DASHSCOPE_API_KEY}
+      api-key: ${DASH_SCOPE_API_KEY}
       chat:
         chat:
           options:
