@@ -1,5 +1,7 @@
 server:
-  port: 10014
+  port: 11014
+  servlet:
+    context-path: /ai
 
 spring:
   application:
@@ -34,3 +36,19 @@ spring:
       base-url: http://localhost:11434
       chat:
         model: deepseek-r1:8b
+authentication:
+  controller: default
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.loafer.lottery.model
+  mapper-locations: classpath:mapper/*.xml
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: deleted # 全局逻辑删除的实体字段名
+      logic-delete-value: 1 # 逻辑已删除值（默认为 1）
+      logic-not-delete-value: 0 # 逻辑未删除值（默认为 0）

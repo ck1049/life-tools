@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: auth-service
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:18848
+      username: nacos
+      password: nacos
+      discovery:
+        namespace: life-tools
+      config:
+        name: ${spring.application.yml.name}
+        namespace: life-tools
+        group: DEFAULT_GROUP
+        timeout: 5000
+#    sentinel:
+#      datasource:
+#        db1:
+#          nacos:
+#            server-addr: 127.0.0.1:8848
+#            username: nacos
+#            password: nacos
+#            data-id: genshin-sentinel-flow-rule
+#            rule-type: flow

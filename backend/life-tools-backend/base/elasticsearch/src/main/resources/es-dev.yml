@@ -3,3 +3,7 @@ spring:
     uris: ["https://127.0.0.1:9200"]
     username: "elastic"
     password: "elastic"
+    rest:
+      ssl:
+        disable-root-certificates: true
+        trust-all-certs: true

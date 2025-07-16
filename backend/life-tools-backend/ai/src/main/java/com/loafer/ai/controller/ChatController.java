@@ -99,8 +99,8 @@ public class ChatController {
                         今天的日期是 {current_date}。
 					""")
                 .defaultAdvisors(
-//                         new PromptChatMemoryAdvisor(chatMemory), // Chat Memory
-                        new VectorStoreChatMemoryAdvisor(vectorStore),
+//                         new PromptChatMemoryAdvisor(chatMemory), // Chat Memory 记忆数据直接存储在内存中
+                        new VectorStoreChatMemoryAdvisor (vectorStore),
                         new QuestionAnswerAdvisor(vectorStore, SearchRequest.builder().topK(4).similarityThresholdAll().build()))
 //                .defaultFunctions("")
                 .build();

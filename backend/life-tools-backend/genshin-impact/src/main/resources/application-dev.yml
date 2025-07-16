@@ -6,11 +6,12 @@ spring:
     password: 123456
   cloud:
     nacos:
-      server-addr: 127.0.0.1:8848
+      server-addr: 127.0.0.1:18848
       username: nacos
       password: nacos
       discovery:
         namespace: life-tools
+        fail-fast: false
     stream:
       bindings:
         hero-out-0:
@@ -20,7 +21,7 @@ spring:
           binder: rocketmq
       rocketmq:
         binder:
-          name-server: 127.0.0.1:9876
+          name-server: localhost:9876
           group: genshin-impact
         bindings:
           hero-out-0:

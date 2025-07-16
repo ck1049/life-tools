@@ -1,0 +1,15 @@
+{
+  "groups": [
+    {
+      "name": "security",
+      "type": "com.loafer.config.SecurityConfigurationProperties",
+      "sourceType": "com.loafer.config.SecurityConfigurationProperties"
+    },
+    {
+      "name": "security.authentication",
+      "type": "com.loafer.config.AuthenticationProperties",
+      "sourceType": "com.loafer.config.AuthenticationProperties"
+    }
+  ],
+  "hints": []
+}

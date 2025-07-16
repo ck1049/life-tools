@@ -19,6 +19,8 @@
         <module>datasource</module>
         <module>elasticsearch</module>
         <module>mq</module>
+        <module>security-starter</module>
+        <module>kafka</module>
     </modules>
 
 </project>
