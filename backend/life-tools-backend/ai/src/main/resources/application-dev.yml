@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: more-client-examples
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:18848
+      username: nacos
+      password: nacos
+      discovery:
+        namespace: life-tools
+  ai:
+    dashscope:
+      api-key: ${DASH_SCOPE_API_KEY}
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: deepseek-r1:8b
+      embedding:
+        model: ${spring.ai.ollama.chat.model}
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      base-url: https://api.openai-hk.com
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3308/lottery2?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: 123456
+      database: 0

@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:18848
+      username: nacos
+      password: nacos
+      discovery:
+        namespace: life-tools
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3308/life_tools?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: 123456
+      database: 0

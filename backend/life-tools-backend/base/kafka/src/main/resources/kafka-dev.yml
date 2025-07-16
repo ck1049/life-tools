@@ -1,0 +1,22 @@
+spring:
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    producer:
+      acks: 1
+      batch-size: 1048960
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      retries: 5
+    consumer:
+      group-id: loafer-default
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false
+      fetch-max-wait: 2000
+      fetch-min-size: 32
+      max-poll-records: 100
+    listener:
+      ack-mode: manual
+      type: batch

@@ -34,6 +34,6 @@ build/
 ### Mac OS ###
 .DS_Store
 
-*-dev.yml
+#*-dev.yml
 *-test.yml
 *-prod.yml
